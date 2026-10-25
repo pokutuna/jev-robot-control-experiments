@@ -2,6 +2,8 @@
 
 ## 重要
 
+* [guides/final-homework.md](guides/final-homework.md) - 最終課題 (10/19 版) の要件、締切、提出方法
+
 ## 分類
 
 * [guides/](guides/) - 繰り返し参照する手順・方針・前提知識
