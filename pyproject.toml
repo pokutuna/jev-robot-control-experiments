@@ -1,0 +1,34 @@
+[project]
+name = "s1cap"
+version = "0.1.0"
+description = "LIBERO で System 1 モデル (Jev) をロボット操作と Code as Policies に使う"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    # LIBERO は robosuite 1.4 系の API に依存する (1.5 で環境とコントローラの API が変わった)
+    "robosuite>=1.4.1,<1.5",
+    # robosuite 1.4 と組める上限は 3.9 系。robosuite 1.4 の OSC は mj_fullM(m, dst, qM) を呼ぶが、
+    # 3.10 で mj_fullM(m, d, dst) に変わり、3.11 で MjData.qM が無くなる。
+    # 3.12 では `jnt_type in (mjtJoint...)` が False になり get_joint_qpos_addr の assert も落ちる
+    "mujoco>=3.9,<3.10",
+    "numpy",
+    # LIBERO の init state (*.pruned_init) は torch.save の形式なので読み込みに要る
+    "torch",
+    # 以下は LIBERO (install_requires が空) が import するもの
+    "bddl",
+    "easydict",
+    "pyyaml",
+    "termcolor",
+    "matplotlib",
+    "gym",
+    "cloudpickle",
+    "pillow",
+    "imageio[ffmpeg]",
+]
+
+[dependency-groups]
+dev = ["pytest", "ruff"]
+
+[build-system]
+requires = ["uv_build>=0.11,<0.12"]
+build-backend = "uv_build"
