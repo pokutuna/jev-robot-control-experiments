@@ -1,0 +1,67 @@
+# 手書きの policy で「put the bowl on the plate」を行う。
+# policy は画像を使わず、物体の姿勢を sim の真値から受け取る (JSON 入力条件)。
+#   uv run --env-file .env dora run dataflows/scripted_json.yml --log-level info
+nodes:
+  - id: sim
+    path: ../nodes/sim.py
+    inputs:
+      # 20 Hz。sim が遅れたときに tick を溜めず、最新の 1 つだけ受ける
+      tick:
+        source: dora/timer/millis/50
+        queue_size: 1
+      command:
+        source: policy/command
+        queue_size: 100
+    outputs:
+      - task
+      - image_agentview
+      - image_wrist
+      - robot_state
+      - ground_truth
+      - command_result
+      - episode_end
+    env:
+      SUITE: libero_goal
+      TASK: "8"
+      INIT: "0"
+      IMAGE_SIZE: "256"
+      MAX_STEPS: "400"
+
+  - id: policy
+    path: ../nodes/scripted_policy.py
+    inputs:
+      task: sim/task
+      # JSON 入力条件: 物体の姿勢を真値から受け取る。最初の 1 つしか使わない
+      scene:
+        source: sim/ground_truth
+        queue_size: 1
+      command_result:
+        source: sim/command_result
+        queue_size: 100
+    outputs: [command]
+
+  - id: evaluator
+    path: ../nodes/evaluator.py
+    # 記録は 1 step も落とさないよう、入力の待ち行列を長くする (既定は 10 で、溢れると古いものから捨てる)
+    inputs:
+      image_agentview:
+        source: sim/image_agentview
+        queue_size: 1000
+      image_wrist:
+        source: sim/image_wrist
+        queue_size: 1000
+      ground_truth:
+        source: sim/ground_truth
+        queue_size: 1000
+      robot_state:
+        source: sim/robot_state
+        queue_size: 1000
+      # 命令と結果、タスクの情報、終わった理由も記録する
+      task: sim/task
+      episode_end: sim/episode_end
+      command_result:
+        source: sim/command_result
+        queue_size: 1000
+      command:
+        source: policy/command
+        queue_size: 1000

@@ -1,0 +1,85 @@
+# 実験 003: 画像に手先の印を描き、印を行き先へ寄せる画像の中の向き、高さ、指を 1 回の呼び出しで Jev に問う
+# (s1cap.jev_marked の JevMarkedPolicy、two_call=False)。固定カメラの画像には手先 (赤い丸) と手先の真下のテーブルの点
+# (黄色い点)、手首の画像には 180° 回して赤い × を描く。真値は policy に配線しない。
+# Jev は OpenRouter 経由で呼ぶので .env に OPENROUTER_API_KEY が要る。INIT と OUT_DIR は scripts/run_experiment.py が書き換える
+#   uv run --env-file .env scripts/run_experiment.py run experiments/003-marked-image --inits 0-9
+nodes:
+  - id: sim
+    path: ../../nodes/sim.py
+    inputs:
+      tick:
+        source: dora/timer/millis/50
+        queue_size: 1
+      command:
+        source: policy/command
+        queue_size: 100
+    outputs:
+      - task
+      - image_agentview
+      - image_wrist
+      - robot_state
+      - ground_truth
+      - command_result
+      - episode_end
+    env:
+      SUITE: libero_90
+      TASK: "60"
+      FIXED_VIEW: quarterview
+      INIT: "0"
+      IMAGE_SIZE: "320"
+      # 1 回の判断に 1〜2 秒かかるので、120 回の判断に足りる長さにする
+      MAX_STEPS: "7000"
+
+  - id: policy
+    path: ../../nodes/jev_policy.py
+    inputs:
+      task: sim/task
+      # 判断を始めるときに最新の観測を読めるよう、古いものは溜めない
+      robot_state:
+        source: sim/robot_state
+        queue_size: 1
+      image_agentview:
+        source: sim/image_agentview
+        queue_size: 1
+      image_wrist:
+        source: sim/image_wrist
+        queue_size: 1
+      command_result:
+        source: sim/command_result
+        queue_size: 100
+    outputs: [command, decision]
+    env:
+      POLICY: marked
+      STEP_M: "0.02"
+      MAX_DECISIONS: "120"
+
+  - id: evaluator
+    path: ../../nodes/evaluator.py
+    inputs:
+      image_agentview:
+        source: sim/image_agentview
+        queue_size: 1000
+      image_wrist:
+        source: sim/image_wrist
+        queue_size: 1000
+      ground_truth:
+        source: sim/ground_truth
+        queue_size: 1000
+      robot_state:
+        source: sim/robot_state
+        queue_size: 1000
+      task: sim/task
+      episode_end: sim/episode_end
+      command_result:
+        source: sim/command_result
+        queue_size: 1000
+      command:
+        source: policy/command
+        queue_size: 1000
+      decision:
+        source: policy/decision
+        queue_size: 1000
+    env:
+      # 動画にも Jev に渡す画像と同じ印を描く
+      WRIST_CROSS_UV: "0.5,0.40"
+      FIXED_MARK: "1"

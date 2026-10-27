@@ -1,0 +1,83 @@
+# Jev に画像の中の位置関係を問い、その答えから意図を選ばせる (計画の C2 の 2 段の形、src/s1cap/jev_staged.py)。
+# 真値は policy に配線しない。手首の画像の × の位置は libero_90 60 の開始の高さで測った。Jev は OpenRouter 経由で呼ぶので .env に OPENROUTER_API_KEY が要る。
+#   uv run --env-file .env dora run dataflows/jev_c2_staged.yml --log-level info
+nodes:
+  - id: sim
+    path: ../nodes/sim.py
+    inputs:
+      tick:
+        source: dora/timer/millis/50
+        queue_size: 1
+      command:
+        source: policy/command
+        queue_size: 100
+    outputs:
+      - task
+      - image_agentview
+      - image_wrist
+      - robot_state
+      - ground_truth
+      - command_result
+      - episode_end
+    env:
+      SUITE: libero_90
+      TASK: "60"
+      FIXED_VIEW: quarterview
+      INIT: "0"
+      # Jev が受け付ける画像は一辺 256 px 以上
+      IMAGE_SIZE: "320"
+      # 1 回の判断に 1〜2 秒かかるので、120 回の判断に足りる長さにする
+      MAX_STEPS: "7000"
+
+  - id: policy
+    path: ../nodes/jev_policy.py
+    inputs:
+      task: sim/task
+      # 判断を始めるときに最新の観測を読めるよう、古いものは溜めない
+      robot_state:
+        source: sim/robot_state
+        queue_size: 1
+      image_agentview:
+        source: sim/image_agentview
+        queue_size: 1
+      image_wrist:
+        source: sim/image_wrist
+        queue_size: 1
+      command_result:
+        source: sim/command_result
+        queue_size: 100
+    outputs: [command, decision]
+    env:
+      POLICY: staged
+      STEP_M: "0.02"
+      MAX_DECISIONS: "120"
+
+  - id: evaluator
+    path: ../nodes/evaluator.py
+    inputs:
+      image_agentview:
+        source: sim/image_agentview
+        queue_size: 1000
+      image_wrist:
+        source: sim/image_wrist
+        queue_size: 1000
+      ground_truth:
+        source: sim/ground_truth
+        queue_size: 1000
+      robot_state:
+        source: sim/robot_state
+        queue_size: 1000
+      task: sim/task
+      episode_end: sim/episode_end
+      command_result:
+        source: sim/command_result
+        queue_size: 1000
+      command:
+        source: policy/command
+        queue_size: 1000
+      decision:
+        source: policy/decision
+        queue_size: 1000
+    env:
+      # 手首の画像を Jev が見るのと同じ向きにし、同じ位置 (s1cap.jev_staged.CROSS_UV) に × を描いて録画する
+      WRIST_CROSS_UV: "0.5,0.40"

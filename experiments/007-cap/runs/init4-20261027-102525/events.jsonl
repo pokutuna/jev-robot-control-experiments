@@ -1,0 +1,121 @@
+{"step": 0, "kind": "task", "suite": "libero_90", "task_name": "LIVING_ROOM_SCENE4_pick_up_the_black_bowl_on_the_left_and_put_it_in_the_tray", "instruction": "pick up the black bowl on the left and put it in the tray", "fixed_view": "quarterview", "camera_matrix": [[-359.80512025699994, 186.4690497226953, -102.8460175498463, 152.24063006782234], [88.90109871022096, 88.90109871022096, -398.7491989831874, 330.04163245290033], [-0.541675220419702, -0.541675220419702, -0.6427876096865394, 1.1051435482306788]]}
+{"step": 0, "kind": "command", "id": 1, "type": "move_to", "pos": [-0.0596, 0.0041, 0.6706], "quat": [1.0, 0.0, 0.0, 0.0]}
+{"step": 2, "kind": "command_result", "id": 1, "status": "reached", "started_step": 1, "steps": 1, "message": ""}
+{"step": 2, "kind": "decision", "obs_step": 0, "intent": "setup"}
+{"step": 1, "kind": "command", "id": 2, "type": "gripper", "closed": false}
+{"step": 1, "kind": "decision", "obs_step": 2, "api": [], "command": {"id": 2, "type": "gripper", "closed": false}}
+{"step": 17, "kind": "command_result", "id": 2, "status": "reached", "started_step": 2, "steps": 15, "message": ""}
+{"step": 33, "kind": "decision", "obs_step": 17, "api": [{"fn": "open_gripper", "args": [], "result": null}, {"fn": "in_wrist_view", "args": ["the black bowl on the left"], "result": 0.72}, {"fn": "wrist_direction", "args": ["the black bowl on the left"], "result": [-1, -1], "answers": {"h": "left", "v": "up"}}], "calls": {"in_wrist_view_1": {"latency_ms": 443, "input_tokens": 668, "output_tokens": 20}, "wrist_direction_2": {"latency_ms": 363, "input_tokens": 821, "output_tokens": 73}}, "latency_ms": {"in_wrist_view_1": 443, "wrist_direction_2": 363}, "command": {"id": 3, "type": "move_delta", "dpos": [-0.03, -0.03, 0.0]}}
+{"step": 33, "kind": "command", "id": 3, "type": "move_delta", "dpos": [-0.03, -0.03, 0.0]}
+{"step": 41, "kind": "command_result", "id": 3, "status": "reached", "started_step": 34, "steps": 7, "message": ""}
+{"step": 48, "kind": "decision", "obs_step": 41, "api": [{"fn": "move_by", "args": [-0.03, -0.03, 0.0], "result": true}, {"fn": "wrist_direction", "args": ["the black bowl on the left"], "result": [0, -1], "answers": {"h": "left", "v": "none"}}], "calls": {"wrist_direction_3": {"latency_ms": 382, "input_tokens": 818, "output_tokens": 73}}, "latency_ms": {"wrist_direction_3": 382}, "command": {"id": 4, "type": "move_delta", "dpos": [0.0, -0.03, 0.0]}}
+{"step": 48, "kind": "command", "id": 4, "type": "move_delta", "dpos": [0.0, -0.03, 0.0]}
+{"step": 55, "kind": "command_result", "id": 4, "status": "reached", "started_step": 49, "steps": 6, "message": ""}
+{"step": 62, "kind": "decision", "obs_step": 55, "api": [{"fn": "move_by", "args": [0.0, -0.03, 0.0], "result": true}, {"fn": "wrist_direction", "args": ["the black bowl on the left"], "result": [0, -1], "answers": {"h": "left", "v": "none"}}], "calls": {"wrist_direction_4": {"latency_ms": 367, "input_tokens": 822, "output_tokens": 73}}, "latency_ms": {"wrist_direction_4": 367}, "command": {"id": 5, "type": "move_delta", "dpos": [0.0, -0.03, 0.0]}}
+{"step": 62, "kind": "command", "id": 5, "type": "move_delta", "dpos": [0.0, -0.03, 0.0]}
+{"step": 68, "kind": "command_result", "id": 5, "status": "reached", "started_step": 62, "steps": 6, "message": ""}
+{"step": 76, "kind": "decision", "obs_step": 68, "api": [{"fn": "move_by", "args": [0.0, -0.03, 0.0], "result": true}, {"fn": "wrist_direction", "args": ["the black bowl on the left"], "result": [0, -1], "answers": {"h": "left", "v": "none"}}], "calls": {"wrist_direction_5": {"latency_ms": 395, "input_tokens": 822, "output_tokens": 73}}, "latency_ms": {"wrist_direction_5": 395}, "command": {"id": 6, "type": "move_delta", "dpos": [0.0, -0.03, 0.0]}}
+{"step": 76, "kind": "command", "id": 6, "type": "move_delta", "dpos": [0.0, -0.03, 0.0]}
+{"step": 82, "kind": "command_result", "id": 6, "status": "reached", "started_step": 76, "steps": 6, "message": ""}
+{"step": 89, "kind": "decision", "obs_step": 82, "api": [{"fn": "move_by", "args": [0.0, -0.03, 0.0], "result": true}, {"fn": "wrist_direction", "args": ["the black bowl on the left"], "result": [0, -1], "answers": {"h": "left", "v": "none"}}], "calls": {"wrist_direction_6": {"latency_ms": 360, "input_tokens": 820, "output_tokens": 73}}, "latency_ms": {"wrist_direction_6": 360}, "command": {"id": 7, "type": "move_delta", "dpos": [0.0, -0.03, 0.0]}}
+{"step": 89, "kind": "command", "id": 7, "type": "move_delta", "dpos": [0.0, -0.03, 0.0]}
+{"step": 95, "kind": "command_result", "id": 7, "status": "reached", "started_step": 89, "steps": 6, "message": ""}
+{"step": 102, "kind": "decision", "obs_step": 95, "api": [{"fn": "move_by", "args": [0.0, -0.03, 0.0], "result": true}, {"fn": "wrist_direction", "args": ["the black bowl on the left"], "result": [0, 0], "answers": {"h": "none", "v": "none"}}], "calls": {"wrist_direction_7": {"latency_ms": 374, "input_tokens": 821, "output_tokens": 73}}, "latency_ms": {"wrist_direction_7": 374}, "command": {"id": 8, "type": "gripper", "closed": false}}
+{"step": 102, "kind": "command", "id": 8, "type": "gripper", "closed": false}
+{"step": 118, "kind": "command_result", "id": 8, "status": "reached", "started_step": 103, "steps": 15, "message": ""}
+{"step": 118, "kind": "decision", "obs_step": 118, "api": [{"fn": "open_gripper", "args": [], "result": null}], "command": {"id": 9, "type": "move_to", "pos": [-0.0916, -0.1464, 0.6713], "quat": [1.0, 0.0, 0.0, 0.0]}}
+{"step": 118, "kind": "command", "id": 9, "type": "move_to", "pos": [-0.0916, -0.1464, 0.6713], "quat": [1.0, 0.0, 0.0, 0.0]}
+{"step": 119, "kind": "command_result", "id": 9, "status": "reached", "started_step": 118, "steps": 1, "message": ""}
+{"step": 134, "kind": "decision", "obs_step": 119, "api": [{"fn": "move_to", "args": [-0.0916, -0.1464, 0.6713], "result": true}, {"fn": "in_wrist_view", "args": ["the black bowl on the left"], "result": 0.79}, {"fn": "wrist_direction", "args": ["the black bowl on the left"], "result": [0, 0], "answers": {"h": "none", "v": "none"}}], "calls": {"in_wrist_view_8": {"latency_ms": 404, "input_tokens": 664, "output_tokens": 20}, "wrist_direction_9": {"latency_ms": 349, "input_tokens": 818, "output_tokens": 73}}, "latency_ms": {"in_wrist_view_8": 404, "wrist_direction_9": 349}, "command": {"id": 10, "type": "move_delta", "dpos": [0.0, 0.06, 0.0]}}
+{"step": 134, "kind": "command", "id": 10, "type": "move_delta", "dpos": [0.0, 0.06, 0.0]}
+{"step": 142, "kind": "command_result", "id": 10, "status": "reached", "started_step": 134, "steps": 8, "message": ""}
+{"step": 142, "kind": "decision", "obs_step": 142, "api": [{"fn": "move_by", "args": [0.0, 0.06, 0.0], "result": true}], "command": {"id": 11, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 142, "kind": "command", "id": 11, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 148, "kind": "command_result", "id": 11, "status": "reached", "started_step": 142, "steps": 6, "message": ""}
+{"step": 148, "kind": "decision", "obs_step": 148, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 12, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 148, "kind": "command", "id": 12, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 154, "kind": "command_result", "id": 12, "status": "reached", "started_step": 148, "steps": 6, "message": ""}
+{"step": 154, "kind": "decision", "obs_step": 154, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 13, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 154, "kind": "command", "id": 13, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 160, "kind": "command_result", "id": 13, "status": "reached", "started_step": 154, "steps": 6, "message": ""}
+{"step": 160, "kind": "decision", "obs_step": 160, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 14, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 160, "kind": "command", "id": 14, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 166, "kind": "command_result", "id": 14, "status": "reached", "started_step": 160, "steps": 6, "message": ""}
+{"step": 166, "kind": "decision", "obs_step": 166, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 15, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 166, "kind": "command", "id": 15, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 172, "kind": "command_result", "id": 15, "status": "reached", "started_step": 166, "steps": 6, "message": ""}
+{"step": 172, "kind": "decision", "obs_step": 172, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 16, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 172, "kind": "command", "id": 16, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 178, "kind": "command_result", "id": 16, "status": "reached", "started_step": 172, "steps": 6, "message": ""}
+{"step": 178, "kind": "decision", "obs_step": 178, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 17, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 178, "kind": "command", "id": 17, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 184, "kind": "command_result", "id": 17, "status": "reached", "started_step": 178, "steps": 6, "message": ""}
+{"step": 184, "kind": "decision", "obs_step": 184, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 18, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 184, "kind": "command", "id": 18, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 190, "kind": "command_result", "id": 18, "status": "reached", "started_step": 184, "steps": 6, "message": ""}
+{"step": 190, "kind": "decision", "obs_step": 190, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 19, "type": "move_delta", "dpos": [0.0, 0.0, 0.015]}}
+{"step": 190, "kind": "command", "id": 19, "type": "move_delta", "dpos": [0.0, 0.0, 0.015]}
+{"step": 198, "kind": "command_result", "id": 19, "status": "reached", "started_step": 190, "steps": 8, "message": ""}
+{"step": 198, "kind": "decision", "obs_step": 198, "api": [{"fn": "move_by", "args": [0.0, 0.0, 0.015], "result": true}], "command": {"id": 20, "type": "gripper", "closed": true}}
+{"step": 198, "kind": "command", "id": 20, "type": "gripper", "closed": true}
+{"step": 213, "kind": "command_result", "id": 20, "status": "reached", "started_step": 198, "steps": 15, "message": ""}
+{"step": 213, "kind": "decision", "obs_step": 213, "api": [{"fn": "close_gripper", "args": [], "result": null}], "command": {"id": 21, "type": "move_to", "pos": [-0.0944, -0.0878, 0.6713], "quat": [1.0, 0.0, 0.0, 0.0]}}
+{"step": 213, "kind": "command", "id": 21, "type": "move_to", "pos": [-0.0944, -0.0878, 0.6713], "quat": [1.0, 0.0, 0.0, 0.0]}
+{"step": 232, "kind": "command_result", "id": 21, "status": "reached", "started_step": 213, "steps": 19, "message": ""}
+{"step": 240, "kind": "decision", "obs_step": 232, "api": [{"fn": "move_to", "args": [-0.0944, -0.0878, 0.6713], "result": true}, {"fn": "fixed_direction", "args": ["the center of the tray"], "result": [0, 1], "answers": {"h": "right", "v": "down"}}], "calls": {"fixed_direction_10": {"latency_ms": 430, "input_tokens": 833, "output_tokens": 73}}, "latency_ms": {"fixed_direction_10": 430}, "command": {"id": 22, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}}
+{"step": 240, "kind": "command", "id": 22, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}
+{"step": 248, "kind": "command_result", "id": 22, "status": "reached", "started_step": 241, "steps": 7, "message": ""}
+{"step": 255, "kind": "decision", "obs_step": 248, "api": [{"fn": "move_by", "args": [0.0, 0.04, 0.0], "result": true}, {"fn": "fixed_direction", "args": ["the center of the tray"], "result": [0, 1], "answers": {"h": "right", "v": "down"}}], "calls": {"fixed_direction_11": {"latency_ms": 366, "input_tokens": 836, "output_tokens": 73}}, "latency_ms": {"fixed_direction_11": 366}, "command": {"id": 23, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}}
+{"step": 255, "kind": "command", "id": 23, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}
+{"step": 261, "kind": "command_result", "id": 23, "status": "reached", "started_step": 255, "steps": 6, "message": ""}
+{"step": 268, "kind": "decision", "obs_step": 261, "api": [{"fn": "move_by", "args": [0.0, 0.04, 0.0], "result": true}, {"fn": "fixed_direction", "args": ["the center of the tray"], "result": [0, 1], "answers": {"h": "right", "v": "down"}}], "calls": {"fixed_direction_12": {"latency_ms": 359, "input_tokens": 837, "output_tokens": 73}}, "latency_ms": {"fixed_direction_12": 359}, "command": {"id": 24, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}}
+{"step": 268, "kind": "command", "id": 24, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}
+{"step": 274, "kind": "command_result", "id": 24, "status": "reached", "started_step": 268, "steps": 6, "message": ""}
+{"step": 281, "kind": "decision", "obs_step": 274, "api": [{"fn": "move_by", "args": [0.0, 0.04, 0.0], "result": true}, {"fn": "fixed_direction", "args": ["the center of the tray"], "result": [0, 1], "answers": {"h": "right", "v": "down"}}], "calls": {"fixed_direction_13": {"latency_ms": 353, "input_tokens": 833, "output_tokens": 73}}, "latency_ms": {"fixed_direction_13": 353}, "command": {"id": 25, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}}
+{"step": 281, "kind": "command", "id": 25, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}
+{"step": 287, "kind": "command_result", "id": 25, "status": "reached", "started_step": 281, "steps": 6, "message": ""}
+{"step": 294, "kind": "decision", "obs_step": 287, "api": [{"fn": "move_by", "args": [0.0, 0.04, 0.0], "result": true}, {"fn": "fixed_direction", "args": ["the center of the tray"], "result": [0, 1], "answers": {"h": "right", "v": "down"}}], "calls": {"fixed_direction_14": {"latency_ms": 388, "input_tokens": 833, "output_tokens": 73}}, "latency_ms": {"fixed_direction_14": 388}, "command": {"id": 26, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}}
+{"step": 294, "kind": "command", "id": 26, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}
+{"step": 302, "kind": "command_result", "id": 26, "status": "reached", "started_step": 295, "steps": 7, "message": ""}
+{"step": 312, "kind": "decision", "obs_step": 302, "api": [{"fn": "move_by", "args": [0.0, 0.04, 0.0], "result": true}, {"fn": "fixed_direction", "args": ["the center of the tray"], "result": [0, 1], "answers": {"h": "right", "v": "down"}}], "calls": {"fixed_direction_15": {"latency_ms": 503, "input_tokens": 833, "output_tokens": 73}}, "latency_ms": {"fixed_direction_15": 503}, "command": {"id": 27, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}}
+{"step": 312, "kind": "command", "id": 27, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}
+{"step": 319, "kind": "command_result", "id": 27, "status": "reached", "started_step": 312, "steps": 7, "message": ""}
+{"step": 327, "kind": "decision", "obs_step": 319, "api": [{"fn": "move_by", "args": [0.0, 0.04, 0.0], "result": true}, {"fn": "fixed_direction", "args": ["the center of the tray"], "result": [0, 1], "answers": {"h": "right", "v": "down"}}], "calls": {"fixed_direction_16": {"latency_ms": 400, "input_tokens": 836, "output_tokens": 73}}, "latency_ms": {"fixed_direction_16": 400}, "command": {"id": 28, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}}
+{"step": 327, "kind": "command", "id": 28, "type": "move_delta", "dpos": [0.0, 0.04, 0.0]}
+{"step": 334, "kind": "command_result", "id": 28, "status": "reached", "started_step": 327, "steps": 7, "message": ""}
+{"step": 357, "kind": "decision", "obs_step": 334, "api": [{"fn": "move_by", "args": [0.0, 0.04, 0.0], "result": true}, {"fn": "fixed_direction", "args": ["the center of the tray"], "result": [0, 0], "answers": {"h": "none", "v": "none"}}, {"fn": "fixed_direction", "args": ["the center of the tray"], "result": [0, 0], "answers": {"h": "none", "v": "none"}}, {"fn": "fixed_direction", "args": ["the center of the tray"], "result": [0, 0], "answers": {"h": "none", "v": "none"}}], "calls": {"fixed_direction_17": {"latency_ms": 380, "input_tokens": 835, "output_tokens": 73}, "fixed_direction_18": {"latency_ms": 382, "input_tokens": 834, "output_tokens": 73}, "fixed_direction_19": {"latency_ms": 382, "input_tokens": 836, "output_tokens": 73}}, "latency_ms": {"fixed_direction_17": 380, "fixed_direction_18": 382, "fixed_direction_19": 382}, "command": {"id": 29, "type": "move_delta", "dpos": [0.0, 0.06, 0.0]}}
+{"step": 357, "kind": "command", "id": 29, "type": "move_delta", "dpos": [0.0, 0.06, 0.0]}
+{"step": 365, "kind": "command_result", "id": 29, "status": "reached", "started_step": 357, "steps": 8, "message": ""}
+{"step": 365, "kind": "decision", "obs_step": 365, "api": [{"fn": "move_by", "args": [0.0, 0.06, 0.0], "result": true}], "command": {"id": 30, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 365, "kind": "command", "id": 30, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 373, "kind": "command_result", "id": 30, "status": "reached", "started_step": 365, "steps": 8, "message": ""}
+{"step": 373, "kind": "decision", "obs_step": 373, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 31, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 373, "kind": "command", "id": 31, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 379, "kind": "command_result", "id": 31, "status": "reached", "started_step": 373, "steps": 6, "message": ""}
+{"step": 379, "kind": "decision", "obs_step": 379, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 32, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 379, "kind": "command", "id": 32, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 385, "kind": "command_result", "id": 32, "status": "reached", "started_step": 379, "steps": 6, "message": ""}
+{"step": 385, "kind": "decision", "obs_step": 385, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 33, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 385, "kind": "command", "id": 33, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 391, "kind": "command_result", "id": 33, "status": "reached", "started_step": 385, "steps": 6, "message": ""}
+{"step": 391, "kind": "decision", "obs_step": 391, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 34, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 391, "kind": "command", "id": 34, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 397, "kind": "command_result", "id": 34, "status": "reached", "started_step": 391, "steps": 6, "message": ""}
+{"step": 397, "kind": "decision", "obs_step": 397, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 35, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 397, "kind": "command", "id": 35, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 403, "kind": "command_result", "id": 35, "status": "reached", "started_step": 397, "steps": 6, "message": ""}
+{"step": 403, "kind": "decision", "obs_step": 403, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 36, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 403, "kind": "command", "id": 36, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 409, "kind": "command_result", "id": 36, "status": "reached", "started_step": 403, "steps": 6, "message": ""}
+{"step": 409, "kind": "decision", "obs_step": 409, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": true}], "command": {"id": 37, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}}
+{"step": 409, "kind": "command", "id": 37, "type": "move_delta", "dpos": [0.0, 0.0, -0.03], "timeout_steps": 40}
+{"step": 449, "kind": "command_result", "id": 37, "status": "timeout", "started_step": 409, "steps": 40, "message": ""}
+{"step": 449, "kind": "decision", "obs_step": 449, "api": [{"fn": "move_by", "args": [0.0, 0.0, -0.03], "result": false}], "command": {"id": 38, "type": "gripper", "closed": false}}
+{"step": 449, "kind": "command", "id": 38, "type": "gripper", "closed": false}
+{"step": 464, "kind": "command_result", "id": 38, "status": "reached", "started_step": 449, "steps": 15, "message": ""}
+{"step": 464, "kind": "decision", "obs_step": 464, "api": [{"fn": "open_gripper", "args": [], "result": null}], "command": {"id": 39, "type": "move_to", "pos": [-0.0918, 0.2522, 0.6713], "quat": [1.0, 0.0, 0.0, 0.0]}}
+{"step": 464, "kind": "command", "id": 39, "type": "move_to", "pos": [-0.0918, 0.2522, 0.6713], "quat": [1.0, 0.0, 0.0, 0.0]}
+{"step": 484, "kind": "command_result", "id": 39, "status": "reached", "started_step": 464, "steps": 20, "message": ""}
+{"step": 484, "kind": "episode_end", "reason": "policy_end"}
+{"step": 484, "kind": "decision", "obs_step": 484, "api": [{"fn": "move_to", "args": [-0.0918, 0.2522, 0.6713], "result": true}], "done": "program finished"}
+{"step": 484, "kind": "command", "type": "end"}

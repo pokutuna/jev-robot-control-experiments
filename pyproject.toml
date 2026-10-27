@@ -24,6 +24,11 @@ dependencies = [
     "cloudpickle",
     "pillow",
     "imageio[ffmpeg]",
+    # ノード (sim / policy / evaluator) をつなぐデータフロー。dora-rs-cli で CLI の `dora` が入る
+    "dora-rs>=1.1.0",
+    "dora-rs-cli>=1.1.0",
+    "pyarrow>=26.0.0",
+    "typesafe-sdk>=0.7.5",
 ]
 
 [dependency-groups]

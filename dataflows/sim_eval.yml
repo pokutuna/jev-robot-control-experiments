@@ -1,0 +1,36 @@
+# sim と evaluator だけの dataflow。ロボットは reset 直後の姿勢を保ち、MAX_STEPS で終わる。
+#   uv run --env-file .env dora run dataflows/sim_eval.yml --log-level info
+nodes:
+  - id: sim
+    path: ../nodes/sim.py
+    inputs:
+      # 20 Hz。sim が遅れたときに tick を溜めず、最新の 1 つだけ受ける
+      tick:
+        source: dora/timer/millis/50
+        queue_size: 1
+    outputs: [task, image_agentview, image_wrist, robot_state, ground_truth, episode_end]
+    env:
+      SUITE: libero_goal
+      TASK: "8"
+      INIT: "0"
+      IMAGE_SIZE: "256"
+      MAX_STEPS: "100"
+
+  - id: evaluator
+    path: ../nodes/evaluator.py
+    # 記録は 1 step も落とさないよう、入力の待ち行列を長くする (既定は 10 で、溢れると古いものから捨てる)
+    inputs:
+      image_agentview:
+        source: sim/image_agentview
+        queue_size: 1000
+      image_wrist:
+        source: sim/image_wrist
+        queue_size: 1000
+      ground_truth:
+        source: sim/ground_truth
+        queue_size: 1000
+      robot_state:
+        source: sim/robot_state
+        queue_size: 1000
+      task: sim/task
+      episode_end: sim/episode_end

@@ -1,7 +1,7 @@
 ---
 type: Finding
 title: LIBERO を新しい Python 環境で動かすときの制約と注意点
-description: LIBERO (robosuite 1.4、MuJoCo) を Python 3.14 と uv で動かしたときに分かった、依存の版の上限、import の方法、画像や四元数の向き、reset の乱数、速度
+description: LIBERO (robosuite 1.4、MuJoCo) を Python 3.14 と uv で動かしたときに分かった、依存の版の上限、import の方法、ビューワとの併用、画像や四元数の向き、reset の乱数、速度
 tags: [robotics, libero, mujoco]
 ---
 
@@ -33,8 +33,16 @@ mujoco の版ごとに試した結果は次のとおり。
 - LIBERO は `setup.py` の `install_requires` が空で、pip で入れても `import libero` が通らない。clone のパスを `sys.path` に足して import する
 - LIBERO は初回の import で `~/.libero/config.yaml` を探し、無ければ標準入力で問い合わせる。以前に別の場所の LIBERO を使っていると、`~/.libero/config.yaml` はその古いパスを指したまま残る。このため `config.yaml` を自分で書き、`LIBERO_CONFIG_PATH` でその場所を渡す
 - `benchmark.get_task_init_states` は `torch.load` を `weights_only` の既定値で呼ぶので、torch 2.6 以降では init state を読めない。自分で `weights_only=False` を付けて読む
-- macOS のオフスクリーン描画は `MUJOCO_GL=cgl` で動く
+- robosuite 1.4 は macOS では `MUJOCO_GL` の値によらず、非表示の GLFW ウィンドウを作ってカメラ画像を描画する (`robosuite/utils/binding_utils.py` の `GLContext`)。普通の `python` で動かす限りはこれで動く
 - gym 0.26 の NumPy 2 非対応の警告と robosuite の「No private macro file found!」の警告は出るが、動作には影響しなかった
+
+## ビューワ (mjpython) と一緒に動かす
+
+macOS で `mujoco.viewer.launch_passive` を使うには、スクリプトを `mjpython` で起動する。`mjpython` はビューワをメインスレッドで動かし、ユーザーのコードを別のスレッドで動かす。uv が入れた Python 3.14 の venv でも、`uv run mjpython` で動いた。
+
+このとき robosuite がカメラ描画用に GLFW のウィンドウを作ろうとすると、`NSWindow should only be instantiated on the main thread!` で落ちる。robosuite の `binding_utils.GLContext` を `mujoco.cgl.GLContext` に差し替えると、ウィンドウを作らずに描画するので落ちなくなる。差し替えた後も、カメラ画像は同じように描画された。
+
+LIBERO の reset は MuJoCo のモデルを作り直すので、ビューワは reset のたびに開き直す。ビューワの使い方は [MuJoCo のビューワの使い方](../guides/mujoco-viewer.md) にある。ビューワを開いた状態で 128px のカメラ 2 台を描画すると、step は約 29 step/秒だった。制御周期は 20 Hz なので、実時間より速い。
 
 ## 観測の向き
 

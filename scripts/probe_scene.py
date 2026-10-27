@@ -1,4 +1,4 @@
-"""LIBERO のタスクを 1 つ reset し、カメラ画像と物体の真値を保存する。
+"""LIBERO のタスクを 1 つ reset し、カメラ画像、ロボットの知覚、シミュレータの真値を保存する。
 
 uv run scripts/probe_scene.py --suite libero_goal --task 8
 """
@@ -25,7 +25,7 @@ def main() -> None:
     args = parser.parse_args()
 
     env = LiberoEnv(args.suite, args.task, image_size=args.size)
-    obs = env.reset(args.init, seed=args.seed)
+    percept = env.reset(args.init, seed=args.seed)
 
     out = (
         args.out
@@ -33,7 +33,7 @@ def main() -> None:
         / f"init{args.init:02d}"
     )
     out.mkdir(parents=True, exist_ok=True)
-    for cam, image in obs.images.items():
+    for cam, image in percept.images.items():
         Image.fromarray(image).save(out / f"{cam}.png")
     scene = {
         "suite": args.suite,
@@ -42,8 +42,8 @@ def main() -> None:
         "instruction": env.instruction,
         "init_index": args.init,
         "seed": args.seed,
-        "success": env.success(),
-        **obs.to_dict(),
+        "percept": percept.to_dict(),
+        "ground_truth": env.ground_truth().to_dict(),
     }
     (out / "scene.json").write_text(
         json.dumps(scene, indent=2, ensure_ascii=False) + "\n"

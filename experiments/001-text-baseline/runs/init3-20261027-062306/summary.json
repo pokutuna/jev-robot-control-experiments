@@ -1,0 +1,21 @@
+{
+  "suite": "libero_90",
+  "task_name": "LIVING_ROOM_SCENE4_pick_up_the_black_bowl_on_the_left_and_put_it_in_the_tray",
+  "instruction": "pick up the black bowl on the left and put it in the tray",
+  "fixed_view": "quarterview",
+  "steps": 1217,
+  "frames": 1217,
+  "dropped_frames": 0,
+  "success": true,
+  "first_success_step": 1070,
+  "end_reason": "policy_end",
+  "commands": 59,
+  "command_status": {
+    "reached": 59
+  },
+  "decisions": 60,
+  "mean_latency_ms": 693,
+  "jev_calls": 118,
+  "input_tokens": 213937,
+  "output_tokens": 13023
+}
