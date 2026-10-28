@@ -12,10 +12,16 @@ libero_90 60 (黒いボウルをトレイに入れる) で、ボウルを持ち�
 遠ざかる (away) に分ける。行き先の近くでの微調整は数えない。move_delta 以外の命令 (指、hold など) を
 送った判断と、ボウルを持ち上げた後に指を開いてからの判断は数えない。行き先は方策の段 (近づく、持ち上げる、運ぶ) によらず真値で決めるので、
 持ち上げる段で横を動かさない判断も still に入る。
+
+真値 (ground_truth.jsonl、robot_state.jsonl) は大きいのでリポジトリに入れていない。判断ごとの手先、行き先、
+送った向きを runs/*/direction.jsonl に書き、真値が無い run はこのファイルから数える。
+direction.jsonl の行き先は --offset でずらした後の値なので、このファイルから数えるときは --offset を使わない。
+どちらも無い run があるときは、数えずに止まる。
 """
 
 import argparse
 import json
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -36,7 +42,8 @@ def up_axis(quat: list[float]) -> np.ndarray:
     return np.array([2 * (x * z + w * y), 2 * (y * z - w * x), 1 - 2 * (x * x + y * y)])
 
 
-def judge(run_dir: Path, offset: np.ndarray) -> Counter:
+def rows(run_dir: Path, offset: np.ndarray) -> list[dict]:
+    """数える判断ごとに、判断に使った観測の手先と行き先、送った move_delta の向きを返す。"""
     gt = {
         g["step"]: g["objects"]
         for g in map(json.loads, (run_dir / "ground_truth.jsonl").open())
@@ -48,18 +55,20 @@ def judge(run_dir: Path, offset: np.ndarray) -> Counter:
     bowl_z0 = gt[min(gt)][BOWL]["pos"][2]
     bowl_up0 = up_axis(gt[min(gt)][BOWL]["quat"])
     events = [json.loads(line) for line in (run_dir / "events.jsonl").open()]
-    commands = {e["step"]: e for e in events if e["kind"] == "command"}
-    count: Counter = Counter()
+    # policy は判断ごとに命令を 1 つ送り、n 番目の判断の命令に id n を付ける。evaluator が受け取る
+    # step は判断と命令で 1 step ずれることがあるので、step ではなく id で対応付ける
+    commands = {e["id"]: e for e in events if e["kind"] == "command" and "id" in e}
+    decisions = [e for e in events if e["kind"] == "decision"]
+    out = []
     lifted = False  # 一度持ち上げたら、以後は運ぶ段とする
-    for d in events:
-        released = d["kind"] == "command" and d["type"] == "gripper" and not d["closed"]
-        if lifted and released:
-            break  # 離した後の判断は数えない
-        if d["kind"] != "decision" or "obs_step" not in d:
+    for n, d in enumerate(decisions, 1):
+        command = commands.get(n)
+        if command is None or "obs_step" not in d:
             continue
-        command = commands.get(d["step"])
+        if lifted and command["type"] == "gripper" and not command["closed"]:
+            break  # 離した後の判断は数えない
         step = d["obs_step"]
-        if command is None or command["type"] != "move_delta" or step not in eef:
+        if command["type"] != "move_delta" or step not in eef:
             continue
         objects = gt[step]
         bowl = objects[BOWL]
@@ -68,13 +77,29 @@ def judge(run_dir: Path, offset: np.ndarray) -> Counter:
             and up_axis(bowl["quat"]) @ bowl_up0 > TILTED
         )
         target = np.array(objects[TRAY if lifted else BOWL]["pos"][:2]) + offset
-        diff = target - eef[step][:2]
-        got = np.sign(np.array(command["dpos"][:2])) * np.sign(diff)
-        phase = "carry" if lifted else "approach"
+        out.append(
+            {
+                "step": d["step"],
+                "obs_step": step,
+                "command_id": command["id"],
+                "phase": "carry" if lifted else "approach",
+                "eef_xy": eef[step][:2].round(4).tolist(),
+                "target_xy": target.round(4).tolist(),
+                "dpos_xy": command["dpos"][:2],
+            }
+        )
+    return out
+
+
+def count(rows: list[dict]) -> Counter:
+    total: Counter = Counter()
+    for r in rows:
+        diff = np.array(r["target_xy"]) - np.array(r["eef_xy"])
+        got = np.sign(np.array(r["dpos_xy"])) * np.sign(diff)
         for axis, off, g in zip("xy", np.abs(diff) >= OFF_TARGET, got):
             if off:
-                count[(phase, axis, RESULTS[1 - int(g)])] += 1
-    return count
+                total[(r["phase"], axis, RESULTS[1 - int(g)])] += 1
+    return total
 
 
 def main() -> None:
@@ -88,11 +113,22 @@ def main() -> None:
     args = parser.parse_args()
     offset = np.array([float(v) for v in args.offset.split(",")])
     total: Counter = Counter()
+    missing = []
     for run_dir in sorted((args.exp_dir / "runs").glob("init*")):
-        if (run_dir / "summary.json").exists() and (
-            run_dir / "ground_truth.jsonl"
-        ).exists():
-            total += judge(run_dir, offset)
+        if not (run_dir / "summary.json").exists():
+            continue  # 途中で止めた run
+        saved = run_dir / "direction.jsonl"
+        if (run_dir / "ground_truth.jsonl").exists():
+            rs = rows(run_dir, offset)
+            saved.write_text("".join(json.dumps(r) + "\n" for r in rs))
+        elif saved.exists():
+            rs = [json.loads(line) for line in saved.open()]
+        else:
+            missing.append(run_dir.name)
+            continue
+        total += count(rs)
+    if missing:
+        sys.exit(f"真値も direction.jsonl も無い run: {', '.join(missing)}")
     print(f"行き先から {OFF_TARGET * 100:.0f} cm 以上ずれている軸の、判断の数 (割合)")
     print()
     print("| 段 | 軸 | 判断 | " + " | ".join(RESULTS) + " |")

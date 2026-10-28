@@ -36,6 +36,7 @@ from s1cap.jev_staged import (
     CROSS_UV,
     DEFAULT_FIXED_CAMERA,
     IMAGE_TO_WORLD,
+    TARGETS,
     TOP_DOWN,
     WRIST_CAPTION,
 )
@@ -244,8 +245,13 @@ class CaPPolicy:
         fixed_camera: str = DEFAULT_FIXED_CAMERA,
         jev_budget: int = DEFAULT_JEV_BUDGET,
         max_moves: int = DEFAULT_MAX_MOVES,
+        fixed_targets: bool = False,
     ) -> None:
+        """fixed_targets にすると、向きの関数 (wrist_direction、fixed_direction) は、プログラムが渡した行き先の
+        言い方を使わず、実験 006 の言い方 (s1cap.jev_staged.TARGETS) で Jev に問う。行き先に tray を含めば
+        トレイの中心、bowl を含めばボウルの中心にする。手順は同じまま、問いの言い方だけを 006 にそろえる比較に使う。"""
         self.client = client
+        self.fixed_targets = fixed_targets
         self.instruction = instruction
         self.code = compile(program, program_name, "exec")
         self.camera_matrix = camera_matrix
@@ -376,22 +382,32 @@ class CaPPolicy:
         self._log("close_gripper", [], None)
 
     def wrist_direction(self, target: str) -> tuple[int, int]:
-        qs = direction_questions(self.instruction, "wrist", "red cross", str(target))
+        qs = direction_questions(
+            self.instruction, "wrist", "red cross", self._direction_target(target)
+        )
         r = self._ask("wrist_direction", self._wrist_state(), qs)
         h, v = r.choices["h"].choice, r.choices["v"].choice
         d = IMAGE_TO_WORLD[h] + IMAGE_TO_WORLD[v]
         result = (int(d[0]), int(d[1]))
-        self._log("wrist_direction", [target], result, {"h": h, "v": v})
+        answers = {"h": h, "v": v}
+        if self.fixed_targets:
+            answers["asked"] = self._direction_target(target)
+        self._log("wrist_direction", [target], result, answers)
         return result
 
     def fixed_direction(self, target: str) -> tuple[int, int]:
-        qs = direction_questions(self.instruction, "fixed", "yellow dot", str(target))
+        qs = direction_questions(
+            self.instruction, "fixed", "yellow dot", self._direction_target(target)
+        )
         r = self._ask("fixed_direction", self._fixed_state(), qs)
         h, v = r.choices["h"].choice, r.choices["v"].choice
         eef = np.asarray(self.gripper_position())
         d = fixed_direction(self.camera_matrix, eef, h, v)
         result = (int(d[0]), int(d[1]))
-        self._log("fixed_direction", [target], result, {"h": h, "v": v})
+        answers = {"h": h, "v": v}
+        if self.fixed_targets:
+            answers["asked"] = self._direction_target(target)
+        self._log("fixed_direction", [target], result, answers)
         return result
 
     def in_wrist_view(self, target: str) -> float:
@@ -410,6 +426,16 @@ class CaPPolicy:
         result = round(r.nouls["q"].noul, 3)
         self._log("check", [question], result)
         return result
+
+    def _direction_target(self, target: str) -> str:
+        target = str(target)
+        if not self.fixed_targets:
+            return target
+        if "tray" in target.lower():
+            return TARGETS["tray"]
+        if "bowl" in target.lower():
+            return TARGETS["bowl"]
+        return target
 
     def _print(self, *args: Any, **kwargs: Any) -> None:
         self.prints.append(" ".join(str(a) for a in args))

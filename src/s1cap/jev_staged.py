@@ -18,9 +18,13 @@
 手首カメラは手先の中心から前後にずれているので、手先の真下の点が画像に写る位置は高さで変わる。
 横の位置合わせは開始の高さ (運ぶ高さ) で行い、× はその高さで掴む高さの点が写る位置に描く。
 高さは問わず、3 cm ずつ下ろして、届かずに timeout で終わった所 (テーブルやトレイの底に当たった所) で止める。
-ボウルの縁を寄せる先として問うと当たらないので、中心に揃えてから縁の方へ RIM_OFFSET だけずらす
-(wiki/findings/jev-c2-direction-policy.md)。掴んだボウルの中心は手先から -RIM_OFFSET の所にあるので、
+ボウルの縁を寄せる先として問うと上下 (世界の x) の向きを答えないので、中心に揃えてから縁の方へ RIM_OFFSET だけずらす
+(experiments/004-2-rim-probe)。掴んだボウルの中心は手先から -RIM_OFFSET の所にあるので、
 トレイに下ろす前にも × をトレイの中心に揃えてから RIM_OFFSET だけずらし、ボウルの中心をトレイの中心に置く。
+
+rim_target ("left" / "right") を与えると、中心に揃えた後に決まった距離ずらす代わりに、手首の画像で × を
+その側の縁へ寄せる左右の向きだけを問い、none と答えるまで (最大 RIM_MAX_MOVES 歩) y に動かしてから下ろす。
+掴む縁がボウルのどちら側かが変わるので、トレイに下ろす前のずらしもその側に合わせる。
 
 camera_matrix (固定カメラの射影行列) を与えると、固定カメラの画像に手先の印 (s1cap.marks) を描き、
 トレイが手首の画像に写っているかと、固定カメラの画像で黄色い点 (手先の真下のテーブルの点) をトレイの中心へ
@@ -48,6 +52,13 @@ from s1cap.marks import fixed_direction, fixed_view
 
 # 掴む縁はボウルの中心から +y (手首の画像の右) に 6 cm。ボウルの大きさから決めた値 (s1cap.scripted と同じ)
 RIM_OFFSET = np.array([0.0, 0.06, 0.0])
+# rim_target ごとの、縁の言い方と、ボウルの中心から見た縁の y の向き
+RIM_TARGETS = {
+    "left": ("the left edge of the bowl to pick up", -1.0),
+    "right": ("the right edge of the bowl to pick up", 1.0),
+}
+# 縁へ寄せる歩数の上限。2 cm の歩幅で、中心から縁 (6 cm) を越えて 4 cm 先まで
+RIM_MAX_MOVES = 5
 # libero_90 60 の開始の高さで、掴む高さ (手先の 21.8 cm 下) の点が手首の画像に写る位置
 CROSS_UV = (0.5, 0.40)
 # 下向きの手先の姿勢 (xyzw)
@@ -139,6 +150,22 @@ def wrist_questions(instruction: str) -> dict[str, Question]:
     return qs
 
 
+def rim_question(instruction: str, what: str) -> dict[str, Question]:
+    return {
+        "rim_h": Choice(
+            instructions=(
+                f"Task: {instruction}. In the wrist camera image, to move the red cross "
+                f"onto {what}, which way should it move horizontally?"
+            ),
+            criteria={
+                "left": None,
+                "none": f"the red cross is already horizontally at {what}",
+                "right": None,
+            },
+        )
+    }
+
+
 def fixed_questions(instruction: str) -> dict[str, Question]:
     return {
         # 「the bowl to pick up」と書くと、トレイに置いた後も 0.04〜0.12 と答えた
@@ -203,6 +230,7 @@ class JevStagedPolicy:
         noul_threshold: float = 0.5,
         camera_matrix: np.ndarray | None = None,
         carry_view: str = "wrist",
+        rim_target: str | None = None,
     ) -> None:
         self.client = client
         self.instruction = instruction
@@ -220,6 +248,16 @@ class JevStagedPolicy:
             extra_wrist, extra_fixed = marked_questions(instruction)
             self.wrist_questions |= extra_wrist
             self.fixed_questions |= extra_fixed
+        self.rim_target = rim_target
+        self.rim_question: dict[str, Question] = {}
+        self.rim_offset = RIM_OFFSET  # 掴む縁から見たボウルの中心は -rim_offset の所
+        if rim_target is not None:
+            what, side = RIM_TARGETS[rim_target]
+            self.rim_question = rim_question(instruction, what)
+            self.rim_offset = RIM_OFFSET * side
+        self.rim_moves: int | None = (
+            None  # 縁へ寄せている間の歩数。寄せていなければ None
+        )
         self.carry_z: float | None = None  # 開始の高さ。最初の観測で決める
         self.fingers_closed = (
             False  # 最後に送った指の命令。sim は reset 直後に指を開いている
@@ -244,6 +282,11 @@ class JevStagedPolicy:
                 self._new(self.queue.popleft()),
                 {"obs_step": obs.step, "intent": self.previous_intent, "queued": True},
             )
+        if self.rim_moves is not None:
+            command, rim = self._rim_step(obs)
+            command = self._new(command)
+            record = {"obs_step": obs.step, "intent": self.previous_intent, "rim": rim}
+            return Decision(command, record | {"command": command})
 
         perception, latency_p, calls = self._perceive(obs, eef)
         conditions = self._conditions(eef, obs.robot_state["gripper_width"], perception)
@@ -264,6 +307,11 @@ class JevStagedPolicy:
             },
         }
         commands = self._commands(intent, eef, perception)
+        if intent == "descend" and self.rim_target and self.previous_intent != intent:
+            # 決まった距離ずらす代わりに、縁へ寄せる。寄せ終えたら下ろす
+            self.rim_moves = 0
+            command, record["rim"] = self._rim_step(obs)
+            commands = [command]
         self.previous_intent = intent
         if not commands:
             return Decision(None, record)
@@ -309,6 +357,27 @@ class JevStagedPolicy:
             )
         calls = {"wrist": jev.call_record(w, w_ms), "fixed": jev.call_record(f, f_ms)}
         return perception, max(w_ms, f_ms), calls
+
+    def _rim_step(self, obs: Observation) -> tuple[dict[str, Any], dict[str, Any]]:
+        """× を縁へ寄せる左右の向きを問い、y に 1 歩動く命令か、寄せ終えたら下ろす命令を返す。"""
+        assert self.rim_moves is not None
+        wrist = wrist_view(obs.images[WRIST_CAMERA], CROSS_UV)
+        state = [f"Task: {self.instruction}", WRIST_CAPTION, jev.image_content(wrist)]
+        response, latency = jev.ask(self.client, state, self.rim_question)
+        choice = response.choices["rim_h"].choice
+        rim = {
+            "rim_h": choice,
+            "moves": self.rim_moves,
+            "call": jev.call_record(response, latency),
+        }
+        if choice == "none" or self.rim_moves >= RIM_MAX_MOVES:
+            self.rim_moves = None
+            return self._down(), rim
+        self.rim_moves += 1
+        return {
+            "type": "move_delta",
+            "dpos": (IMAGE_TO_WORLD[choice] * self.step_m).tolist(),
+        }, rim
 
     def _conditions(
         self, eef: np.ndarray, gripper_width: float, perception: dict[str, Any]
@@ -360,7 +429,7 @@ class JevStagedPolicy:
         if intent in ("descend", "lower"):
             down = self._down()
             if self.previous_intent != intent:
-                return [{"type": "move_delta", "dpos": RIM_OFFSET.tolist()}, down]
+                return [{"type": "move_delta", "dpos": self.rim_offset.tolist()}, down]
             return [down]
         if intent == "grasp":
             self.fingers_closed = True

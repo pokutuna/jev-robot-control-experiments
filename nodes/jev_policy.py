@@ -35,9 +35,13 @@ POLICY で方策を選ぶ。
                             写っていないときは固定カメラの画像の答えで運ぶ向きを決める
     CARRY_VIEW (wrist)      staged で FIXED_MARK=1 のときの、運ぶ段の向きの決め方 (wrist / fixed)。
                             fixed は、固定カメラの答えで運び、黄色い点がトレイの上に来たら手首の画像で合わせる
+    RIM_TARGET ()           staged で left / right にすると、ボウルの中心に合わせた後、決まった距離ずらす代わりに
+                            手首の画像でその側の縁へ y だけ寄せてから下ろす (s1cap.jev_staged)
     PROGRAM ()              cap で動かすプログラムのパス。scripts/run_experiment.py が PROGRAM_DIR と init state から書く
     JEV_BUDGET (360)        cap で Jev を呼ぶ回数の上限
     MAX_MOVES (120)         cap で移動と指の命令を送る回数の上限
+    FIXED_TARGETS ()        cap で 1 にすると、向きの関数はプログラムが渡した行き先の言い方を使わず、
+                            実験 006 の言い方で Jev に問う (s1cap.cap.CaPPolicy)
     JEV_MODEL (typesafe/jev-1.14)
 """
 
@@ -124,6 +128,7 @@ def main() -> None:
                     if os.environ.get("FIXED_MARK") == "1"
                     else None,
                     carry_view=os.environ.get("CARRY_VIEW", "wrist"),
+                    rim_target=os.environ.get("RIM_TARGET") or None,
                 )
             elif policy_kind in ("marked", "marked2"):
                 policy = JevMarkedPolicy(
@@ -147,6 +152,7 @@ def main() -> None:
                         os.environ.get("JEV_BUDGET", cap.DEFAULT_JEV_BUDGET)
                     ),
                     max_moves=int(os.environ.get("MAX_MOVES", cap.DEFAULT_MAX_MOVES)),
+                    fixed_targets=os.environ.get("FIXED_TARGETS") == "1",
                 )
             elif policy_kind == "text":
                 policy = JevTextPolicy(client, task["instruction"])

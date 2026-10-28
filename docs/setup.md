@@ -98,7 +98,7 @@ uv run scripts/run_experiment.py summary experiments/005-staged-guide   # 表だ
 
 `--inits` は `0-9` や `0,2,5` の形で書く。sim は 50 ms ごとに 1 step 進めるので、1 エピソードは長くても sim ノードの `MAX_STEPS` (Jev の dataflow では 7000 step) の 350 秒で終わる。
 
-`scripts/direction_accuracy.py` は、記録の真値から、方策が送った横の移動が行き先 (ボウルかトレイの中心) へ近づく向きだったかを数える。
+`scripts/direction_accuracy.py` は、記録の真値から、方策が送った横の移動が行き先 (ボウルかトレイの中心) へ近づく向きだったかを数える。真値の記録 (`ground_truth.jsonl`、`robot_state.jsonl`) は大きいので git の管理から外している。数えるのに使った判断ごとの手先、行き先、送った向きを `runs/*/direction.jsonl` に書き、真値の記録が無い run はこのファイルから数える。
 
 ```sh
 uv run scripts/direction_accuracy.py experiments/002-image-direction
@@ -109,6 +109,41 @@ Code as Policies の実験 (`experiments/007-cap`) では、回す前に、LLM �
 ```sh
 uv run --env-file .env scripts/generate_programs.py experiments/007-cap --inits 0-9   # 既にあるものは書き直さない (--force で書き直す)
 uv run --env-file .env scripts/run_experiment.py run experiments/007-cap --inits 0-9
+```
+
+`experiments/009-cap-fixed-targets` は 007 のプログラムをそのまま使う (dataflow の `PROGRAM_DIR` が `../007-cap/programs`)。policy ノードの `FIXED_TARGETS=1` で、向きの関数が Jev に渡す行き先の言い方を 006 と同じものに置き換える。
+
+```sh
+uv run --env-file .env scripts/run_experiment.py run experiments/009-cap-fixed-targets --inits 0-9
+```
+
+`experiments/010-rim-target` は 006 の dataflow に、policy ノードの `RIM_TARGET: left` を足したものである。ボウルの中心に合わせた後、手首の画像で −y の側の縁へ寄せる向きを問い、y だけを合わせてから下ろす。
+
+```sh
+uv run --env-file .env scripts/run_experiment.py run experiments/010-rim-target --inits 0-9
+```
+
+`scripts/intent_rules.py` は、005、006、010 の記録で、Jev が選んだ段が問いに書いた条件の成り立つ段だったかを数える。
+
+```sh
+uv run scripts/intent_rules.py experiments/005-staged-guide experiments/006-fixed-carry experiments/010-rim-target
+```
+
+`scripts/probe_directions.py` は、エピソードを回さずに、手先を決まった位置に置いた静止画で、問い方ごとに Jev に向きを問う (`experiments/008-direction-probe`)。記録は `probe/*.jsonl`、表は `probe/*.md` に書き、問いに使った画像は `outputs/probe_directions/` に書く。
+
+```sh
+uv run --env-file .env scripts/probe_directions.py run experiments/008-direction-probe
+uv run --env-file .env scripts/probe_directions.py run experiments/008-direction-probe \
+    --dz 0.10 --conditions wrist_center,world_target --name low
+```
+
+`--center-dy` は手先を置く位置の中心を、掴むボウルの中心から y にずらす。004-2 では掴む縁 (±6 cm) の周りに置き、縁を行き先にして問う。
+
+```sh
+uv run --env-file .env scripts/probe_directions.py run experiments/004-2-rim-probe \
+    --center-dy 0.06 --conditions wrist_rim_right_edge,wrist_rim_right_rim --name rim_plus
+uv run --env-file .env scripts/probe_directions.py run experiments/004-2-rim-probe \
+    --center-dy -0.06 --conditions wrist_rim_left_edge,wrist_rim_left_rim --name rim_minus
 ```
 
 ## 環境変数
