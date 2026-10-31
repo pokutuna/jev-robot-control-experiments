@@ -3,7 +3,8 @@
     uv run scripts/direction_accuracy.py experiments/002-image-direction
     uv run scripts/direction_accuracy.py experiments/001-text-baseline --offset 0,0.06
 
-libero_90 60 (黒いボウルをトレイに入れる) で、ボウルを持ち上げる前の行き先を掴むボウルの中心、
+運ぶ物をトレイに入れるタスク (s1cap.tasks の TaskSpec) で、運ぶ物を持ち上げる前の行き先を運ぶ物の位置、
+以下ではボウル (libero_90 60) を例に書く。ボウルを持ち上げる前の行き先を掴むボウルの中心、
 持ち上げた後をトレイの中心とする。ボウルが初めより LIFTED 以上高く、向きが 30° 以上傾いていないときに
 持ち上げたとする (押されて傾いただけのボウルは持ち上げていない)。--offset (x,y [m]) を与えると、どちらの行き先もその分ずらす。
 ボウルの縁を掴む方策 (実験 001 は +y に 6 cm) で使う。判断に使った観測の step (decision の obs_step) の真値から、
@@ -27,7 +28,7 @@ from pathlib import Path
 
 import numpy as np
 
-from s1cap.jev_text import BOWL, TRAY
+from s1cap.tasks import spec_of_run
 
 OFF_TARGET = 0.02  # [m]
 RESULTS = ("toward", "still", "away")
@@ -52,8 +53,10 @@ def rows(run_dir: Path, offset: np.ndarray) -> list[dict]:
         r["step"]: np.array(r["eef"]["pos"])
         for r in map(json.loads, (run_dir / "robot_state.jsonl").open())
     }
-    bowl_z0 = gt[min(gt)][BOWL]["pos"][2]
-    bowl_up0 = up_axis(gt[min(gt)][BOWL]["quat"])
+    spec = spec_of_run(json.loads((run_dir / "summary.json").read_text()))
+    obj_body, target_body = spec.object_body, spec.target_body
+    bowl_z0 = gt[min(gt)][obj_body]["pos"][2]
+    bowl_up0 = up_axis(gt[min(gt)][obj_body]["quat"])
     events = [json.loads(line) for line in (run_dir / "events.jsonl").open()]
     # policy は判断ごとに命令を 1 つ送り、n 番目の判断の命令に id n を付ける。evaluator が受け取る
     # step は判断と命令で 1 step ずれることがあるので、step ではなく id で対応付ける
@@ -71,12 +74,14 @@ def rows(run_dir: Path, offset: np.ndarray) -> list[dict]:
         if command["type"] != "move_delta" or step not in eef:
             continue
         objects = gt[step]
-        bowl = objects[BOWL]
+        bowl = objects[obj_body]
         lifted = lifted or (
             bowl["pos"][2] - bowl_z0 > LIFTED
             and up_axis(bowl["quat"]) @ bowl_up0 > TILTED
         )
-        target = np.array(objects[TRAY if lifted else BOWL]["pos"][:2]) + offset
+        target = (
+            np.array(objects[target_body if lifted else obj_body]["pos"][:2]) + offset
+        )
         out.append(
             {
                 "step": d["step"],

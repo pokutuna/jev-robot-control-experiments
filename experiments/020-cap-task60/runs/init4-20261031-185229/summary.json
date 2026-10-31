@@ -1,0 +1,46 @@
+{
+  "suite": "libero_90",
+  "task_id": 60,
+  "init": 4,
+  "seed": 0,
+  "image_size": 448,
+  "task_name": "LIVING_ROOM_SCENE4_pick_up_the_black_bowl_on_the_left_and_put_it_in_the_tray",
+  "instruction": "pick up the black bowl on the left and put it in the tray",
+  "fixed_view": "quarterview",
+  "camera_matrix": [
+    [
+      -503.72716835979986,
+      261.0566696117734,
+      -143.9844245697848,
+      213.13688209495126
+    ],
+    [
+      124.46153819430933,
+      124.46153819430933,
+      -558.2488785764623,
+      462.05828543406045
+    ],
+    [
+      -0.541675220419702,
+      -0.541675220419702,
+      -0.6427876096865394,
+      1.1051435482306788
+    ]
+  ],
+  "steps": 821,
+  "frames": 821,
+  "dropped_frames": 0,
+  "success": false,
+  "first_success_step": null,
+  "end_reason": "policy_end",
+  "commands": 65,
+  "command_status": {
+    "reached": 62,
+    "timeout": 3
+  },
+  "decisions": 66,
+  "mean_latency_ms": 462,
+  "jev_calls": 26,
+  "input_tokens": 26798,
+  "output_tokens": 1739
+}

@@ -44,3 +44,14 @@ LIBERO-Goal の「put the bowl on the plate」の初期状態 (task 8、init sta
 - 料金は `usage.cost` で返り、画像 1 枚の問いで約 $0.00003 だった
 - 次の primitive を選ぶ Choice は、JSON 入力では `approach_bowl` に 0.97〜0.98、画像入力では 0.57〜0.71 (次点の `grasp` が 0.23〜0.33) だった。3 回とも同じ答えを選んだ
 - agentview の画像でボウルの Box を問うと、`top 0.51〜0.52, bottom 0.58〜0.60, left 0.41〜0.43, right 0.53〜0.55` (画像の幅と高さに対する比) を確信度 0.78〜0.82 で返した。画像で見たボウルの位置とほぼ合っていた。手首カメラの画像で問った結果と、Choice で移動方向を選ばせたときとの違いは [jev-c2-direction-policy.md](jev-c2-direction-policy.md)
+
+## 画像の大きさと入力トークン
+
+2026-10-31 に、libero_90 task 61 のクォータービュー 1 枚を 280〜1120 px の 7 通りの大きさで送り比べた。条件と表は [実験 012](../../experiments/012-image-resolution/README.md) にある。
+
+- 入力トークンは画素数にほぼ比例して増え、約 360 + 画素数 / 392 (約 20 × 20 px ごとに 1 トークン) でどの大きさも数トークン以内に合った。28 px 四方や 32 px 四方を 1 トークンにする数え方 (Qwen2.5-VL、Qwen3-VL) とは合わない。内部でどう分割しているかは公開されていない
+- レイテンシは 896 px まで 1 秒未満で、1120 px で 740〜1032 ms になった
+- 「プリンの箱が写っているか」(Noul) の確信度は、280 px の 0.71〜0.75 から上がり、560 px で 0.98〜0.99 になった。それより大きくしても変わらなかった。問いは 2 種類、場面は 1 つだけで確かめた
+- 受け付ける大きさは一辺 280〜1,568 px、総画素数 78,400〜2,458,624 で、範囲外の画像は自動で縮められずにリクエスト全体が失敗すると報じられている[^jev-image-spec]。`src/s1cap/jev.py` の docstring と [system1-model-robot-control.md](../sources/system1-model-robot-control.md) にある 256 px という下限は、この報道と食い違う。256〜279 px の画像は試していない
+
+[^jev-image-spec]: [Jev 1.14 image input: box, TypeSafe warns](https://pasqualepillitteri.it/en/news/26048/jev-1-14-image-input-box-typesafe-warns)、[LiteLLM: TypeSafe images](https://docs.litellm.ai/docs/decisions/typesafe_images)

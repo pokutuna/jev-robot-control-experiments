@@ -21,7 +21,7 @@ LIBERO のシミュレーションを、dora-rs のノードに分けて動か�
           │       │ ◀──────────────────────────────────────── │        │
           └───────┘                                command    └────────┘
               │ image_agentview, image_wrist, ground_truth,       │
-              │ task, command_result, episode_end                 │ command
+              │ task, command_result, episode_end, sim_state      │ command
               ▼                                                   │
          ┌───────────┐ ◀──────────────────────────────────────────┘
          │ evaluator │ → outputs/runs/<日時>/
@@ -32,19 +32,20 @@ LIBERO のシミュレーションを、dora-rs のノードに分けて動か�
 | --- | --- | --- |
 | sim | `nodes/sim.py` | tick ごとに LIBERO を 1 step 進め、画像、ロボットの状態、真値を流す。命令を受けて制御器の目標を書き換え、命令が終わったら結果を出す。実機のロボットドライバとセンサに当たる |
 | policy | `nodes/scripted_policy.py` など | 画像とロボットの状態から命令を決める |
-| evaluator | `nodes/evaluator.py` | 真値で成功を判定し、動画 (`episode.mp4`)、step ごとの真値 (`ground_truth.jsonl`)、命令と結果などの出来事 (`events.jsonl`)、まとめ (`summary.json`) を保存する |
+| evaluator | `nodes/evaluator.py` | 真値で成功を判定し、動画 (`episode.mp4`)、step ごとの真値 (`ground_truth.jsonl`)、命令と結果などの出来事 (`events.jsonl`)、まとめ (`summary.json`) を保存する。`sim_state` をつなぐと step ごとの MuJoCo の状態 (`sim_states.npz`) も保存する |
 
 sim の出力:
 
 | 出力 | 中身 |
 | --- | --- |
-| `task` | タスクの名前、指示文、固定カメラの置き方と射影行列の JSON (`{"suite", "task_name", "instruction", "fixed_view", "camera_matrix"}`)。`fixed_view` は `agentview` か `quarterview`。`camera_matrix` は世界座標 [m] を `image_agentview` の画素 (u は右、v は下へ増える) に移す 3x4 の行列 (`LiberoEnv.camera_matrix`)。カメラの校正値にあたり、方策が手先の位置を画像に描くのに使う。最初に 1 回だけ送る |
+| `task` | タスクの名前、指示文、固定カメラの置き方と射影行列の JSON (`{"suite", "task_id", "init", "seed", "image_size", "task_name", "instruction", "fixed_view", "camera_matrix"}`)。`task_id` から `image_size` は、記録から動画を描き直すとき (`scripts/render_episode.py`) に使う。`fixed_view` は `agentview` か `quarterview`。`camera_matrix` は世界座標 [m] を `image_agentview` の画素 (u は右、v は下へ増える) に移す 3x4 の行列 (`LiberoEnv.camera_matrix`)。カメラの校正値にあたり、方策が手先の位置を画像に描くのに使う。最初に 1 回だけ送る |
 | `image_agentview` | 斜め上の固定カメラの画像。uint8 の 1 次元配列で、shape はメタデータの `shape` |
 | `image_wrist` | 手首カメラの画像 |
 | `robot_state` | `Percept` の画像以外 (手先の姿勢、指の開き、腕の関節角) の JSON |
 | `ground_truth` | `GroundTruth` (物体と固定物の姿勢、固定物の関節値、成功判定) の JSON |
 | `command_result` | 命令の結果の JSON |
 | `episode_end` | エピソードを終えた理由の JSON (`{"reason", "step"}`)。終わる直前に 1 回だけ送る |
+| `sim_state` | MuJoCo の状態 (時刻、qpos、qvel) の float64 の 1 次元配列 (`LiberoEnv.sim_state`)。固定物の位置は含まないので、描き直すときは同じ init と seed で reset してから `LiberoEnv.restore` で戻す。dataflow の `outputs` に書かなければ送られない |
 
 どの出力もメタデータの `step` に step 番号が入る。
 

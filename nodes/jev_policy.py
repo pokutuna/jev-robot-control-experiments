@@ -7,10 +7,12 @@ POLICY で方策を選ぶ。
     marked     画像に手先の印を描き、印を行き先へ寄せる画像の中の向きを 1 回の呼び出しで問う (s1cap.jev_marked)。
                INPUT、CAMERAS、OVERLAY は使わず、固定カメラと手首カメラの画像を使う
     marked2    marked の前に意図を選ばせ、意図の行き先を問いに入れる (2 回の呼び出し)
-    cap        LLM が書いた手順のプログラム (PROGRAM) を動かし、プログラムの中で Jev に画像を問う (s1cap.cap)。
+    cap        手順のプログラム (PROGRAM) を動かし、プログラムの中で Jev に画像を問う (s1cap.cap)。
+               プログラムは LLM が書いたものか、人が書いた骨組みとタスクに固有の値 (実験 017 以降)
                INPUT、CAMERAS、OVERLAY、STEP_M は使わず、固定カメラと手首カメラの画像を使う
     text       物体の位置の真値を文で渡し、意図と軸ごとの向きを選ばせる (s1cap.jev_text)。
-               INPUT、CAMERAS、OVERLAY、STEP_M は使わず、scene を配線する
+               INPUT、CAMERAS、OVERLAY、STEP_M は使わず、scene を配線する。運ぶ物と置き場所は
+               task の suite と task_id から s1cap.tasks で決める
 
 命令を 1 つ送ったら結果を待ち、結果より後の step の観測が届いてから次の判断をする。
 
@@ -37,7 +39,8 @@ POLICY で方策を選ぶ。
                             fixed は、固定カメラの答えで運び、黄色い点がトレイの上に来たら手首の画像で合わせる
     RIM_TARGET ()           staged で left / right にすると、ボウルの中心に合わせた後、決まった距離ずらす代わりに
                             手首の画像でその側の縁へ y だけ寄せてから下ろす (s1cap.jev_staged)
-    PROGRAM ()              cap で動かすプログラムのパス。scripts/run_experiment.py が PROGRAM_DIR と init state から書く
+    PROGRAM ()              cap で動かすプログラムのパス。scripts/run_experiment.py が PROGRAM_DIR と init state から書く。
+                            , で区切って並べると、その順につないで 1 つのプログラムにする (タスクに固有の値、骨組みの順)
     JEV_BUDGET (360)        cap で Jev を呼ぶ回数の上限
     MAX_MOVES (120)         cap で移動と指の命令を送る回数の上限
     FIXED_TARGETS ()        cap で 1 にすると、向きの関数はプログラムが渡した行き先の言い方を使わず、
@@ -57,6 +60,7 @@ from s1cap.jev_marked import JevMarkedPolicy
 from s1cap.jev_policy import JevDirectionPolicy, Observation
 from s1cap.jev_staged import JevStagedPolicy
 from s1cap.jev_text import JevTextPolicy
+from s1cap.tasks import spec_of_run
 
 CAMERA_OF_INPUT = {"image_agentview": "agentview", "image_wrist": "robot0_eye_in_hand"}
 INPUT_OF_NAME = {"agentview": "image_agentview", "wrist": "image_wrist"}
@@ -144,7 +148,7 @@ def main() -> None:
                 policy = cap.CaPPolicy(
                     client,
                     task["instruction"],
-                    Path(program).read_text(),
+                    "\n".join(Path(p).read_text() for p in program.split(",")),
                     np.array(task["camera_matrix"]),
                     program_name=program,
                     fixed_camera=camera_of_input["image_agentview"],
@@ -155,7 +159,7 @@ def main() -> None:
                     fixed_targets=os.environ.get("FIXED_TARGETS") == "1",
                 )
             elif policy_kind == "text":
-                policy = JevTextPolicy(client, task["instruction"])
+                policy = JevTextPolicy(client, task["instruction"], spec_of_run(task))
             else:
                 policy = JevDirectionPolicy(
                     client,

@@ -1,7 +1,9 @@
 """物体の位置の真値を文で渡し、Jev に意図と軸ごとの向きを選ばせる方策 (実験 001、先行事例の再現)。
 
 OpenRoboto の incremental_policy (https://github.com/openroboto-ai/jev-robot-control, 7a4ed8b) の
-問いの形を、libero_90 60 (黒いボウルをトレイに入れる) に置き換えた。1 回の判断で Jev を 2 回呼ぶ。
+問いの形を、LIBERO の「物をトレイに入れる」タスクに置き換えた。1 回の判断で Jev を 2 回呼ぶ。
+運ぶ物と置き場所、掴む点と離す点は s1cap.tasks の TaskSpec で決める。文の中の運ぶ物の名前は
+TaskSpec の object_word にし、bowl (libero_90 60) では実験 001 と同じ文になる。
 
 1. 意図: 状態 (JSON) を渡し、approach、grasp、lift、carry、lower、release、withdraw、finish から選ばせる。
    各意図の説明に、その意図を選ぶ条件を書く
@@ -22,13 +24,8 @@ from typesafe_sdk import Choice, Question, TypeSafeClient
 
 from s1cap import jev
 from s1cap.jev_policy import Decision, Observation
+from s1cap.tasks import TaskSpec
 
-BOWL = "akita_black_bowl_1"
-TRAY = "wooden_tray_1"
-# ボウルの +y 側の縁を掴む手先の位置 (ボウルの中心から)。s1cap.scripted と同じ
-GRASP_OFFSET = np.array([0.0, 0.06, 0.03])
-# 離す手先の位置 (トレイの中心から)。ボウルの中心がトレイの中心の上に来る
-RELEASE_OFFSET = np.array([0.0, 0.06, 0.06])
 TRAVEL_ABOVE_GRASP = 0.15  # 運ぶ高さ (掴む高さから)
 TOP_DOWN = [1.0, 0.0, 0.0, 0.0]
 HELD_WIDTH = (
@@ -103,20 +100,37 @@ The motion must follow the selected intent. Do not keep descending once the gras
 DIRECTION = {"negative": -1.0, "hold": 0.0, "positive": 1.0}
 
 
-def intent_question() -> dict[str, Question]:
-    return {"intent": Choice(instructions=INTENT_INSTRUCTIONS, criteria=INTENTS)}
+def name_object(text: str, word: str) -> str:
+    """文の中のボウル (bowl) を、運ぶ物の名前 word に替える。状態のキーの bowl は word の空白を _ にする。"""
+    key = word.replace(" ", "_")
+    text = text.replace("bowl_", f"{key}_")
+    return text.replace("Bowl", word[0].upper() + word[1:]).replace("bowl", word)
 
 
-def motor_questions(state: dict[str, Any], intent: str) -> dict[str, Question]:
+def intent_question(word: str = "bowl") -> dict[str, Question]:
+    return {
+        "intent": Choice(
+            instructions=name_object(INTENT_INSTRUCTIONS, word),
+            criteria={k: name_object(v, word) for k, v in INTENTS.items()},
+        )
+    }
+
+
+def motor_questions(
+    state: dict[str, Any], intent: str, word: str = "bowl"
+) -> dict[str, Question]:
+    key = word.replace(" ", "_")
+    motor_instructions = name_object(MOTOR_INSTRUCTIONS, word)
     qs: dict[str, Question] = {}
     for i, axis in enumerate("xyz"):
         a = axis.upper()
         instructions = (
-            f"{MOTOR_INSTRUCTIONS}\nCURRENT INTENT: {intent.upper()}. "
+            f"{motor_instructions}\nCURRENT INTENT: {intent.upper()}. "
             f"This question controls ONLY {a}. "
             f"Current {a}={state['tcp_mm'][i]} mm. "
-            f"Bowl grasp {a}={state['grasp_tcp_mm'][i]} mm. "
-            f"Bowl grasp minus current on this axis={state['bowl_grasp_minus_tcp_mm'][i]} mm. "
+            f"{name_object('Bowl', word)} grasp {a}={state['grasp_tcp_mm'][i]} mm. "
+            f"{name_object('Bowl', word)} grasp minus current on this axis="
+            f"{state[f'{key}_grasp_minus_tcp_mm'][i]} mm. "
             f"Tray release {a}={state['release_tcp_mm'][i]} mm. "
             f"Tray release minus current on this axis={state['tray_release_minus_tcp_mm'][i]} mm. "
             "Use ONLY this axis for this answer; do not answer for another axis."
@@ -139,7 +153,7 @@ def motor_questions(state: dict[str, Any], intent: str) -> dict[str, Question]:
             },
         )
     qs["gripper"] = Choice(
-        instructions=f"{MOTOR_INSTRUCTIONS}\nCURRENT INTENT: {intent.upper()}. Decide only the gripper.",
+        instructions=f"{motor_instructions}\nCURRENT INTENT: {intent.upper()}. Decide only the gripper.",
         criteria={
             "open": "Open the fingers.",
             "hold": "Keep the current finger command.",
@@ -154,9 +168,14 @@ def _mm(v: np.ndarray) -> list[float]:
 
 
 class JevTextPolicy:
-    def __init__(self, client: TypeSafeClient, instruction: str) -> None:
+    def __init__(
+        self, client: TypeSafeClient, instruction: str, spec: TaskSpec
+    ) -> None:
         self.client = client
         self.instruction = instruction
+        self.spec = spec
+        self.word = spec.object_word
+        self.key = spec.object_word.replace(" ", "_")
         self.started = False
         self.fingers_closed = (
             False  # 最後に送った指の命令。sim は reset 直後に指を開いている
@@ -170,28 +189,28 @@ class JevTextPolicy:
         """OpenRoboto の observe にならい、真値から状態を作る。"""
         assert obs.objects is not None
         tcp = np.asarray(obs.robot_state["eef"]["pos"])
-        bowl = np.asarray(obs.objects[BOWL]["pos"])
-        tray = np.asarray(obs.objects[TRAY]["pos"])
-        grasp = bowl + GRASP_OFFSET
-        release = tray + RELEASE_OFFSET
+        obj = np.asarray(obs.objects[self.spec.object_body]["pos"])
+        tray = np.asarray(obs.objects[self.spec.target_body]["pos"])
+        grasp = obj + self.spec.grasp_offset
+        release = tray + self.spec.release_offset
         if self.travel_z is None:
             self.travel_z = float(grasp[2] + TRAVEL_ABOVE_GRASP)
         width = float(obs.robot_state["gripper_width"])
         held = self.fingers_closed and width > HELD_WIDTH
-        # ボウルの中心がトレイの中心から横に 7 cm 以内で、トレイより 5 cm 以上は上にない
+        # 運ぶ物の中心がトレイの中心から横に 7 cm 以内で、トレイより 5 cm 以上は上にない
         in_tray = bool(
-            np.linalg.norm(bowl[:2] - tray[:2]) < 0.07 and bowl[2] < tray[2] + 0.05
+            np.linalg.norm(obj[:2] - tray[:2]) < 0.07 and obj[2] < tray[2] + 0.05
         )
         return {
             "task": self.instruction,
             "source": "LIBERO simulator ground-truth object positions, not camera vision",
             "units": "millimetres; robot base coordinates; +Z is up",
             "tcp_mm": _mm(tcp),
-            "bowl_mm": _mm(bowl),
+            f"{self.key}_mm": _mm(obj),
             "grasp_tcp_mm": _mm(grasp),
             "tray_center_mm": _mm(tray),
             "release_tcp_mm": _mm(release),
-            "bowl_grasp_minus_tcp_mm": _mm(grasp - tcp),
+            f"{self.key}_grasp_minus_tcp_mm": _mm(grasp - tcp),
             "tray_release_minus_tcp_mm": _mm(release - tcp),
             "alignment": {
                 "grasp_x_error_mm": round(float(grasp[0] - tcp[0]) * 1000, 1),
@@ -206,7 +225,7 @@ class JevTextPolicy:
             "gripper_command": "closed" if self.fingers_closed else "open",
             "finger_width_mm": round(width * 1000, 1),
             "held": held,
-            "bowl_in_tray": in_tray,
+            f"{self.key}_in_tray": in_tray,
             "previous_intent": self.previous_intent,
             "feedback": self.feedback,
         }
@@ -221,11 +240,13 @@ class JevTextPolicy:
                 {"obs_step": obs.step, "intent": "setup"},
             )
         state = self.state(obs)
-        intent_answer, intent_ms = jev.ask(self.client, state, intent_question())
+        intent_answer, intent_ms = jev.ask(
+            self.client, state, intent_question(self.word)
+        )
         intent = intent_answer.choices["intent"].choice
         motor_state = {**state, "selected_intent": intent}
         motor, motor_ms = jev.ask(
-            self.client, motor_state, motor_questions(state, intent)
+            self.client, motor_state, motor_questions(state, intent, self.word)
         )
         choices = {name: a.choice for name, a in motor.choices.items()}
         record = {

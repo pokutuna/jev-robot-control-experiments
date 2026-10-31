@@ -4,6 +4,7 @@
     image_agentview、image_wrist  sim のカメラ画像
     ground_truth                  sim の真値
     robot_state                   sim のロボットの状態 (任意。つなぐと robot_state.jsonl に記録する)
+    sim_state                     sim の MuJoCo の状態 (任意。つなぐと sim_states.npz に記録する)
     以下は任意。つなぐと events.jsonl に記録し、まとめに入れる
     task、episode_end             sim のタスクの情報と、エピソードを終えた理由
     command、command_result       policy の命令と、sim が返した結果
@@ -54,6 +55,8 @@ def main() -> None:
             step = event["metadata"].get("step", step)
             if eid == "ground_truth":
                 recorder.add_ground_truth(step, decode_json(event["value"]))
+            elif eid == "sim_state":
+                recorder.add_sim_state(step, event["value"].to_numpy())
             elif eid == "robot_state":
                 state = decode_json(event["value"])
                 eef = np.asarray(state["eef"]["pos"])

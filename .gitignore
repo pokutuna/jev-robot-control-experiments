@@ -11,4 +11,9 @@ experiments/*/runs/*/*.mp4
 experiments/*/runs/*/ground_truth.jsonl
 experiments/*/runs/*/robot_state.jsonl
 experiments/*/runs/*/dora.log
+# 表から外した記録 (通信の不調で止まったものなど)。理由は実験の README に書く
+experiments/*/excluded-runs/*/*.mp4
+experiments/*/excluded-runs/*/ground_truth.jsonl
+experiments/*/excluded-runs/*/robot_state.jsonl
+experiments/*/excluded-runs/*/dora.log
 experiments/*/.dataflow-init*.yml

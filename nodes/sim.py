@@ -11,6 +11,7 @@
     image_wrist     手首カメラの画像
     robot_state     手先の姿勢、指の開き、腕の関節角 (JSON)
     ground_truth    物体と固定物の姿勢、固定物の関節値、成功判定 (JSON)
+    sim_state       MuJoCo の状態 (float64 の 1 次元配列、LiberoEnv.sim_state)。動画を後から描き直すのに使う
     command_result  命令の結果 (JSON)。reached / timeout / preempted / rejected
     episode_end     エピソードを終えた理由 (JSON)。policy_end / policy_closed / max_steps
 
@@ -23,6 +24,7 @@ import os
 import time
 
 import numpy as np
+import pyarrow as pa
 from arrow_io import decode_json, encode_image, encode_json
 from dora import Node
 
@@ -39,6 +41,7 @@ def publish(node: Node, driver: RobotDriver, percept: Percept) -> None:
         node.send_output(OUTPUT_OF_CAMERA[camera], value, {**meta, **shape})
     node.send_output("robot_state", encode_json(percept.to_dict()), meta)
     node.send_output("ground_truth", encode_json(driver.ground_truth().to_dict()), meta)
+    node.send_output("sim_state", pa.array(driver.env.sim_state()), meta)
 
 
 def main() -> None:
@@ -47,14 +50,15 @@ def main() -> None:
         os.environ.get("SUITE", "libero_goal"),
         int(os.environ.get("TASK", "8")),
         image_size=int(os.environ.get("IMAGE_SIZE", "256")),
-        horizon=max_steps,
+        # reset で LIBERO が物を落ち着かせる step も horizon に数えるので、max_steps で止まる前に
+        # 打ち切られないよう余裕を持たせる
+        horizon=max_steps + 100,
         fixed_view=os.environ.get("FIXED_VIEW", "agentview"),
     )
     driver = RobotDriver(env)
     # reset は数秒かかる。Node を作ると dataflow が始まり tick が届き出すので、先に済ませる
-    percept = driver.reset(
-        int(os.environ.get("INIT", "0")), seed=int(os.environ.get("SEED", "0"))
-    )
+    init, seed = int(os.environ.get("INIT", "0")), int(os.environ.get("SEED", "0"))
+    percept = driver.reset(init, seed=seed)
     node = Node()
     node.log("info", f"{env.task_name}: {env.instruction}")
 
@@ -74,8 +78,13 @@ def main() -> None:
                 node.log("info", f"command {result.to_dict()}")
             finished_at = (driver.step_count, time.perf_counter())
 
+    # suite から image_size までは、記録した sim_state から動画を描き直すとき (scripts/render_episode.py) に使う
     task = {
         "suite": env.suite,
+        "task_id": env.task_id,
+        "init": init,
+        "seed": seed,
+        "image_size": int(os.environ.get("IMAGE_SIZE", "256")),
         "task_name": env.task_name,
         "instruction": env.instruction,
         "fixed_view": env.fixed_view,

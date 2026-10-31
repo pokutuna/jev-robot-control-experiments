@@ -14,15 +14,18 @@ experiments/NNN-slug/
 └── videos/         README から参照する代表的な動画
 ```
 
-エピソードを回さない静止画の実験 (004-2、008) は、`runs/` と `videos/` の代わりに次を置く。
+エピソードを回さない実験 (静止画で問う 004-2、008、016、掴む動きだけを繰り返す 015) は、`runs/` と `videos/` の代わりに次を置く。
 
 ```
 experiments/NNN-slug/
-├── probe/          scripts/probe_directions.py が書く記録 (*.jsonl) と表 (*.md)
+├── probe/          scripts/probe_directions.py、probe_targets.py、probe_grasp.py が書く記録 (*.jsonl) と表 (*.md)
 └── images/         README から参照する代表的な画像
 ```
 
+通信の不調で止まったエピソードや、方策を直す前のエピソードのように、`results.md` の表に入れない記録は `excluded-runs/` に移し、外した理由を README に書く。
+
 - `NNN` は実験の番号、`slug` は条件を表す短い kebab-case の語にする
+- 012 以降の `dataflow.yml` は、sim の出力 `sim_state` を evaluator の入力につなぐ。evaluator が `runs/*/sim_states.npz` に書いた状態から、`scripts/render_episode.py` で動画を描き直せる ([docs/setup.md の「動画を描き直す」](../docs/setup.md#動画を描き直す))。エピソードの動画は全部を git に入れず、レポートと動画に使うものだけを描き直して `videos/` に置く
 - `dataflow.yml` は `scripts/run_experiment.py` で回す。sim ノードの `INIT` と evaluator ノードの `OUT_DIR` はランナーが書き換えるので、yml には書かなくてよい。回し方は [docs/setup.md の「実験を回す」](../docs/setup.md#実験を回す) にある
 
 ## README に書くこと
@@ -46,6 +49,7 @@ experiments/NNN-slug/
 | --- | --- |
 | `runs/*/summary.json` | 入れる。エピソードのまとめ |
 | `runs/*/events.jsonl` | 入れる。Jev の答え、命令、命令の結果 |
+| `runs/*/sim_states.npz` | 入れる。step ごとの MuJoCo の状態。動画を描き直すのに使う (012 以降。1000 step で約 0.4 MB) |
 | `runs/*/episode.mp4`、`ground_truth.jsonl`、`robot_state.jsonl` | 入れない (大きい) |
 | `runs/*/dora.log` | 入れない (手元の絶対パスを含む) |
 | `videos/*.mp4` | 代表的なものだけを入れる |

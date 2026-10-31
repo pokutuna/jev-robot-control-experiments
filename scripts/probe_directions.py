@@ -57,10 +57,13 @@ from s1cap.jev_staged import (
     marked_questions,
     wrist_questions,
 )
-from s1cap.jev_text import BOWL, TRAY
 from s1cap.marks import FIXED_CAPTION, fixed_direction, fixed_view
 from s1cap.sim import LiberoEnv
+from s1cap.tasks import TASKS
 
+# libero_90 60 の黒いボウルとトレイ
+BOWL = TASKS[("libero_90", 60)].object_body
+TRAY = TASKS[("libero_90", 60)].target_body
 SUITE, TASK = "libero_90", 60
 IMAGE_SIZE = 320
 OTHER_BOWL = "akita_black_bowl_2"

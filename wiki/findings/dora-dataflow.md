@@ -66,3 +66,11 @@ LIBERO の 1 step (OSC_POSE の action 1 つ、1/20 秒) にかかる時間を�
 | 512 px | 18.8 ms | 19.5 ms |
 
 時間のほとんどは物理の計算で、画像の大きさにはほとんど左右されない。dora で 50 ms の tick ごとに 1 step 進めると、256 px でも 512 px でも 100 step を 5.0 秒 (20.1 step/s) で進め、evaluator は 101 フレーム (step 0〜100) を 1 つも落とさずに記録した。
+
+## 命令の結果が届かなかった例
+
+実験 013 の init 3 (2026-10-31) で、sim が出した `command_result` が policy にも evaluator にも届かず、policy が結果を待ったまま `MAX_STEPS` まで進んだ[^lost]。同じ命令を同じ step に送り直すと、dora を通さない `RobotDriver` では step 172 に reached になった。dora の実行では、その頃 (開始から約 40 秒) に sim のログに `zenoh_shm::watchdog::periodic_task Some("Watchdog Validator"): timer overrun` が出ていた。このとき、同じ Mac で LIBERO を使う probe のスクリプトを 2 つ並べて回していた。
+
+timer overrun と結果が届かないことの因果は確かめていない。006 の init 9 では evaluator に timer overrun が出たが、届かなかった出力は無かった。policy は結果を待つ間に次の命令を送らないので、結果が 1 つ落ちるとエピソードが止まる。dora の実行中は、ほかの重い処理を同じ Mac で並べて回さない。
+
+[^lost]: `experiments/013-text-baseline/excluded-runs/init3-20261031-165527/`と、その Task Document (`docs/tasks/20261031-report-experiments/02-exp-text-baseline.md`) の Work Log

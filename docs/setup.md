@@ -81,6 +81,7 @@ uv run --env-file .env dora run dataflows/scripted_json.yml --log-level info
 - sim ノード (`nodes/sim.py`) は 50 ms ごとに 1 step 進め、カメラ画像、ロボットの状態、真値を流す。タスクや step 数は yaml の `env:` で変える
 - sim ノードの `FIXED_VIEW: quarterview` で、固定カメラをロボットの正面左の斜め上に置く。Jev の policy ノードの `OVERLAY` で、Jev に渡す画像に軸の矢印 (`axes`) や手先の真下の印 (`below`) を描く。どちらも yaml の `env:` に書く
 - evaluator ノード (`nodes/evaluator.py`) は `outputs/runs/<日時>/` に、2 台のカメラの画像を横に並べた動画 (`episode.mp4`)、step ごとの真値 (`ground_truth.jsonl`) とロボットの状態 (`robot_state.jsonl`)、命令とその結果などの出来事 (`events.jsonl`)、まとめ (`summary.json`) を書く。まとめには成功したかと、エピソードを終えた理由 (`end_reason`) が入る
+- sim の出力 `sim_state` を evaluator の入力につなぐと、evaluator は step ごとの MuJoCo の状態を `sim_states.npz` に書く (実験 012 以降の dataflow)。この記録から、カメラの大きさを変えた動画を後で描き直せる (「動画を描き直す」)
 - `dataflows/jev_c2_staged.yml` では、evaluator の環境変数 `WRIST_CROSS_UV` により、動画の手首の画像を Jev に渡すときと同じ向き (180° 回す) にし、同じ位置に赤い × を描く。この設定の前に録画した動画には、`uv run scripts/draw_cross.py outputs/runs/<日時>` で × を描いた `episode_cross.mp4` を作れる
 - evaluator の環境変数 `FIXED_MARK: "1"` で、動画の固定カメラの画像に、Jev に渡すときと同じ手先の印 (`s1cap.marks`) を描く (実験 003〜007 の dataflow)
 - `--log-level info` にすると、dora の細かいログとノードの `print` が消え、ノードが `node.log` で送ったメッセージが残る
@@ -123,6 +124,29 @@ uv run --env-file .env scripts/run_experiment.py run experiments/009-cap-fixed-t
 uv run --env-file .env scripts/run_experiment.py run experiments/010-rim-target --inits 0-9
 ```
 
+`experiments/011-cap-rim-target` は 007 の dataflow に、policy ノードの `KNOWLEDGE: "010"` を足したものである。`generate_programs.py` は、このキーで `s1cap.cap.KNOWLEDGE` から選んだ事実と測った傾向をプロンプトに入れる (既定は 007 と同じ `"006"`)。
+
+```sh
+uv run --env-file .env scripts/generate_programs.py experiments/011-cap-rim-target --inits 0-9
+uv run --env-file .env scripts/run_experiment.py run experiments/011-cap-rim-target --inits 0-9
+```
+
+`experiments/017-skeleton` と `experiments/018-skeleton-switch` は、LLM に書かせず、人が書いたプログラムを回す。policy ノードの `PROGRAM` にカンマで区切って並べたファイルを、この順につないで 1 つのプログラムにする (タスクに固有の値、手順の骨組みの順)。パスは実験のディレクトリから解決する。018 は 017 の `programs/` のファイルを使う。
+
+```sh
+uv run --env-file .env scripts/run_experiment.py run experiments/017-skeleton --inits 0-9
+uv run --env-file .env scripts/run_experiment.py run experiments/018-skeleton-switch --inits 0-9
+```
+
+`experiments/019-cap-task61` と `experiments/020-cap-task60` は、`KNOWLEDGE: "016"` (015、016 で分かったこと) で LLM にプログラムを書かせる。
+
+```sh
+uv run --env-file .env scripts/generate_programs.py experiments/019-cap-task61 --inits 0-9
+uv run --env-file .env scripts/run_experiment.py run experiments/019-cap-task61 --inits 0-9
+```
+
+`experiments/021-cap-task61-full` と `experiments/022-cap-task60-full` は、`KNOWLEDGE: "017"` (016 に、017、018 で骨組みを回して分かったことを足したもの) で書かせる。手順は 019 と同じである。LLM の答えの本文が空で返ったとき (考える途中で出力の長さの上限に達したとき) は、`generate_programs.py` が 3 回まで書かせ直す。
+
 `scripts/intent_rules.py` は、005、006、010 の記録で、Jev が選んだ段が問いに書いた条件の成り立つ段だったかを数える。
 
 ```sh
@@ -145,6 +169,36 @@ uv run --env-file .env scripts/probe_directions.py run experiments/004-2-rim-pro
 uv run --env-file .env scripts/probe_directions.py run experiments/004-2-rim-probe \
     --center-dy -0.06 --conditions wrist_rim_left_edge,wrist_rim_left_rim --name rim_minus
 ```
+
+`scripts/probe_targets.py` は、同じように手先を置いた静止画で、行き先の言い方ごとに、CaP と骨組みの `wrist_direction`、`fixed_direction` と同じ問いを問う (`experiments/016-target-wording`)。問いに使った画像は `outputs/probe_targets/` に書く。
+
+```sh
+uv run --env-file .env scripts/probe_targets.py run experiments/016-target-wording --inits 0-4 --task 61 --name pudding \
+    --phrases "the chocolate pudding box,the box"
+```
+
+`scripts/probe_grasp.py` は、Jev を呼ばずに、手先を運ぶ物の位置からずらした真上に置き、下ろして掴んで持ち上げる動きだけを繰り返して、掴めた回数をずれごとに数える (`experiments/015-grasp-tolerance`)。`reach` は、物の無い所で手先が下向きのまま下りられる高さを測る。
+
+```sh
+uv run --env-file .env scripts/probe_grasp.py run experiments/015-grasp-tolerance --task 61 --inits 0-4 --name pudding
+uv run --env-file .env scripts/probe_grasp.py reach experiments/015-grasp-tolerance --task 62
+```
+
+dora の実験と同時に probe を回さない。013 では、2 つの probe と同時に回したエピソードで、命令の結果が policy ノードに届かずに止まったことがある。probe が原因かは確かめていない ([wiki/findings/dora-dataflow.md](../wiki/findings/dora-dataflow.md))。
+
+## 動画を描き直す
+
+`sim_states.npz` のある記録からは、`scripts/render_episode.py` で動画を描き直せる。記録の `summary.json` にある suite、task、init、seed、固定カメラの置き方で場面を作り直し、記録した状態を 1 step ずつ戻してカメラを描画する。
+
+```sh
+uv run --env-file .env scripts/render_episode.py experiments/NNN-slug/runs/init0-<日時> \
+    --size 480 --marks --out outputs/videos/init0.mp4
+```
+
+- `--size` はカメラ 1 枚の一辺。実験のときの大きさ (`IMAGE_SIZE`) によらず選べる
+- `--marks` で、Jev に渡す画像と同じ印 (固定カメラの手先の印、手首カメラの赤い ×) を描く。手首カメラの画像は、印の有無によらず 180° 回して固定カメラと左右をそろえる
+- `--layout v` で 2 台のカメラを縦につなぐ。`--start`、`--end` で step の範囲を、`--every 2` で 2 倍速を選ぶ
+- 描き直した画像は記録した画像とほぼ一致する。静止画で比べると、画素値の差の平均は固定カメラで約 0.2、手首カメラで約 1.7 (0〜255) だった
 
 ## 環境変数
 

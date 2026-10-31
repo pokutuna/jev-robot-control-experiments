@@ -6,8 +6,9 @@ LLM には init state の情報を渡さないので、プロンプトはどの 
 1 本ずつ書かせ、書かれるプログラムのばらつきも結果に含める。
 
 dataflow.yml の sim ノードの SUITE と TASK から指示文を読み、policy ノードの CODE_MODEL、JEV_BUDGET、
-MAX_MOVES をプロンプトに入れる。プログラムは policy ノードの PROGRAM_DIR (既定 programs) に
-init<N>.py として書き、モデル、トークン数、費用、時間を init<N>.json に書く。プロンプトは prompt.md に書く。
+MAX_MOVES、KNOWLEDGE (プロンプトに入れる知識。s1cap.cap.KNOWLEDGE のキー、既定 006) をプロンプトに
+入れる。プログラムは policy ノードの PROGRAM_DIR (既定 programs) に init<N>.py として書き、モデル、
+トークン数、費用、時間を init<N>.json に書く。プロンプトは prompt.md に書く。
 既にあるプログラムは書き直さない (--force で書き直す)。
 """
 
@@ -19,6 +20,8 @@ import yaml
 
 from s1cap import cap
 from s1cap.sim import setup_libero
+
+GENERATE_TRIES = 3  # 答えが空のとき、書かせ直す回数の上限
 
 
 def parse_inits(text: str) -> list[int]:
@@ -54,6 +57,7 @@ def main() -> None:
         instruction(sim["SUITE"], int(sim["TASK"])),
         jev_budget=int(policy.get("JEV_BUDGET", cap.DEFAULT_JEV_BUDGET)),
         max_moves=int(policy.get("MAX_MOVES", cap.DEFAULT_MAX_MOVES)),
+        knowledge=str(policy.get("KNOWLEDGE", cap.DEFAULT_KNOWLEDGE)),
     )
     out = args.exp_dir / policy.get("PROGRAM_DIR", "programs")
     out.mkdir(exist_ok=True)
@@ -63,7 +67,17 @@ def main() -> None:
         if path.exists() and not args.force:
             print(f"{path} は既にある")
             continue
-        code, meta = cap.generate(text, model)
+        for attempt in range(GENERATE_TRIES):
+            try:
+                code, meta = cap.generate(text, model)
+                break
+            except cap.EmptyAnswer as e:
+                print(
+                    f"{path}: {e}。書かせ直す ({attempt + 1}/{GENERATE_TRIES})",
+                    flush=True,
+                )
+        else:
+            raise RuntimeError(f"{path}: {GENERATE_TRIES} 回とも答えが空")
         path.write_text(code)
         (out / f"init{init}.json").write_text(json.dumps(meta, indent=2) + "\n")
         print(f"{path}: {meta}", flush=True)

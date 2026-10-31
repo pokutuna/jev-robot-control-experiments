@@ -1,0 +1,81 @@
+# 実験 013: 001 と同じ方策 (s1cap.jev_text) を、本筋の libero_90 61 (プリンの箱をトレイへ) で回す。
+# 物体の位置の真値を文で渡し、Jev に意図と軸ごとの向きを選ばせる。運ぶ物と掴む点は s1cap.tasks の TaskSpec で決まる。
+# Jev は OpenRouter 経由で呼ぶので .env に OPENROUTER_API_KEY が要る。INIT と OUT_DIR は scripts/run_experiment.py が書き換える
+#   uv run --env-file .env scripts/run_experiment.py run experiments/013-text-baseline --inits 0-9
+nodes:
+  - id: sim
+    path: ../../nodes/sim.py
+    inputs:
+      tick:
+        source: dora/timer/millis/50
+        queue_size: 1
+      command:
+        source: policy/command
+        queue_size: 100
+    outputs:
+      - task
+      - image_agentview
+      - image_wrist
+      - robot_state
+      - ground_truth
+      - sim_state
+      - command_result
+      - episode_end
+    env:
+      SUITE: libero_90
+      TASK: "61"
+      FIXED_VIEW: quarterview
+      INIT: "0"
+      IMAGE_SIZE: "448"
+      # 1 回の判断に 1〜2 秒かかるので、120 回の判断に足りる長さにする
+      MAX_STEPS: "7000"
+
+  - id: policy
+    path: ../../nodes/jev_policy.py
+    inputs:
+      task: sim/task
+      # 物体の位置の真値。この実験だけが方策に真値を配線する
+      scene:
+        source: sim/ground_truth
+        queue_size: 1
+      robot_state:
+        source: sim/robot_state
+        queue_size: 1
+      command_result:
+        source: sim/command_result
+        queue_size: 100
+    outputs: [command, decision]
+    env:
+      POLICY: text
+      MAX_DECISIONS: "120"
+
+  - id: evaluator
+    path: ../../nodes/evaluator.py
+    inputs:
+      image_agentview:
+        source: sim/image_agentview
+        queue_size: 1000
+      image_wrist:
+        source: sim/image_wrist
+        queue_size: 1000
+      ground_truth:
+        source: sim/ground_truth
+        queue_size: 1000
+      robot_state:
+        source: sim/robot_state
+        queue_size: 1000
+      # 動画を後から描き直すための MuJoCo の状態 (scripts/render_episode.py)
+      sim_state:
+        source: sim/sim_state
+        queue_size: 1000
+      task: sim/task
+      episode_end: sim/episode_end
+      command_result:
+        source: sim/command_result
+        queue_size: 1000
+      command:
+        source: policy/command
+        queue_size: 1000
+      decision:
+        source: policy/decision
+        queue_size: 1000

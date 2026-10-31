@@ -1,0 +1,98 @@
+# 実験 019: Code as Policies (s1cap.cap.CaPPolicy)。LLM に、017 の骨組みと同じ動作の部品と、015 (掴めるか) と
+# 016 (行き先の言い方) で分かったこと (KNOWLEDGE: "016") だけを渡してプログラムを書かせ、libero_90 61 (プリンの箱をトレイへ) を回す。
+# 手順もタスクに固有の値も LLM が決める。真値は policy に配線しない。
+# プログラムは実行の前に scripts/generate_programs.py で programs/ に生成し、読んでから回す。
+# LLM と Jev は OpenRouter 経由で呼ぶので .env に OPENROUTER_API_KEY が要る。INIT、OUT_DIR、PROGRAM は
+# scripts/run_experiment.py が書き換える
+#   uv run --env-file .env scripts/generate_programs.py experiments/019-cap-task61 --inits 0-9
+#   uv run --env-file .env scripts/run_experiment.py run experiments/019-cap-task61 --inits 0-9
+nodes:
+  - id: sim
+    path: ../../nodes/sim.py
+    inputs:
+      tick:
+        source: dora/timer/millis/50
+        queue_size: 1
+      command:
+        source: policy/command
+        queue_size: 100
+    outputs:
+      - task
+      - image_agentview
+      - image_wrist
+      - robot_state
+      - ground_truth
+      - sim_state
+      - command_result
+      - episode_end
+    env:
+      SUITE: libero_90
+      TASK: "61"
+      FIXED_VIEW: quarterview
+      INIT: "0"
+      IMAGE_SIZE: "448"
+      # 1 回の判断に 1〜2 秒かかるので、120 回の判断に足りる長さにする
+      MAX_STEPS: "7000"
+
+  - id: policy
+    path: ../../nodes/jev_policy.py
+    inputs:
+      task: sim/task
+      # 判断を始めるときに最新の観測を読めるよう、古いものは溜めない
+      robot_state:
+        source: sim/robot_state
+        queue_size: 1
+      image_agentview:
+        source: sim/image_agentview
+        queue_size: 1
+      image_wrist:
+        source: sim/image_wrist
+        queue_size: 1
+      command_result:
+        source: sim/command_result
+        queue_size: 100
+    outputs: [command, decision]
+    env:
+      POLICY: cap
+      CODE_MODEL: deepseek/deepseek-v4.1-flash-1017
+      PROGRAM_DIR: programs
+      KNOWLEDGE: "016"
+      JEV_BUDGET: "360"
+      MAX_MOVES: "120"
+      # 最初の判断 (手先を下向きにそろえる) の分だけ MAX_MOVES より多くする
+      MAX_DECISIONS: "121"
+
+  - id: evaluator
+    path: ../../nodes/evaluator.py
+    inputs:
+      image_agentview:
+        source: sim/image_agentview
+        queue_size: 1000
+      image_wrist:
+        source: sim/image_wrist
+        queue_size: 1000
+      ground_truth:
+        source: sim/ground_truth
+        queue_size: 1000
+      robot_state:
+        source: sim/robot_state
+        queue_size: 1000
+      # 動画を後から描き直すための MuJoCo の状態 (scripts/render_episode.py)
+      sim_state:
+        source: sim/sim_state
+        queue_size: 1000
+      task: sim/task
+      episode_end: sim/episode_end
+      command_result:
+        source: sim/command_result
+        queue_size: 1000
+      command:
+        source: policy/command
+        queue_size: 1000
+      decision:
+        source: policy/decision
+        queue_size: 1000
+    env:
+      # 動画にも Jev に渡す画像と同じ印を描く
+      WRIST_CROSS_UV: "0.5,0.40"
+      FIXED_MARK: "1"

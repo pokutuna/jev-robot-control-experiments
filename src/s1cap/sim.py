@@ -179,6 +179,7 @@ class LiberoEnv:
         bench = benchmark.get_benchmark_dict()[suite]()
         task = bench.get_task(task_id)
         self.suite = suite
+        self.task_id = task_id
         self.task_name: str = task.name
         self.instruction: str = task.language
         self.cameras = cameras
@@ -323,6 +324,19 @@ class LiberoEnv:
         hold = np.append(NOOP_ACTION[:-1], self.gripper_command)
         for _ in range(settle_steps):
             self.step(hold)
+        return self.perceive()
+
+    def sim_state(self) -> np.ndarray:
+        """MuJoCo の状態 (時刻、qpos、qvel) を 1 次元にしたもの。restore に渡すとこの状態に戻る。
+
+        固定物の位置は状態に含まれないので、戻す前に同じ init と seed で reset しておく。
+        """
+        return np.asarray(self._env.get_sim_state(), dtype=np.float64)
+
+    def restore(self, state: np.ndarray) -> Percept:
+        """sim_state で得た状態に戻し、その状態の知覚を返す。記録したエピソードを描き直すのに使う。"""
+        self._raw_obs = self._env.regenerate_obs_from_state(state)
+        self._sync_viewer()
         return self.perceive()
 
     def perceive(self) -> Percept:
