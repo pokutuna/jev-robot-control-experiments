@@ -1,0 +1,174 @@
+{
+ "experiment": "021-cap-task61-full",
+ "init": 1,
+ "instruction": "pick up the chocolate pudding and put it in the tray",
+ "fps": 20,
+ "steps": 622,
+ "speed": 4,
+ "clip_steps": 622,
+ "success": false,
+ "decisions": [
+  {
+   "obs": 2,
+   "step": 12,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: up",
+   "command": "水平に y -3 cm 動かす"
+  },
+  {
+   "obs": 18,
+   "step": 27,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +3 cm、y -3 cm 動かす"
+  },
+  {
+   "obs": 35,
+   "step": 43,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +3 cm、y -3 cm 動かす"
+  },
+  {
+   "obs": 51,
+   "step": 60,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +3 cm、y -3 cm 動かす"
+  },
+  {
+   "obs": 69,
+   "step": 78,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +3 cm、y -3 cm 動かす"
+  },
+  {
+   "obs": 87,
+   "step": 94,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: down",
+   "command": "水平に x +3 cm 動かす"
+  },
+  {
+   "obs": 103,
+   "step": 111,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +3 cm、y -3 cm 動かす"
+  },
+  {
+   "obs": 121,
+   "step": 137,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: none, v: none / wrist_direction(\"the box\") → h: left, v: none",
+   "command": "水平に y -2 cm 動かす"
+  },
+  {
+   "obs": 143,
+   "step": 160,
+   "text": "wrist_direction(\"the box\") → h: none, v: none / wrist_direction(\"the box\") → h: left, v: none",
+   "command": "水平に y -2 cm 動かす"
+  },
+  {
+   "obs": 166,
+   "step": 183,
+   "text": "wrist_direction(\"the box\") → h: none, v: none / wrist_direction(\"the box\") → h: none, v: none",
+   "command": "3 cm 下ろす"
+  },
+  {
+   "obs": 291,
+   "step": 291,
+   "text": "close_gripper()",
+   "command": "21 cm 上げる"
+  },
+  {
+   "obs": 311,
+   "step": 320,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +3 cm 動かす"
+  },
+  {
+   "obs": 327,
+   "step": 335,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +3 cm 動かす"
+  },
+  {
+   "obs": 342,
+   "step": 350,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +3 cm 動かす"
+  },
+  {
+   "obs": 356,
+   "step": 364,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +3 cm 動かす"
+  },
+  {
+   "obs": 370,
+   "step": 377,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +3 cm 動かす"
+  },
+  {
+   "obs": 384,
+   "step": 391,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +3 cm 動かす"
+  },
+  {
+   "obs": 398,
+   "step": 406,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +3 cm 動かす"
+  },
+  {
+   "obs": 412,
+   "step": 420,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +3 cm 動かす"
+  },
+  {
+   "obs": 426,
+   "step": 435,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +3 cm 動かす"
+  },
+  {
+   "obs": 441,
+   "step": 448,
+   "text": "wrist_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 454,
+   "step": 463,
+   "text": "wrist_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 468,
+   "step": 475,
+   "text": "wrist_direction(\"the center of the tray\") → h: right, v: up",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 482,
+   "step": 491,
+   "text": "wrist_direction(\"the center of the tray\") → h: right, v: none",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 497,
+   "step": 504,
+   "text": "wrist_direction(\"the center of the tray\") → h: right, v: none",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 511,
+   "step": 518,
+   "text": "wrist_direction(\"the center of the tray\") → h: right, v: up",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 610,
+   "step": 610,
+   "text": "open_gripper()",
+   "command": "10 cm 上げる"
+  }
+ ]
+}

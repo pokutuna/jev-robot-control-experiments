@@ -14,6 +14,7 @@ Decision モデル Jev にカメラ画像とロボット自身の状態を渡し
 - [実験](experiments/): 実験ごとの設定、記録、結果 ([構成の説明](experiments/README.md))
 - [環境構築](docs/setup.md): セットアップと実験の実行方法
 - [wiki](wiki/index.md): 環境構築やロボット制御についての知見
+- [説明動画](video/README.md): 実験の録画から説明動画を作る Remotion のプロジェクト
 - `src/s1cap/`、`nodes/`、`dataflows/`: シミュレーション、方策、評価とそれらをつなぐ dora-rs の設定
 
 `experiments/` には、実験ごとに `NNN-slug/` ディレクトリを置いています。各ディレクトリの `README.md` に方法と考察、`dataflow.yml` に実験の設定、`results.md` と `runs/` に結果とエピソードの記録があります。静止画などを使う検証では、代わりに `probe/` や `images/` に記録を置いています。

@@ -1,0 +1,521 @@
+{
+ "experiment": "013-text-baseline",
+ "init": 0,
+ "instruction": "pick up the chocolate pudding and put it in the tray",
+ "fps": 20,
+ "steps": 1760,
+ "speed": 8,
+ "clip_steps": 1760,
+ "success": true,
+ "decisions": [
+  {
+   "obs": 2,
+   "step": 23,
+   "text": "意図: approach / x: +, y: -, z: 0, gripper: hold",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 32,
+   "step": 47,
+   "text": "意図: approach / x: +, y: -, z: 0, gripper: hold",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 56,
+   "step": 73,
+   "text": "意図: approach / x: +, y: -, z: 0, gripper: hold",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 83,
+   "step": 103,
+   "text": "意図: approach / x: +, y: -, z: 0, gripper: hold",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 112,
+   "step": 127,
+   "text": "意図: approach / x: +, y: -, z: 0, gripper: hold",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 136,
+   "step": 150,
+   "text": "意図: approach / x: +, y: -, z: 0, gripper: hold",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 159,
+   "step": 172,
+   "text": "意図: approach / x: +, y: -, z: 0, gripper: hold",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 182,
+   "step": 197,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 198,
+   "step": 211,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 211,
+   "step": 225,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 226,
+   "step": 241,
+   "text": "意図: approach / x: +, y: 0, z: 0, gripper: hold",
+   "command": "水平に x +1 cm 動かす"
+  },
+  {
+   "obs": 248,
+   "step": 263,
+   "text": "意図: approach / x: +, y: 0, z: 0, gripper: hold",
+   "command": "動かさない"
+  },
+  {
+   "obs": 267,
+   "step": 281,
+   "text": "意図: approach / x: +, y: -, z: 0, gripper: hold",
+   "command": "水平に y -2 cm 動かす"
+  },
+  {
+   "obs": 289,
+   "step": 305,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 306,
+   "step": 319,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 320,
+   "step": 334,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 335,
+   "step": 350,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 351,
+   "step": 366,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 367,
+   "step": 386,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 386,
+   "step": 400,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 400,
+   "step": 413,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 414,
+   "step": 429,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 429,
+   "step": 444,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 444,
+   "step": 459,
+   "text": "意図: approach / x: 0, y: -, z: 0, gripper: hold",
+   "command": "水平に y -1 cm 動かす"
+  },
+  {
+   "obs": 465,
+   "step": 480,
+   "text": "意図: approach / x: 0, y: 0, z: 0, gripper: hold",
+   "command": "hold"
+  },
+  {
+   "obs": 480,
+   "step": 494,
+   "text": "意図: approach / x: 0, y: -, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 501,
+   "step": 514,
+   "text": "意図: approach / x: 0, y: -, z: -, gripper: open",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 522,
+   "step": 536,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: open",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 543,
+   "step": 557,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 564,
+   "step": 578,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 585,
+   "step": 600,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 607,
+   "step": 620,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 628,
+   "step": 641,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 648,
+   "step": 662,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 670,
+   "step": 684,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 691,
+   "step": 704,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: open",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 712,
+   "step": 730,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: open",
+   "command": "1 cm 下ろす"
+  },
+  {
+   "obs": 735,
+   "step": 749,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: open",
+   "command": "1 cm 下ろす"
+  },
+  {
+   "obs": 754,
+   "step": 768,
+   "text": "意図: approach / x: 0, y: 0, z: -, gripper: open",
+   "command": "動かさない"
+  },
+  {
+   "obs": 771,
+   "step": 785,
+   "text": "意図: grasp / x: 0, y: 0, z: 0, gripper: close",
+   "command": "グリッパーを閉じる"
+  },
+  {
+   "obs": 800,
+   "step": 814,
+   "text": "意図: lift / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 821,
+   "step": 836,
+   "text": "意図: lift / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 844,
+   "step": 858,
+   "text": "意図: lift / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 865,
+   "step": 879,
+   "text": "意図: lift / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 886,
+   "step": 900,
+   "text": "意図: lift / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 907,
+   "step": 921,
+   "text": "意図: lift / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 928,
+   "step": 941,
+   "text": "意図: lift / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 949,
+   "step": 962,
+   "text": "意図: lift / x: 0, y: 0, z: +, gripper: hold",
+   "command": "動かさない"
+  },
+  {
+   "obs": 967,
+   "step": 980,
+   "text": "意図: carry / x: -, y: +, z: +, gripper: hold",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 989,
+   "step": 1002,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1012,
+   "step": 1025,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1034,
+   "step": 1048,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1058,
+   "step": 1071,
+   "text": "意図: carry / x: -, y: +, z: +, gripper: hold",
+   "command": "水平に x -1 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1080,
+   "step": 1094,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1101,
+   "step": 1114,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1121,
+   "step": 1135,
+   "text": "意図: carry / x: +, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1142,
+   "step": 1156,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1163,
+   "step": 1177,
+   "text": "意図: carry / x: +, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1184,
+   "step": 1198,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1206,
+   "step": 1220,
+   "text": "意図: carry / x: +, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1227,
+   "step": 1243,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1250,
+   "step": 1264,
+   "text": "意図: carry / x: +, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1272,
+   "step": 1286,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1293,
+   "step": 1307,
+   "text": "意図: carry / x: +, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1316,
+   "step": 1331,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1338,
+   "step": 1352,
+   "text": "意図: carry / x: +, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1361,
+   "step": 1376,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1383,
+   "step": 1396,
+   "text": "意図: carry / x: +, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1404,
+   "step": 1418,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 1427,
+   "step": 1441,
+   "text": "意図: carry / x: +, y: +, z: 0, gripper: hold",
+   "command": "水平に y +1 cm 動かす"
+  },
+  {
+   "obs": 1449,
+   "step": 1462,
+   "text": "意図: carry / x: -, y: +, z: 0, gripper: hold",
+   "command": "水平に y +1 cm 動かす"
+  },
+  {
+   "obs": 1468,
+   "step": 1482,
+   "text": "意図: lower / x: +, y: +, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 1489,
+   "step": 1503,
+   "text": "意図: lower / x: -, y: +, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 1510,
+   "step": 1523,
+   "text": "意図: lower / x: +, y: -, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 1531,
+   "step": 1544,
+   "text": "意図: lower / x: -, y: -, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 1553,
+   "step": 1567,
+   "text": "意図: lower / x: +, y: +, z: -, gripper: hold",
+   "command": "2 cm 下ろす"
+  },
+  {
+   "obs": 1575,
+   "step": 1589,
+   "text": "意図: lower / x: -, y: 0, z: -, gripper: hold",
+   "command": "1 cm 下ろす"
+  },
+  {
+   "obs": 1596,
+   "step": 1609,
+   "text": "意図: release / x: 0, y: 0, z: 0, gripper: open",
+   "command": "グリッパーを開く"
+  },
+  {
+   "obs": 1624,
+   "step": 1637,
+   "text": "意図: withdraw / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 1644,
+   "step": 1657,
+   "text": "意図: withdraw / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 1665,
+   "step": 1678,
+   "text": "意図: withdraw / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 1686,
+   "step": 1699,
+   "text": "意図: withdraw / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 1707,
+   "step": 1721,
+   "text": "意図: withdraw / x: 0, y: 0, z: +, gripper: hold",
+   "command": "2 cm 上げる"
+  },
+  {
+   "obs": 1728,
+   "step": 1741,
+   "text": "意図: withdraw / x: 0, y: 0, z: +, gripper: hold",
+   "command": "動かさない"
+  },
+  {
+   "obs": 1745,
+   "step": 1758,
+   "text": "意図: finish / x: 0, y: 0, z: 0, gripper: hold"
+  }
+ ]
+}

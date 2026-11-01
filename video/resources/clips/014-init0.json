@@ -1,0 +1,732 @@
+{
+ "experiment": "014-image-direction",
+ "init": 0,
+ "instruction": "pick up the chocolate pudding and put it in the tray",
+ "fps": 20,
+ "steps": 5661,
+ "speed": 6,
+ "clip_steps": 1200,
+ "success": false,
+ "decisions": [
+  {
+   "obs": 0,
+   "step": 17,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "グリッパーを閉じる"
+  },
+  {
+   "obs": 33,
+   "step": 42,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 52,
+   "step": 63,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 73,
+   "step": 82,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 92,
+   "step": 101,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 110,
+   "step": 119,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 128,
+   "step": 138,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 148,
+   "step": 156,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 166,
+   "step": 176,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 185,
+   "step": 194,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 203,
+   "step": 212,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 222,
+   "step": 230,
+   "text": "x: plus, y: minus, z: plus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 271,
+   "step": 283,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 323,
+   "step": 332,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 372,
+   "step": 380,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 395,
+   "step": 404,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 445,
+   "step": 454,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 494,
+   "step": 504,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 545,
+   "step": 553,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 594,
+   "step": 602,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 643,
+   "step": 652,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 692,
+   "step": 701,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 741,
+   "step": 749,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 790,
+   "step": 799,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 840,
+   "step": 849,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 890,
+   "step": 898,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 939,
+   "step": 947,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 988,
+   "step": 997,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1038,
+   "step": 1048,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1088,
+   "step": 1098,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1138,
+   "step": 1152,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1192,
+   "step": 1200,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1241,
+   "step": 1250,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1290,
+   "step": 1299,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1340,
+   "step": 1348,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1389,
+   "step": 1397,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1438,
+   "step": 1447,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1488,
+   "step": 1496,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1537,
+   "step": 1545,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1586,
+   "step": 1595,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1635,
+   "step": 1645,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 1685,
+   "step": 1694,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1734,
+   "step": 1744,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1784,
+   "step": 1793,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1833,
+   "step": 1841,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1881,
+   "step": 1889,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1930,
+   "step": 1941,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 1981,
+   "step": 1989,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2030,
+   "step": 2038,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2078,
+   "step": 2087,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2127,
+   "step": 2135,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2175,
+   "step": 2186,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2227,
+   "step": 2235,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2276,
+   "step": 2286,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2326,
+   "step": 2334,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2375,
+   "step": 2385,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2426,
+   "step": 2436,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2476,
+   "step": 2484,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2525,
+   "step": 2534,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2574,
+   "step": 2583,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2623,
+   "step": 2634,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2674,
+   "step": 2683,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2723,
+   "step": 2733,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 2774,
+   "step": 2782,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2823,
+   "step": 2832,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2872,
+   "step": 2880,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2921,
+   "step": 2929,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 2970,
+   "step": 2981,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3022,
+   "step": 3031,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3072,
+   "step": 3081,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 3122,
+   "step": 3131,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3172,
+   "step": 3182,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3223,
+   "step": 3231,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 3272,
+   "step": 3285,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3325,
+   "step": 3334,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3374,
+   "step": 3396,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3436,
+   "step": 3446,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3486,
+   "step": 3495,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3536,
+   "step": 3546,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3586,
+   "step": 3596,
+   "text": "x: plus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 3637,
+   "step": 3647,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3687,
+   "step": 3696,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3736,
+   "step": 3744,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3785,
+   "step": 3795,
+   "text": "x: plus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 3835,
+   "step": 3844,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3884,
+   "step": 3894,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3934,
+   "step": 3945,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 3985,
+   "step": 3996,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4036,
+   "step": 4047,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4087,
+   "step": 4096,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4136,
+   "step": 4146,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4186,
+   "step": 4196,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4237,
+   "step": 4248,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4289,
+   "step": 4299,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4340,
+   "step": 4350,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4390,
+   "step": 4400,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4440,
+   "step": 4450,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4491,
+   "step": 4506,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4546,
+   "step": 4557,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4597,
+   "step": 4605,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4646,
+   "step": 4656,
+   "text": "x: plus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y +2 cm 動かす"
+  },
+  {
+   "obs": 4697,
+   "step": 4709,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4749,
+   "step": 4758,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4798,
+   "step": 4807,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4848,
+   "step": 4859,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4899,
+   "step": 4907,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4947,
+   "step": 4956,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 4997,
+   "step": 5006,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5047,
+   "step": 5058,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5098,
+   "step": 5107,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5147,
+   "step": 5156,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5196,
+   "step": 5205,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5245,
+   "step": 5255,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5295,
+   "step": 5306,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5346,
+   "step": 5363,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5403,
+   "step": 5414,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5455,
+   "step": 5468,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5508,
+   "step": 5518,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5559,
+   "step": 5569,
+   "text": "x: minus, y: plus, z: minus, gripper: closed",
+   "command": "水平に x +2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 5609,
+   "step": 5620,
+   "text": "x: minus, y: minus, z: minus, gripper: closed",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  }
+ ]
+}

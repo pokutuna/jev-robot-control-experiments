@@ -1,0 +1,1956 @@
+{
+ "experiment": "023-skeleton-jev-phases",
+ "init": 0,
+ "instruction": "pick up the chocolate pudding and put it in the tray",
+ "fps": 20,
+ "steps": 924,
+ "speed": 1.5,
+ "clip_steps": 924,
+ "success": true,
+ "decisions": [
+  {
+   "obs": 2,
+   "step": 11,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 1.0,
+        "none": 0.0,
+        "right": 0.0
+       },
+       "v": {
+        "up": 0.17,
+        "none": 0.61,
+        "down": 0.22
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 19,
+   "step": 27,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 1.0,
+        "none": 0.0,
+        "right": 0.0
+       },
+       "v": {
+        "up": 0.18,
+        "none": 0.46,
+        "down": 0.36
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 35,
+   "step": 43,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: down",
+   "command": "水平に x +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 1.0,
+        "none": 0.0,
+        "right": 0.0
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.27,
+        "down": 0.66
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 50,
+   "step": 59,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 1.0,
+        "none": 0.0,
+        "right": 0.0
+       },
+       "v": {
+        "up": 0.14,
+        "none": 0.66,
+        "down": 0.2
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 67,
+   "step": 75,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 1.0,
+        "none": 0.0,
+        "right": 0.0
+       },
+       "v": {
+        "up": 0.12,
+        "none": 0.63,
+        "down": 0.25
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 82,
+   "step": 89,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 1.0,
+        "none": 0.0,
+        "right": 0.0
+       },
+       "v": {
+        "up": 0.2,
+        "none": 0.58,
+        "down": 0.22
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 97,
+   "step": 104,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.98,
+        "none": 0.02,
+        "right": 0.0
+       },
+       "v": {
+        "up": 0.12,
+        "none": 0.62,
+        "down": 0.26
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 112,
+   "step": 121,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.69,
+        "none": 0.3,
+        "right": 0.01
+       },
+       "v": {
+        "up": 0.39,
+        "none": 0.58,
+        "down": 0.03
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 129,
+   "step": 144,
+   "text": "fixed_direction(\"the chocolate pudding box\") → h: none, v: none / wrist_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.04,
+        "none": 0.95,
+        "right": 0.01
+       },
+       "v": {
+        "up": 0.06,
+        "none": 0.92,
+        "down": 0.02
+       }
+      }
+     }
+    },
+    {
+     "fn": "wrist_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.97,
+        "none": 0.03,
+        "right": 0.0
+       },
+       "v": {
+        "up": 0.38,
+        "none": 0.61,
+        "down": 0.01
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 151,
+   "step": 158,
+   "text": "wrist_direction(\"the chocolate pudding box\") → h: left, v: none",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.79,
+        "none": 0.2,
+        "right": 0.01
+       },
+       "v": {
+        "up": 0.3,
+        "none": 0.69,
+        "down": 0.01
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 165,
+   "step": 173,
+   "text": "wrist_direction(\"the chocolate pudding box\") → h: none, v: none",
+   "command": "動かさない",
+   "calls": [
+    {
+     "fn": "wrist_direction",
+     "args": [
+      "the chocolate pudding box"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.08,
+        "none": 0.72,
+        "right": 0.2
+       },
+       "v": {
+        "up": 0.12,
+        "none": 0.83,
+        "down": 0.05
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 174,
+   "step": 182,
+   "text": "wrist_step(\"the chocolate pudding box\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the chocolate pudding box",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.05,
+        "none": 0.75,
+        "right": 0.2
+       },
+       "v": {
+        "up": 0.12,
+        "none": 0.85,
+        "down": 0.03
+       },
+       "action": {
+        "move": 0.0,
+        "lower": 0.99,
+        "close": 0.01,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 188,
+   "step": 195,
+   "text": "wrist_step(\"the chocolate pudding box\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the chocolate pudding box",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.06,
+        "none": 0.5,
+        "right": 0.44
+       },
+       "v": {
+        "up": 0.28,
+        "none": 0.69,
+        "down": 0.03
+       },
+       "action": {
+        "move": 0.0,
+        "lower": 0.99,
+        "close": 0.01,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 202,
+   "step": 214,
+   "text": "wrist_step(\"the chocolate pudding box\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the chocolate pudding box",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.06,
+        "none": 0.85,
+        "right": 0.09
+       },
+       "v": {
+        "up": 0.09,
+        "none": 0.9,
+        "down": 0.01
+       },
+       "action": {
+        "move": 0.0,
+        "lower": 0.98,
+        "close": 0.02,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 221,
+   "step": 229,
+   "text": "wrist_step(\"the chocolate pudding box\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the chocolate pudding box",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.04,
+        "none": 0.81,
+        "right": 0.15
+       },
+       "v": {
+        "up": 0.13,
+        "none": 0.84,
+        "down": 0.03
+       },
+       "action": {
+        "move": 0.0,
+        "lower": 0.97,
+        "close": 0.03,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 235,
+   "step": 243,
+   "text": "wrist_step(\"the chocolate pudding box\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the chocolate pudding box",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.09,
+        "none": 0.84,
+        "right": 0.07
+       },
+       "v": {
+        "up": 0.1,
+        "none": 0.84,
+        "down": 0.06
+       },
+       "action": {
+        "move": 0.0,
+        "lower": 0.98,
+        "close": 0.02,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 250,
+   "step": 257,
+   "text": "wrist_step(\"the chocolate pudding box\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the chocolate pudding box",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.03,
+        "none": 0.93,
+        "right": 0.04
+       },
+       "v": {
+        "up": 0.1,
+        "none": 0.87,
+        "down": 0.03
+       },
+       "action": {
+        "move": 0.0,
+        "lower": 0.97,
+        "close": 0.03,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 264,
+   "step": 271,
+   "text": "wrist_step(\"the chocolate pudding box\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the chocolate pudding box",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.02,
+        "none": 0.95,
+        "right": 0.03
+       },
+       "v": {
+        "up": 0.14,
+        "none": 0.84,
+        "down": 0.02
+       },
+       "action": {
+        "move": 0.0,
+        "lower": 0.96,
+        "close": 0.04,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 278,
+   "step": 286,
+   "text": "wrist_step(\"the chocolate pudding box\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the chocolate pudding box",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.03,
+        "none": 0.93,
+        "right": 0.04
+       },
+       "v": {
+        "up": 0.19,
+        "none": 0.78,
+        "down": 0.03
+       },
+       "action": {
+        "move": 0.0,
+        "lower": 0.94,
+        "close": 0.06,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 292,
+   "step": 299,
+   "text": "wrist_step(\"the chocolate pudding box\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the chocolate pudding box",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.09,
+        "none": 0.8,
+        "right": 0.11
+       },
+       "v": {
+        "up": 0.09,
+        "none": 0.87,
+        "down": 0.04
+       },
+       "action": {
+        "move": 0.01,
+        "lower": 0.91,
+        "close": 0.08,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 340,
+   "step": 347,
+   "text": "wrist_step(\"the chocolate pudding box\") → close (h: none, v: none)",
+   "command": "グリッパーを閉じる",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the chocolate pudding box",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "close",
+      "p": {
+       "h": {
+        "left": 0.06,
+        "none": 0.82,
+        "right": 0.12
+       },
+       "v": {
+        "up": 0.08,
+        "none": 0.82,
+        "down": 0.1
+       },
+       "action": {
+        "close": 0.99,
+        "open": 0.01
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 362,
+   "step": 362,
+   "text": "close_gripper()",
+   "command": "始めの高さまで上げる",
+   "stage": 2
+  },
+  {
+   "obs": 385,
+   "step": 393,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.01,
+        "none": 0.02,
+        "down": 0.97
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 400,
+   "step": 408,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.01,
+        "none": 0.01,
+        "down": 0.98
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 414,
+   "step": 423,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.01,
+        "none": 0.01,
+        "down": 0.98
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 429,
+   "step": 436,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.02,
+        "none": 0.02,
+        "down": 0.96
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 442,
+   "step": 450,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.02,
+        "none": 0.01,
+        "down": 0.97
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 455,
+   "step": 463,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.03,
+        "none": 0.03,
+        "down": 0.94
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 469,
+   "step": 478,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.02,
+        "none": 0.04,
+        "down": 0.94
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 483,
+   "step": 491,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.06,
+        "none": 0.07,
+        "down": 0.87
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 496,
+   "step": 504,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.08,
+        "none": 0.09,
+        "down": 0.83
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 509,
+   "step": 528,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.09,
+        "none": 0.05,
+        "down": 0.86
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 533,
+   "step": 540,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.03,
+        "none": 0.04,
+        "down": 0.93
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 546,
+   "step": 554,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.16,
+        "none": 0.2,
+        "down": 0.64
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 559,
+   "step": 567,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.22,
+        "none": 0.11,
+        "down": 0.67
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 573,
+   "step": 580,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.04,
+        "none": 0.03,
+        "down": 0.93
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 586,
+   "step": 593,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.39,
+        "none": 0.17,
+        "down": 0.44
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 599,
+   "step": 607,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.3,
+        "none": 0.16,
+        "down": 0.54
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 613,
+   "step": 623,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.32,
+        "none": 0.15,
+        "down": 0.53
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 630,
+   "step": 639,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.26,
+        "none": 0.18,
+        "down": 0.56
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 645,
+   "step": 653,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.0,
+        "right": 1.0
+       },
+       "v": {
+        "up": 0.62,
+        "none": 0.09,
+        "down": 0.29
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 660,
+   "step": 669,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.0,
+        "none": 0.01,
+        "right": 0.99
+       },
+       "v": {
+        "up": 0.33,
+        "none": 0.12,
+        "down": 0.55
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 675,
+   "step": 682,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.01,
+        "none": 0.05,
+        "right": 0.94
+       },
+       "v": {
+        "up": 0.71,
+        "none": 0.15,
+        "down": 0.14
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 690,
+   "step": 698,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "p": {
+       "h": {
+        "left": 0.01,
+        "none": 0.18,
+        "right": 0.81
+       },
+       "v": {
+        "up": 0.24,
+        "none": 0.24,
+        "down": 0.52
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 705,
+   "step": 713,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.01,
+        "none": 0.14,
+        "right": 0.85
+       },
+       "v": {
+        "up": 0.6,
+        "none": 0.3,
+        "down": 0.1
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 721,
+   "step": 729,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.01,
+        "none": 0.06,
+        "right": 0.93
+       },
+       "v": {
+        "up": 0.5,
+        "none": 0.18,
+        "down": 0.32
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 735,
+   "step": 742,
+   "text": "fixed_direction(\"the center of the tray\") → h: none, v: none",
+   "command": "動かさない",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the tray"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.06,
+        "none": 0.72,
+        "right": 0.22
+       },
+       "v": {
+        "up": 0.12,
+        "none": 0.65,
+        "down": 0.23
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 744,
+   "step": 752,
+   "text": "wrist_step(\"the center of the tray\") → lower (h: none, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the tray",
+      "chocolate pudding box in the gripper"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.2,
+        "none": 0.52,
+        "right": 0.28
+       },
+       "v": {
+        "up": 0.02,
+        "none": 0.13,
+        "down": 0.85
+       },
+       "action": {
+        "move": 0.04,
+        "lower": 0.73,
+        "close": 0.01,
+        "open": 0.22
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 758,
+   "step": 765,
+   "text": "wrist_step(\"the center of the tray\") → lower (h: none, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the tray",
+      "chocolate pudding box in the gripper"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.12,
+        "none": 0.55,
+        "right": 0.33
+       },
+       "v": {
+        "up": 0.1,
+        "none": 0.29,
+        "down": 0.61
+       },
+       "action": {
+        "move": 0.04,
+        "lower": 0.59,
+        "close": 0.02,
+        "open": 0.35
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 771,
+   "step": 779,
+   "text": "wrist_step(\"the center of the tray\") → lower (h: right, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the tray",
+      "chocolate pudding box in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.15,
+        "none": 0.38,
+        "right": 0.47
+       },
+       "v": {
+        "up": 0.06,
+        "none": 0.12,
+        "down": 0.82
+       },
+       "action": {
+        "move": 0.1,
+        "lower": 0.57,
+        "close": 0.02,
+        "open": 0.31
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 786,
+   "step": 794,
+   "text": "wrist_step(\"the center of the tray\") → lower (h: right, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the tray",
+      "chocolate pudding box in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.04,
+        "none": 0.13,
+        "right": 0.83
+       },
+       "v": {
+        "up": 0.25,
+        "none": 0.22,
+        "down": 0.53
+       },
+       "action": {
+        "move": 0.28,
+        "lower": 0.53,
+        "close": 0.01,
+        "open": 0.18
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 800,
+   "step": 807,
+   "text": "wrist_step(\"the center of the tray\") → lower (h: right, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the tray",
+      "chocolate pudding box in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.16,
+        "none": 0.22,
+        "right": 0.62
+       },
+       "v": {
+        "up": 0.11,
+        "none": 0.26,
+        "down": 0.63
+       },
+       "action": {
+        "move": 0.25,
+        "lower": 0.47,
+        "close": 0.01,
+        "open": 0.27
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 814,
+   "step": 822,
+   "text": "wrist_step(\"the center of the tray\") → move (h: right, v: down)",
+   "command": "水平に x +2 cm、y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the tray",
+      "chocolate pudding box in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.14,
+        "none": 0.27,
+        "right": 0.59
+       },
+       "v": {
+        "up": 0.11,
+        "none": 0.16,
+        "down": 0.73
+       },
+       "action": {
+        "move": 0.56,
+        "lower": 0.26,
+        "close": 0.03,
+        "open": 0.15
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 829,
+   "step": 837,
+   "text": "wrist_step(\"the center of the tray\") → lower (h: none, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the tray",
+      "chocolate pudding box in the gripper"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.24,
+        "none": 0.57,
+        "right": 0.19
+       },
+       "v": {
+        "up": 0.17,
+        "none": 0.22,
+        "down": 0.61
+       },
+       "action": {
+        "move": 0.13,
+        "lower": 0.58,
+        "close": 0.01,
+        "open": 0.28
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 843,
+   "step": 851,
+   "text": "wrist_step(\"the center of the tray\") → move (h: none, v: down)",
+   "command": "水平に x +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the tray",
+      "chocolate pudding box in the gripper"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.24,
+        "none": 0.66,
+        "right": 0.1
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.07,
+        "down": 0.86
+       },
+       "action": {
+        "move": 0.42,
+        "lower": 0.33,
+        "close": 0.02,
+        "open": 0.23
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 858,
+   "step": 866,
+   "text": "wrist_step(\"the center of the tray\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the tray",
+      "chocolate pudding box in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.41,
+        "none": 0.39,
+        "right": 0.2
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.09,
+        "down": 0.84
+       },
+       "action": {
+        "move": 0.49,
+        "lower": 0.31,
+        "close": 0.03,
+        "open": 0.17
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 873,
+   "step": 880,
+   "text": "wrist_step(\"the center of the tray\") → open (h: none, v: down)",
+   "command": "グリッパーを開く",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the tray",
+      "chocolate pudding box in the gripper"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "down",
+      "action": "open",
+      "p": {
+       "h": {
+        "left": 0.31,
+        "none": 0.36,
+        "right": 0.33
+       },
+       "v": {
+        "up": 0.22,
+        "none": 0.26,
+        "down": 0.52
+       },
+       "action": {
+        "move": 0.27,
+        "lower": 0.34,
+        "close": 0.03,
+        "open": 0.36
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 896,
+   "step": 896,
+   "text": "open_gripper()",
+   "command": "始めの高さまで上げる",
+   "stage": 4
+  },
+  {
+   "obs": 914,
+   "step": 923,
+   "text": "check(\"Is the chocolate pudding box in the tray?\") → 0.94",
+   "stage": 5
+  }
+ ],
+ "stages": [
+  "対象物へ寄せる",
+  "掴む",
+  "持ち上げる",
+  "置き場所へ寄せる",
+  "置く",
+  "完了を確認"
+ ]
+}

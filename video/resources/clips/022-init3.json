@@ -1,0 +1,156 @@
+{
+ "experiment": "022-cap-task60-full",
+ "init": 3,
+ "instruction": "pick up the black bowl on the left and put it in the tray",
+ "fps": 20,
+ "steps": 743,
+ "speed": 4,
+ "clip_steps": 743,
+ "success": false,
+ "decisions": [
+  {
+   "obs": 17,
+   "step": 26,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +4 cm 動かす"
+  },
+  {
+   "obs": 33,
+   "step": 42,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +4 cm 動かす"
+  },
+  {
+   "obs": 49,
+   "step": 58,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +4 cm 動かす"
+  },
+  {
+   "obs": 65,
+   "step": 74,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +4 cm 動かす"
+  },
+  {
+   "obs": 82,
+   "step": 91,
+   "text": "fixed_direction(\"the center of the tray\") → h: right, v: down",
+   "command": "水平に y +4 cm 動かす"
+  },
+  {
+   "obs": 98,
+   "step": 114,
+   "text": "fixed_direction(\"the center of the tray\") → h: none, v: none / wrist_direction(\"the center of the tray\") → h: right, v: none",
+   "command": "水平に y +2 cm 動かす"
+  },
+  {
+   "obs": 120,
+   "step": 152,
+   "text": "wrist_direction(\"the center of the tray\") → h: none, v: none / wrist_direction(\"the center of the tray\") → h: none, v: none / in_wrist_view() / fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up",
+   "command": "水平に y -3 cm 動かす"
+  },
+  {
+   "obs": 159,
+   "step": 167,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up",
+   "command": "水平に y -3 cm 動かす"
+  },
+  {
+   "obs": 174,
+   "step": 182,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up",
+   "command": "水平に y -3 cm 動かす"
+  },
+  {
+   "obs": 188,
+   "step": 195,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up",
+   "command": "水平に y -3 cm 動かす"
+  },
+  {
+   "obs": 202,
+   "step": 210,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up",
+   "command": "水平に y -3 cm 動かす"
+  },
+  {
+   "obs": 217,
+   "step": 226,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up",
+   "command": "水平に y -3 cm 動かす"
+  },
+  {
+   "obs": 233,
+   "step": 251,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up / wrist_direction(\"the center of the bowl to pick up\") → h: left, v: up",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 258,
+   "step": 276,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up / wrist_direction(\"the center of the bowl to pick up\") → h: left, v: up",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 283,
+   "step": 300,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up / wrist_direction(\"the center of the bowl to pick up\") → h: left, v: none",
+   "command": "水平に y -2 cm 動かす"
+  },
+  {
+   "obs": 305,
+   "step": 321,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up / wrist_direction(\"the center of the bowl to pick up\") → h: left, v: none",
+   "command": "水平に y -2 cm 動かす"
+  },
+  {
+   "obs": 326,
+   "step": 343,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up / wrist_direction(\"the center of the bowl to pick up\") → h: left, v: none",
+   "command": "水平に y -2 cm 動かす"
+  },
+  {
+   "obs": 348,
+   "step": 365,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up / wrist_direction(\"the center of the bowl to pick up\") → h: left, v: none",
+   "command": "水平に y -2 cm 動かす"
+  },
+  {
+   "obs": 371,
+   "step": 386,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: left, v: up / wrist_direction(\"the center of the bowl to pick up\") → h: left, v: none",
+   "command": "水平に y -2 cm 動かす"
+  },
+  {
+   "obs": 391,
+   "step": 407,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: none, v: up / wrist_direction(\"the center of the bowl to pick up\") → h: left, v: none",
+   "command": "水平に x -2 cm、y -2 cm 動かす"
+  },
+  {
+   "obs": 414,
+   "step": 444,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: none, v: none / wrist_direction(\"the center of the bowl to pick up\") → h: none, v: none / fixed_direction(\"the center of the bowl to pick up\") → h: none, v: none / wrist_direction(\"the center of the bowl to pick up\") → h: none, v: none",
+   "command": "グリッパーを開く"
+  },
+  {
+   "obs": 460,
+   "step": 460,
+   "text": "open_gripper()",
+   "command": "指定の位置へ動かす"
+  },
+  {
+   "obs": 578,
+   "step": 578,
+   "text": "close_gripper()",
+   "command": "指定の位置へ動かす"
+  },
+  {
+   "obs": 727,
+   "step": 727,
+   "text": "open_gripper()",
+   "command": "指定の位置へ動かす"
+  }
+ ]
+}
