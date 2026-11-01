@@ -22,7 +22,6 @@ LIBERO を dora の sim ノードで進め、画像、ロボットの状態、�
 - 出力の候補: sim から `image_agentview`、`image_wrist`、`robot_state` (Percept の画像以外)、`ground_truth`。ノードの設定 (suite、task、init、seed、画像サイズ、step 数) は dataflow の `env:` で渡す
 - 動画は imageio と imageio-ffmpeg (venv に入っている) で書ける。`outputs/` は gitignore 済み
 - 確認には `LIBERO_ROOT` が要る。`.env` に書いてあるので `uv run --env-file .env ...` で動かす
-- 講義 (応用編1 第 6 回) の「MuJoCo + dora」の例: `~/ghq/github.com/pokutuna/physicalai2026/lectures/advanced1/06/lecture06_SUMMARY.md` (リポジトリ外。参照だけで、内容はコピーしない)
 
 ## Result
 

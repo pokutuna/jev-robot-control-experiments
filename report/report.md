@@ -23,7 +23,7 @@ Decision モデルは LLM と同様に自然言語や画像を解釈できる一
 
 ### ロボットアームを操作する先行事例
 
-Jev をロボット制御に使った公開事例 (TarunTomar122/jev-askable-arm [4]、Dmytro Hrybov による MuJoCo での事例 [5]、openroboto-ai/jev-robot-control [6] など) は、初期の Jev がテキスト入力のみだったこともあり、カメラ画像をそのまま Jev に渡していない。
+Jev をロボット制御に使った公開事例 (TarunTomar122/jev-askable-arm[4]、Dmytro Hrybov による MuJoCo での事例[5]、openroboto-ai/jev-robot-control[6] など) は、初期の Jev がテキスト入力のみだったこともあり、カメラ画像をそのまま Jev に渡していない。
 
 多くの事例では、シミュレータから取得した物体の位置や外部の処理で抽出した位置から構造化テキストを作り、Jev が選んだ行動を別のコードが実行していることが見て取れる。TarunTomar122/jev-askable-arm や Hrybov による MuJoCo での事例では、作者自身が「No images go to Jev」「Jev doesn't accept images, it gets simplified geometry and contacts as text here」などと記している。たとえば openroboto-ai/jev-robot-control では、軸ごとの目標位置とグリッパー位置の差 (目標 − グリッパー) を問いの文中に書き、「差が正なら positive」という選び方も同じ文中に明記している。この形では、Jev はテキストに書かれた数値の符号を読めば答えられる。
 
@@ -35,7 +35,7 @@ LIBERO[7] の `libero_90` から、同一のシーン (`LIVING_ROOM_SCENE4`) を
 
 固定カメラは LIBERO の既定の位置 (`agentview`、ロボットの正面から斜めに見下ろす) から動かし、ロボットの正面と左の間 (方位 45°) の斜め上 (仰角 40°) から作業域を見下ろすクオータービューの画角とした。正面からの画像では前後の移動が画像の上下の動きと重なるのに対し、クオータービューでは前後、左右、上下が画像上で別々の方向に写るためである。
 
-![](report-images/scene-quarterview.png)
+![](images/scene-quarterview.png)
 
 図 1: 固定カメラ (クオータービュー) から見たシーン (プリンの箱のタスク、init 0)
 
@@ -62,7 +62,7 @@ LIBERO[7] の `libero_90` から、同一のシーン (`LIVING_ROOM_SCENE4`) を
 
 | (a) 固定カメラ | (b) 手首カメラ |
 | --- | --- |
-| ![](report-images/023-init0-d02-fixed-plain.png) | ![](report-images/023-init0-d02-wrist-plain.png) |
+| ![](images/023-init0-d02-fixed-plain.png) | ![](images/023-init0-d02-wrist-plain.png) |
 
 図 2: Jev に渡す画像の例 (プリンの箱のタスク、init 0)
 
@@ -351,13 +351,13 @@ Jev に座標系を解釈させるのをやめ、画像に描いた印を画像�
 
 | (a) 固定カメラ | (b) 手首カメラ |
 | --- | --- |
-| ![](report-images/023-init0-d02-fixed.png) | ![](report-images/023-init0-d02-wrist.png) |
+| ![](images/023-init0-d02-fixed.png) | ![](images/023-init0-d02-wrist.png) |
 
 図 7: 印を描いた画像の例 (図 2 と同じ観測)
 
 グリッパーを対象物からずらした静止画 (21 か所 × init 5 つ) で、行き先の言い方だけを替えて回答を比較した。回答は、軸ごとにグリッパーから行き先までの差が 2 cm 以上なら「近づく / 動かさない / 遠ざかる」の 3 つに分けて数え、差が 1 cm 未満なら `none` を正解とした。位置合わせに使えるかは、ずれた軸で遠ざかる向きを答えないか (遠ざかる割合がほぼ 0%) で判断した。
 
-![](report-images/016-dy4.png)
+![](images/016-dy4.png)
 
 図 8: グリッパーを対象物から +y に 4 cm ずらしたときの画像。左から、プリンの箱、ドレッシングの瓶、左の黒いボウルの各タスクの手首カメラ画像と、プリンの箱のタスクの固定カメラ画像。対象物は × の左に写っており、横方向の正しい回答は `left` である
 
@@ -580,7 +580,7 @@ LIBERO の判定が成功でも、グリッパーを開いた後に上げると�
 
 | (a) 掴む段階の始め (テーブルから 26 cm) | (b) 下りきって `close` を選んだ判断 |
 | --- | --- |
-| ![](report-images/023-init0-d13-wrist.png) | ![](report-images/023-init0-d22-wrist.png) |
+| ![](images/023-init0-d13-wrist.png) | ![](images/023-init0-d22-wrist.png) |
 
 図 12: プリンの箱のタスク (init 0) の手首カメラ画像
 
@@ -614,7 +614,7 @@ LIBERO の判定が成功でも、グリッパーを開いた後に上げると�
 
 | (a) 左の黒いボウルのタスク、init 0 の最初の判断 | (b) 右のボウルを重ねるタスク、init 7 の最初の判断 |
 | --- | --- |
-| ![](report-images/024-init0-d02-fixed.png) | ![](report-images/025-init7-d02-fixed.png) |
+| ![](images/024-init0-d02-fixed.png) | ![](images/025-init7-d02-fixed.png) |
 | h: left 0.76、none 0.09、right 0.15 | h: left 0.19、none 0.14、right 0.67 |
 
 図 13: 最初の判断での固定カメラ画像と、`h` の回答の確率
@@ -629,7 +629,7 @@ LIBERO の判定が成功でも、グリッパーを開いた後に上げると�
 
 | (a) 置く段階の始め | (b) 3 回後 (右下へずれる) | (c) 9 回後 (左のボウルは写っていない) |
 | --- | --- | --- |
-| ![](report-images/025-init4-d37-wrist.png) | ![](report-images/025-init4-d40-wrist.png) | ![](report-images/025-init4-d46-wrist.png) |
+| ![](images/025-init4-d37-wrist.png) | ![](images/025-init4-d40-wrist.png) | ![](images/025-init4-d46-wrist.png) |
 
 図 14: 右のボウルを重ねるタスク (init 4) の置く段階での手首カメラ画像
 
@@ -848,22 +848,22 @@ Jev が担う判断の範囲を実験 1 (対象物の位置のテキスト入力
 
 ## 参考文献
 
-[1] TypeSafe AI. "Introducing System One Models & Jev". TypeSafe AI Blog, 2026-09-15. https://typesafe.ai/blog/introducing-system-one-models-and-jev
+[1] TypeSafe AI, "Introducing System One Models & Jev," TypeSafe AI Blog, Sep. 15, 2026. [Online]. Available: https://typesafe.ai/blog/introducing-system-one-models-and-jev (accessed Nov. 2, 2026).
 
-[2] TypeSafe AI. "Jev: For the builders AND dreamers". TypeSafe AI Blog, 2026-10-14. https://typesafe.ai/blog/jev-1-14
+[2] TypeSafe AI, "Jev: For the builders AND dreamers," TypeSafe AI Blog, Oct. 14, 2026. [Online]. Available: https://typesafe.ai/blog/jev-1-14 (accessed Nov. 2, 2026).
 
-[3] OpenRouter. "Jev Documentation". https://openrouter.ai/docs/guides/community/jev
+[3] OpenRouter, "Jev documentation: TypeSafe decision model on OpenRouter." [Online]. Available: https://openrouter.ai/docs/guides/community/jev (accessed Nov. 2, 2026).
 
-[4] TarunTomar122. jev-askable-arm. GitHub. https://github.com/TarunTomar122/jev-askable-arm
+[4] TarunTomar122, "jev-askable-arm," GitHub repository. [Online]. Available: https://github.com/TarunTomar122/jev-askable-arm (accessed Nov. 2, 2026).
 
-[5] Dmytro Hrybov. X での投稿 (MuJoCo での事例), 2026-09-18. https://x.com/dimentary/status/2101018760371171420
+[5] D. Hrybov (@dimentary), post on X, Sep. 18, 2026. [Online]. Available: https://x.com/dimentary/status/2101018760371171420 (accessed Nov. 2, 2026).
 
-[6] openroboto-ai. jev-robot-control. GitHub. https://github.com/openroboto-ai/jev-robot-control
+[6] openroboto-ai, "jev-robot-control," GitHub repository. [Online]. Available: https://github.com/openroboto-ai/jev-robot-control (accessed Nov. 2, 2026).
 
-[7] B. Liu, Y. Zhu, C. Gao, Y. Feng, Q. Liu, Y. Zhu, P. Stone. "LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning". NeurIPS 2023 Datasets and Benchmarks Track. https://arxiv.org/abs/2306.03310
+[7] B. Liu et al., "LIBERO: Benchmarking knowledge transfer for lifelong robot learning," in Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2023. arXiv:2306.03310.
 
-[8] dora-rs. dora: Dataflow-Oriented Robotic Architecture. GitHub. https://github.com/dora-rs/dora
+[8] dora-rs, "dora: Dataflow-oriented robotic architecture," GitHub repository. [Online]. Available: https://github.com/dora-rs/dora (accessed Nov. 2, 2026).
 
-[9] J. Liang, W. Huang, F. Xia, P. Xu, K. Hausman, B. Ichter, P. Florence, A. Zeng. "Code as Policies: Language Model Programs for Embodied Control". ICRA 2023. https://arxiv.org/abs/2209.07753
+[9] J. Liang et al., "Code as policies: Language model programs for embodied control," in Proc. IEEE International Conference on Robotics and Automation (ICRA), 2023. arXiv:2209.07753.
 
-[10] DeepSeek-AI. DeepSeek-V4.1-Flash. Hugging Face. https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash
+[10] DeepSeek-AI, "DeepSeek-V4.1-Flash: Pushing the limits of KV cache compression," Hugging Face model card. [Online]. Available: https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash (accessed Nov. 2, 2026).

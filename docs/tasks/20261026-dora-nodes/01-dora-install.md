@@ -16,9 +16,8 @@ dora-rs をこのリポジトリの uv 環境に入れ、最小の dataflow が�
 
 ## Context
 
-- PyPI の `dora-rs` と `dora-rs-cli` は 1.1.0 (2026-10-26 時点)。macOS arm64 用の abi3 wheel (cp311 以降) がある。講義 (応用編1 第 6 回) のハンズオンは 1.0.1 で、`dora-rs-cli` で CLI と Python API の両方が入るとされていた
-- 講義の最小例: `dataflow.yml` に `nodes:` を並べ、`inputs: { tick: dora/timer/millis/500 }` で組込みタイマーを受ける。ノードは `from dora import Node` の `Node()` のイベントループで `event["type"] == "INPUT"` を受け、`node.send_output(name, pa.array(...))` で送る。`dora run dataflow.yml` で coordinator、daemon、各ノードがまとめて起動する
-- 講義資料: `~/ghq/github.com/pokutuna/physicalai2026/lectures/advanced1/06/lecture06_SUMMARY.md` の「3. 演習」と `lecture06_exercise.ipynb` (リポジトリ外。参照だけで、内容はコピーしない)
+- PyPI の `dora-rs` と `dora-rs-cli` は 1.1.0 (2026-10-26 時点)。macOS arm64 用の abi3 wheel (cp311 以降) がある
+- dora の最小構成: `dataflow.yml` に `nodes:` を並べ、`inputs: { tick: dora/timer/millis/500 }` で組込みタイマーを受ける。ノードは `from dora import Node` の `Node()` のイベントループで `event["type"] == "INPUT"` を受け、`node.send_output(name, pa.array(...))` で送る。`dora run dataflow.yml` で coordinator、daemon、各ノードがまとめて起動する
 - ノードの置き場所は `nodes/`、dataflow の yaml はリポジトリ直下か `dataflows/` を想定。このタスクの最小例は確認用なので、残すかどうかは結果を見て決める
 - ノードを起動する Python が venv のものになるかを確かめる (`uv run dora run` で PATH に `.venv/bin` が入るはず)
 

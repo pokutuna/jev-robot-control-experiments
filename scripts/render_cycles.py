@@ -1,7 +1,7 @@
 """CaP の方策 (POLICY: cap) のエピソードを、判断ごとの Jev の問いと答え、送った命令を添えて描き直す。
 
     uv run --env-file .env scripts/render_cycles.py experiments/023-skeleton-jev-phases/runs/init0-<日時> \\
-        --cross-by-height --out docs/walkthrough/023-init0.mp4 --stills docs/walkthrough/023-init0 --decisions 2,10,13
+        --cross-by-height --out outputs/023-init0.mp4 --stills outputs/023-init0 --decisions 2,10,13
 
 動画は、上に固定カメラと手首カメラの画像 (Jev に渡す画像と同じ印を描く)、下にその step で進んでいる判断を描く。
 判断は events.jsonl の decision の記録から読む。観測の step (obs_step) から判断を出した step までは、
