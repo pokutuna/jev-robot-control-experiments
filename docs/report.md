@@ -14,24 +14,24 @@ LIBERO からタスクを選択し、シミュレータから取得した対象�
 
 ### Jev
 
-Jev は TypeSafe AI が 2026-09-15 に公開したモデルである[N]。状態と型付きの問いを受け取り、型付きの回答と各選択肢の確率を返す。また 2026-10-14 に公開された `typesafe/jev-1.14` (preview) から、画像を入力できるようになった[N]。このレポートでは、Jev のように状態と型付きの問いから回答を返すモデルを Decision モデルと呼ぶ。
+Jev は TypeSafe AI が 2026-09-15 に公開したモデルである[1]。状態と型付きの問いを受け取り、型付きの回答と各選択肢の確率を返す。また 2026-10-14 には、`typesafe/jev-1.14` (preview) の公開とともに、画像を入力できることが公表された[2]。このレポートでは、Jev のように状態と型付きの問いから回答を返すモデルを Decision モデルと呼ぶ。
 
 Decision モデルは LLM と同様に自然言語や画像を解釈できる一方、文章を生成せずに回答を返すため高速に応答する。本課題では、この能力をロボットアームの方策の一部として利用する。
 
-本課題の測定では、448 px の画像 1 枚と短い問いを送る。ローカル環境からの 1 回の呼び出しのレイテンシは 400〜500 ms ほどだった。OpenRouter[N] を利用しており、国外でホストされているためやや遅い。
+本課題の測定では、448 px の画像 1 枚と短い問いを送る。ローカル環境からの 1 回の呼び出しのレイテンシは 400〜500 ms ほどだった。OpenRouter[3] を利用しており、国外でホストされているためやや遅い。
 
 
 ### ロボットアームを操作する先行事例
 
-Jev をロボット制御に使った公開事例 (TarunTomar122/jev-askable-arm [N]、Dmytro Hrybov による MuJoCo での事例 [N]、openroboto-ai/jev-robot-control [N] など) は、初期の Jev がテキスト入力のみだったこともあり、カメラ画像をそのまま Jev に渡していない。
+Jev をロボット制御に使った公開事例 (TarunTomar122/jev-askable-arm [4]、Dmytro Hrybov による MuJoCo での事例 [5]、openroboto-ai/jev-robot-control [6] など) は、初期の Jev がテキスト入力のみだったこともあり、カメラ画像をそのまま Jev に渡していない。
 
-多くの事例では、シミュレータから取得した物体の位置や外部の処理で抽出した位置から構造化テキストを作り、Jev が選んだ行動を別のコードが実行していることが見て取れる。TarunTomar122/jev-askable-arm や Hrybov による MuJoCo での事例では、作者自身が「No images go to Jev」「Jev doesn't accept images, it gets simplified geometry and contacts as text here」などと記している。たとえば openroboto-ai/jev-robot-control では、軸ごとの目標位置とグリッパー位置の差 (目標 − グリッパー) を問いの文中に書き、選択肢の説明に「差が正なら positive」と選び方まで明記している。この形では、Jev はテキストに書かれた数値の符号を読めば答えられる。
+多くの事例では、シミュレータから取得した物体の位置や外部の処理で抽出した位置から構造化テキストを作り、Jev が選んだ行動を別のコードが実行していることが見て取れる。TarunTomar122/jev-askable-arm や Hrybov による MuJoCo での事例では、作者自身が「No images go to Jev」「Jev doesn't accept images, it gets simplified geometry and contacts as text here」などと記している。たとえば openroboto-ai/jev-robot-control では、軸ごとの目標位置とグリッパー位置の差 (目標 − グリッパー) を問いの文中に書き、「差が正なら positive」という選び方も同じ文中に明記している。この形では、Jev はテキストに書かれた数値の符号を読めば答えられる。
 
 ## 3. 実験環境
 
 ### タスクと環境
 
-LIBERO[N] の `libero_90` から、同一のシーン (`LIVING_ROOM_SCENE4`) を使う 4 つのタスクを選んだ。ロボットアームは Franka Panda で、グリッパーは最大 8 cm 開き、y 軸方向に開閉する。4 つのタスクはシーン、置き場所 (トレイ)、カメラ配置が共通であり、タスクを替えると運ぶ対象物と指示文だけが変わる。
+LIBERO[7] の `libero_90` から、同一のシーン (`LIVING_ROOM_SCENE4`) を使う 4 つのタスクを選んだ。ロボットアームは Franka Panda で、グリッパーは最大 8 cm 開き、y 軸方向に開閉する。4 つのタスクはシーン、置き場所 (トレイ)、カメラ配置が共通であり、タスクを替えると運ぶ対象物と指示文だけが変わる。
 
 固定カメラは LIBERO の既定の位置 (`agentview`、ロボットの正面から斜めに見下ろす) から動かし、ロボットの正面と左の間 (方位 45°) の斜め上 (仰角 40°) から作業域を見下ろすクオータービューの画角とした。正面からの画像では前後の移動が画像の上下の動きと重なるのに対し、クオータービューでは前後、左右、上下が画像上で別々の方向に写るためである。
 
@@ -56,7 +56,7 @@ LIBERO[N] の `libero_90` から、同一のシーン (`LIVING_ROOM_SCENE4`) を
 
 ### 方策の構成と Jev への入力
 
-方策は dora-rs[N] を使い、シミュレータ (`sim`)、記録と評価 (`evaluator`) とは別のノード (`policy`) として実装し、20 Hz で動かした。方策ノードは、指示文、2 つのカメラの画像、グリッパーの位置と開き幅を受け取る。シミュレータから取得した物体の位置は、基準となる実験 1 を除き `evaluator` ノードだけに配線し、実行中は採点と失敗の分析にだけ使った。
+方策は dora-rs[8] を使い、シミュレータ (`sim`)、記録と評価 (`evaluator`) とは別のノード (`policy`) として実装し、20 Hz で動かした。方策ノードは、指示文、2 つのカメラの画像、グリッパーの位置と開き幅を受け取る。シミュレータから取得した物体の位置は、基準となる実験 1 を除き `evaluator` ノードだけに配線し、実行中は採点と失敗の分析にだけ使った。
 
 固定カメラはテーブルを斜め上から見下ろしたクオータービューで、運ぶ物と置き場所の両方を写す。手首カメラはグリッパーから真下を向く。手首カメラの画像は、固定カメラの画像と上下の印象が近くなるよう 180° 回転して渡す。画像はどちらのカメラも 448 px の正方形にした。事前の検証で、プリンの箱が写った固定カメラの画像を 280〜1120 px で渡して比べたところ、入力トークン数は画素数にほぼ比例し (448 px で画像 1 枚と短い問い 2 つが約 870 トークン)、レイテンシは 896 px まで 1 秒未満で変わらなかった。448 px で箱の輪郭がはっきりと写り、「箱が写っているか」の確信度が 0.92〜0.94 に達したため、それ以上大きくしても見え方はほとんど変わらないと判断して 448 px を採用した。
 
@@ -132,7 +132,7 @@ flowchart LR
 
 ### 5.1 実験 1: 対象物の位置をテキストで渡す
 
-公開事例 (OpenRoboto の `jev-robot-control`[N]) の問いの形を、プリンの箱をトレイへ運ぶタスクに当てはめた。各軸の問いの文には現在の座標、目標の座標、その差を書き、位置が合ったか (`grasp_pose_reached` など) の真偽値もコードがシミュレータから取得した位置から判定して渡す。
+公開事例 (OpenRoboto の `jev-robot-control`[6]) の問いの形を、プリンの箱をトレイへ運ぶタスクに当てはめた。各軸の問いの文には現在の座標、目標の座標、その差を書き、位置が合ったか (`grasp_pose_reached` など) の真偽値もコードがシミュレータから取得した位置から判定して渡す。
 
 1 回の判断ごとに Jev の API を 2 回呼ぶ。1 回目の呼び出しでは、指示文と状態を渡して意図を問い、2 回目の呼び出しでは、同じ状態に 1 回目で選んだ意図を加えて、軸ごとの向きとグリッパーの開閉を問う。
 
@@ -637,7 +637,7 @@ LIBERO の判定が成功でも、グリッパーを開いた後に上げると�
 
 ### 5.6 実験 6: LLM にスケルトンを書かせる
 
-Code as Policies (CaP)[N] は、利用できる関数群と数個の例を LLM に与え、自然言語の指示から制御プログラムを生成させる手法である。ここでは、Jev に画像で問う関数を LLM (DeepSeek V4.1 Flash[N]) に渡してプログラム全体を書かせ、スケルトンを人が定義しなくてもタスクを解けるかを試した。実行中は、プログラムが関数を呼ぶたびに Jev が画像への問いに答える。
+Code as Policies (CaP)[9] は、利用できる関数群と数個の例を LLM に与え、自然言語の指示から制御プログラムを生成させる手法である。ここでは、Jev に画像で問う関数を LLM (DeepSeek V4.1 Flash[10]) に渡してプログラム全体を書かせ、スケルトンを人が定義しなくてもタスクを解けるかを試した。実行中は、プログラムが関数を呼ぶたびに Jev が画像への問いに答える。
 
 #### 生成と実行の手順
 
@@ -846,14 +846,24 @@ Jev が担う判断の範囲を実験 1 (対象物の位置のテキスト入力
 
 一方で、置き場所が小さいときや画角から外れたときの位置合わせと、グリッパーを閉じるタイミング自体は、Jev の回答だけでは決まらなかった。また、スケルトンを渡さずに LLM にプログラム全体を書かせると、Jev の特性に関する知見はうまくコードに取り込むものの、シーンの距離感から決まるループ上限などを適切に設定できず、実験 4、5 のスケルトンより成功が少なかった (ただし渡した関数と知見の条件はそろっていない)。この課題の範囲では、Decision モデルである Jev を画像入力でロボット制御に使うには、座標変換や物理的な制約に基づく選択肢の絞り込みをコード側で担い、Jev が安定して答えられる視覚的な問いに問題を切り分ける設計が有効であった。
 
-## 整形前リンク
+## 参考文献
 
-- https://typesafe.ai/blog/jev-1-14
-- https://openrouter.ai/docs/guides/community/jev
-- https://github.com/TarunTomar122/jev-askable-arm
-- https://x.com/dimentary/status/2101018760371171420
-- https://github.com/openroboto-ai/jev-robot-control
-- https://arxiv.org/abs/2209.07753
-- https://arxiv.org/abs/2306.03310
-- https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash
-- https://github.com/dora-rs/dora
+[1] TypeSafe AI. "Introducing System One Models & Jev". TypeSafe AI Blog, 2026-09-15. https://typesafe.ai/blog/introducing-system-one-models-and-jev
+
+[2] TypeSafe AI. "Jev: For the builders AND dreamers". TypeSafe AI Blog, 2026-10-14. https://typesafe.ai/blog/jev-1-14
+
+[3] OpenRouter. "Jev Documentation". https://openrouter.ai/docs/guides/community/jev
+
+[4] TarunTomar122. jev-askable-arm. GitHub. https://github.com/TarunTomar122/jev-askable-arm
+
+[5] Dmytro Hrybov. X での投稿 (MuJoCo での事例), 2026-09-18. https://x.com/dimentary/status/2101018760371171420
+
+[6] openroboto-ai. jev-robot-control. GitHub. https://github.com/openroboto-ai/jev-robot-control
+
+[7] B. Liu, Y. Zhu, C. Gao, Y. Feng, Q. Liu, Y. Zhu, P. Stone. "LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning". NeurIPS 2023 Datasets and Benchmarks Track. https://arxiv.org/abs/2306.03310
+
+[8] dora-rs. dora: Dataflow-Oriented Robotic Architecture. GitHub. https://github.com/dora-rs/dora
+
+[9] J. Liang, W. Huang, F. Xia, P. Xu, K. Hausman, B. Ichter, P. Florence, A. Zeng. "Code as Policies: Language Model Programs for Embodied Control". ICRA 2023. https://arxiv.org/abs/2209.07753
+
+[10] DeepSeek-AI. DeepSeek-V4.1-Flash. Hugging Face. https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash
