@@ -46,3 +46,9 @@ export const stepAt = (data: ClipData, frame: number, fps: number): number =>
 
 export const clipDuration = (data: ClipData, fps: number): number =>
   Math.ceil((data.clip_steps / data.fps / data.speed) * fps);
+
+// 倍速の表記。録画は sim の 1 step を 1 フレームにしており、Jev の応答を待つ時間は含まない
+export const speedLabel = (speed: number): string => {
+  const rounded = Math.round(speed * 10) / 10;
+  return rounded === 1 ? "等倍速 (シミュレータの時間)" : `${rounded} 倍速`;
+};

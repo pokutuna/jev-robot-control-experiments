@@ -1,69 +1,77 @@
 import React from "react";
-import { SceneFrame, SceneTitle } from "../components/SceneText";
+import {
+  Section,
+  SceneFrame,
+  SceneTitle,
+  TimedCaption,
+} from "../components/SceneText";
 import { COLORS } from "../theme";
 
-export const summaryDuration = (fps: number) => Math.round(12 * fps);
-
-const ROWS = [
-  ["1", "対象物の座標 (テキスト)", "10/10"],
-  ["2", "画像、世界座標の向きで問う", "0/10"],
-  ["4", "印を描いた画像、人が定義したスケルトン", "プリンの箱 10/10"],
-  ["5", "同じスケルトンを転用", "左の黒いボウル 8/10、重ねる 4/10"],
-  ["6", "LLM が生成したスケルトン", "4/10〜8/10"],
-];
-
-const cell: React.CSSProperties = {
-  padding: "12px 24px",
-  borderBottom: `1px solid ${COLORS.line}`,
-  textAlign: "left",
-};
+export const summaryDuration = (fps: number) => Math.round(15 * fps);
 
 export const Summary: React.FC = () => (
   <SceneFrame>
-    <SceneTitle>まとめ</SceneTitle>
+    <SceneTitle fontSize={80}>まとめ</SceneTitle>
     <div
       style={{
         position: "absolute",
-        top: 240,
-        left: 0,
-        right: 0,
+        top: 200,
+        left: 80,
+        right: 80,
         display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 56,
+        justifyContent: "center",
       }}
     >
-      <table style={{ borderCollapse: "collapse", fontSize: 32 }}>
-        <thead>
-          <tr style={{ color: COLORS.sub, fontSize: 24 }}>
-            <th style={cell}>実験</th>
-            <th style={cell}>方策への入力</th>
-            <th style={cell}>成功</th>
-          </tr>
-        </thead>
-        <tbody>
-          {ROWS.map(([n, input, result]) => (
-            <tr key={n}>
-              <td style={{ ...cell, textAlign: "center" }}>{n}</td>
-              <td style={cell}>{input}</td>
-              <td style={cell}>{result}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div style={{ fontSize: 34, lineHeight: 1.7, textAlign: "center" }}>
-        <div>
-          <span style={{ color: COLORS.sub }}>Jev </span>
-          画像から判断できる問い (画像内の向き、閉じるか開くか)
-        </div>
-        <div>
-          <span style={{ color: COLORS.sub }}>スケルトンのコード </span>
-          ステップの順序、世界座標への変換、選択肢の絞り込み
-        </div>
-        <div style={{ marginTop: 16 }}>
-          この役割分担で、対象物の座標を渡さずに物を運べました
-        </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 56 }}>
+        <Section
+          head="Jev が担えた判断"
+          fontSize={44}
+          items={[
+            "印を行き先へ寄せる画像内の向き",
+            "指示文に合う掴む対象の選択",
+            "選択肢を絞った後の、閉じるか開くか",
+          ]}
+        />
+        <Section
+          head="Jev の回答だけでは難しかったこと"
+          fontSize={44}
+          items={[
+            "下ろすのを止めて閉じるタイミング",
+            "小さい置き先、画角から外れた置き先への位置合わせ",
+          ]}
+        />
       </div>
     </div>
+    <div
+      style={{
+        position: "absolute",
+        right: 32,
+        bottom: 8,
+        fontSize: 20,
+        color: COLORS.muted,
+      }}
+    >
+      ♫ 「龍の住む森」 モイモイ
+    </div>
+    <TimedCaption
+      items={[
+        {
+          at: 0,
+          text: "対象物の座標を渡さずに、カメラ画像とロボットの状態だけで物を運べました",
+        },
+        {
+          at: 4,
+          text: "Jev に任せられたのは、印を動かす向きや掴む物の選択といった画像で答えられる判断です",
+        },
+        {
+          at: 8,
+          text: "閉じるタイミングや、見えなくなった置き先への位置合わせは Jev だけでは決まりませんでした",
+        },
+        {
+          at: 11.5,
+          text: "手順や座標の変換はコードが担い、Jev への問いを絞る分担が有効でした",
+        },
+      ]}
+    />
   </SceneFrame>
 );

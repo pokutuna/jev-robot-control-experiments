@@ -1,0 +1,2529 @@
+{
+ "experiment": "025-skeleton-bowl-left-right",
+ "init": 5,
+ "instruction": "stack the right bowl on the left bowl and place them in the tray",
+ "fps": 20,
+ "steps": 1106,
+ "speed": 8,
+ "clip_steps": 1106,
+ "success": false,
+ "decisions": [
+  {
+   "obs": 2,
+   "step": 12,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: none, v: up",
+   "command": "水平に x -2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the bowl to pick up"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.29,
+        "none": 0.5,
+        "right": 0.21
+       },
+       "v": {
+        "up": 0.61,
+        "none": 0.26,
+        "down": 0.13
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 18,
+   "step": 27,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: none, v: up",
+   "command": "水平に x -2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the bowl to pick up"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.29,
+        "none": 0.56,
+        "right": 0.15
+       },
+       "v": {
+        "up": 0.52,
+        "none": 0.34,
+        "down": 0.14
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 34,
+   "step": 53,
+   "text": "fixed_direction(\"the center of the bowl to pick up\") → h: none, v: none / wrist_direction(\"the center of the bowl to pick up\") → h: right, v: none",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the bowl to pick up"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.21,
+        "none": 0.61,
+        "right": 0.18
+       },
+       "v": {
+        "up": 0.31,
+        "none": 0.55,
+        "down": 0.14
+       }
+      }
+     }
+    },
+    {
+     "fn": "wrist_direction",
+     "args": [
+      "the center of the bowl to pick up"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.05,
+        "none": 0.05,
+        "right": 0.9
+       },
+       "v": {
+        "up": 0.17,
+        "none": 0.79,
+        "down": 0.04
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 58,
+   "step": 65,
+   "text": "wrist_direction(\"the center of the bowl to pick up\") → h: none, v: none",
+   "command": "水平に y -6 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_direction",
+     "args": [
+      "the center of the bowl to pick up"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.15,
+        "none": 0.47,
+        "right": 0.38
+       },
+       "v": {
+        "up": 0.11,
+        "none": 0.77,
+        "down": 0.12
+       }
+      }
+     }
+    }
+   ],
+   "stage": 0
+  },
+  {
+   "obs": 74,
+   "step": 82,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → move (h: right, v: none)",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "none",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.41,
+        "none": 0.04,
+        "right": 0.55
+       },
+       "v": {
+        "up": 0.25,
+        "none": 0.64,
+        "down": 0.11
+       },
+       "action": {
+        "move": 0.64,
+        "lower": 0.34,
+        "close": 0.02,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 88,
+   "step": 96,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → move (h: right, v: none)",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "none",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.44,
+        "none": 0.05,
+        "right": 0.51
+       },
+       "v": {
+        "up": 0.21,
+        "none": 0.64,
+        "down": 0.15
+       },
+       "action": {
+        "move": 0.59,
+        "lower": 0.4,
+        "close": 0.01,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 101,
+   "step": 109,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → move (h: left, v: none)",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.45,
+        "none": 0.11,
+        "right": 0.44
+       },
+       "v": {
+        "up": 0.26,
+        "none": 0.6,
+        "down": 0.14
+       },
+       "action": {
+        "move": 0.57,
+        "lower": 0.42,
+        "close": 0.01,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 114,
+   "step": 123,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → move (h: right, v: none)",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "none",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.33,
+        "none": 0.08,
+        "right": 0.59
+       },
+       "v": {
+        "up": 0.2,
+        "none": 0.69,
+        "down": 0.11
+       },
+       "action": {
+        "move": 0.58,
+        "lower": 0.41,
+        "close": 0.01,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 128,
+   "step": 135,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → move (h: left, v: none)",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.6,
+        "none": 0.09,
+        "right": 0.31
+       },
+       "v": {
+        "up": 0.29,
+        "none": 0.57,
+        "down": 0.14
+       },
+       "action": {
+        "move": 0.55,
+        "lower": 0.43,
+        "close": 0.02,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 141,
+   "step": 148,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → move (h: right, v: none)",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "none",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.37,
+        "none": 0.12,
+        "right": 0.51
+       },
+       "v": {
+        "up": 0.25,
+        "none": 0.65,
+        "down": 0.1
+       },
+       "action": {
+        "move": 0.62,
+        "lower": 0.37,
+        "close": 0.01,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 154,
+   "step": 161,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → lower (h: left, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.57,
+        "none": 0.06,
+        "right": 0.37
+       },
+       "v": {
+        "up": 0.28,
+        "none": 0.58,
+        "down": 0.14
+       },
+       "action": {
+        "move": 0.46,
+        "lower": 0.52,
+        "close": 0.02,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 168,
+   "step": 175,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → move (h: right, v: none)",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "none",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.39,
+        "none": 0.18,
+        "right": 0.43
+       },
+       "v": {
+        "up": 0.2,
+        "none": 0.75,
+        "down": 0.05
+       },
+       "action": {
+        "move": 0.76,
+        "lower": 0.23,
+        "close": 0.01,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 181,
+   "step": 188,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.11,
+        "none": 0.85,
+        "right": 0.04
+       },
+       "v": {
+        "up": 0.03,
+        "none": 0.95,
+        "down": 0.02
+       },
+       "action": {
+        "move": 0.07,
+        "lower": 0.91,
+        "close": 0.02,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 195,
+   "step": 203,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.09,
+        "none": 0.88,
+        "right": 0.03
+       },
+       "v": {
+        "up": 0.02,
+        "none": 0.97,
+        "down": 0.01
+       },
+       "action": {
+        "move": 0.16,
+        "lower": 0.76,
+        "close": 0.08,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 210,
+   "step": 236,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.08,
+        "none": 0.91,
+        "right": 0.01
+       },
+       "v": {
+        "up": 0.02,
+        "none": 0.97,
+        "down": 0.01
+       },
+       "action": {
+        "move": 0.11,
+        "lower": 0.86,
+        "close": 0.03,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 242,
+   "step": 249,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.12,
+        "none": 0.86,
+        "right": 0.02
+       },
+       "v": {
+        "up": 0.04,
+        "none": 0.93,
+        "down": 0.03
+       },
+       "action": {
+        "move": 0.1,
+        "lower": 0.87,
+        "close": 0.03,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 256,
+   "step": 263,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.18,
+        "none": 0.74,
+        "right": 0.08
+       },
+       "v": {
+        "up": 0.05,
+        "none": 0.91,
+        "down": 0.04
+       },
+       "action": {
+        "move": 0.09,
+        "lower": 0.86,
+        "close": 0.05,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 270,
+   "step": 278,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.06,
+        "none": 0.75,
+        "right": 0.19
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.84,
+        "down": 0.09
+       },
+       "action": {
+        "move": 0.03,
+        "lower": 0.95,
+        "close": 0.02,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 285,
+   "step": 292,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → lower (h: none, v: none)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.2,
+        "none": 0.71,
+        "right": 0.09
+       },
+       "v": {
+        "up": 0.14,
+        "none": 0.71,
+        "down": 0.15
+       },
+       "action": {
+        "move": 0.03,
+        "lower": 0.9,
+        "close": 0.07,
+        "open": 0.0
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 333,
+   "step": 342,
+   "text": "wrist_step(\"the left edge of the bowl to pick up\") → close (h: none, v: none)",
+   "command": "グリッパーを閉じる",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the left edge of the bowl to pick up",
+      "red cross"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "action": "close",
+      "p": {
+       "h": {
+        "left": 0.35,
+        "none": 0.57,
+        "right": 0.08
+       },
+       "v": {
+        "up": 0.21,
+        "none": 0.57,
+        "down": 0.22
+       },
+       "action": {
+        "close": 0.97,
+        "open": 0.03
+       }
+      }
+     }
+    }
+   ],
+   "stage": 1
+  },
+  {
+   "obs": 357,
+   "step": 357,
+   "text": "close_gripper()",
+   "command": "始めの高さまで上げる",
+   "stage": 2
+  },
+  {
+   "obs": 378,
+   "step": 386,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: left, v: up",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.85,
+        "none": 0.09,
+        "right": 0.06
+       },
+       "v": {
+        "up": 0.85,
+        "none": 0.08,
+        "down": 0.07
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 392,
+   "step": 399,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: left, v: up",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.88,
+        "none": 0.06,
+        "right": 0.06
+       },
+       "v": {
+        "up": 0.87,
+        "none": 0.08,
+        "down": 0.05
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 405,
+   "step": 413,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: left, v: up",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.56,
+        "none": 0.2,
+        "right": 0.24
+       },
+       "v": {
+        "up": 0.79,
+        "none": 0.12,
+        "down": 0.09
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 419,
+   "step": 429,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: left, v: up",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.69,
+        "none": 0.18,
+        "right": 0.13
+       },
+       "v": {
+        "up": 0.89,
+        "none": 0.07,
+        "down": 0.04
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 434,
+   "step": 442,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.14,
+        "none": 0.38,
+        "right": 0.48
+       },
+       "v": {
+        "up": 0.74,
+        "none": 0.16,
+        "down": 0.1
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 448,
+   "step": 456,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.21,
+        "none": 0.25,
+        "right": 0.54
+       },
+       "v": {
+        "up": 0.9,
+        "none": 0.07,
+        "down": 0.03
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 462,
+   "step": 471,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: left, v: up",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.78,
+        "none": 0.15,
+        "right": 0.07
+       },
+       "v": {
+        "up": 0.77,
+        "none": 0.14,
+        "down": 0.09
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 476,
+   "step": 484,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.19,
+        "none": 0.24,
+        "right": 0.57
+       },
+       "v": {
+        "up": 0.9,
+        "none": 0.06,
+        "down": 0.04
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 490,
+   "step": 498,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.13,
+        "none": 0.12,
+        "right": 0.75
+       },
+       "v": {
+        "up": 0.83,
+        "none": 0.1,
+        "down": 0.07
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 504,
+   "step": 512,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.11,
+        "none": 0.22,
+        "right": 0.67
+       },
+       "v": {
+        "up": 0.63,
+        "none": 0.11,
+        "down": 0.26
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 519,
+   "step": 527,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: left, v: none",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.82,
+        "none": 0.12,
+        "right": 0.06
+       },
+       "v": {
+        "up": 0.32,
+        "none": 0.45,
+        "down": 0.23
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 534,
+   "step": 541,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.08,
+        "none": 0.06,
+        "right": 0.86
+       },
+       "v": {
+        "up": 0.79,
+        "none": 0.07,
+        "down": 0.14
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 549,
+   "step": 556,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.05,
+        "none": 0.12,
+        "right": 0.83
+       },
+       "v": {
+        "up": 0.6,
+        "none": 0.16,
+        "down": 0.24
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 564,
+   "step": 571,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: left, v: up",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.65,
+        "none": 0.22,
+        "right": 0.13
+       },
+       "v": {
+        "up": 0.45,
+        "none": 0.25,
+        "down": 0.3
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 577,
+   "step": 584,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: right, v: up",
+   "command": "水平に x -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.07,
+        "none": 0.28,
+        "right": 0.65
+       },
+       "v": {
+        "up": 0.65,
+        "none": 0.19,
+        "down": 0.16
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 592,
+   "step": 600,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: none, v: up",
+   "command": "水平に x -2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.11,
+        "none": 0.58,
+        "right": 0.31
+       },
+       "v": {
+        "up": 0.38,
+        "none": 0.37,
+        "down": 0.25
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 606,
+   "step": 615,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: none, v: up",
+   "command": "水平に x -2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "up",
+      "p": {
+       "h": {
+        "left": 0.17,
+        "none": 0.55,
+        "right": 0.28
+       },
+       "v": {
+        "up": 0.38,
+        "none": 0.36,
+        "down": 0.26
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 621,
+   "step": 629,
+   "text": "fixed_direction(\"the center of the other black bowl\") → h: none, v: none",
+   "command": "水平に y -6 cm 動かす",
+   "calls": [
+    {
+     "fn": "fixed_direction",
+     "args": [
+      "the center of the other black bowl"
+     ],
+     "answers": {
+      "h": "none",
+      "v": "none",
+      "p": {
+       "h": {
+        "left": 0.16,
+        "none": 0.58,
+        "right": 0.26
+       },
+       "v": {
+        "up": 0.32,
+        "none": 0.38,
+        "down": 0.3
+       }
+      }
+     }
+    }
+   ],
+   "stage": 3
+  },
+  {
+   "obs": 638,
+   "step": 647,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: up)",
+   "command": "水平に x -2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "up",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.59,
+        "none": 0.13,
+        "right": 0.28
+       },
+       "v": {
+        "up": 0.45,
+        "none": 0.15,
+        "down": 0.4
+       },
+       "action": {
+        "move": 0.72,
+        "lower": 0.21,
+        "close": 0.01,
+        "open": 0.06
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 653,
+   "step": 661,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.49,
+        "none": 0.23,
+        "right": 0.28
+       },
+       "v": {
+        "up": 0.18,
+        "none": 0.17,
+        "down": 0.65
+       },
+       "action": {
+        "move": 0.59,
+        "lower": 0.3,
+        "close": 0.01,
+        "open": 0.1
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 670,
+   "step": 680,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: right, v: down)",
+   "command": "水平に x +2 cm、y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.28,
+        "none": 0.16,
+        "right": 0.56
+       },
+       "v": {
+        "up": 0.16,
+        "none": 0.19,
+        "down": 0.65
+       },
+       "action": {
+        "move": 0.55,
+        "lower": 0.33,
+        "close": 0.01,
+        "open": 0.11
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 686,
+   "step": 694,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: right, v: down)",
+   "command": "水平に x +2 cm、y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.3,
+        "none": 0.18,
+        "right": 0.52
+       },
+       "v": {
+        "up": 0.23,
+        "none": 0.17,
+        "down": 0.6
+       },
+       "action": {
+        "move": 0.69,
+        "lower": 0.22,
+        "close": 0.01,
+        "open": 0.08
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 700,
+   "step": 707,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: up)",
+   "command": "水平に x -2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "up",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.62,
+        "none": 0.12,
+        "right": 0.26
+       },
+       "v": {
+        "up": 0.6,
+        "none": 0.12,
+        "down": 0.28
+       },
+       "action": {
+        "move": 0.65,
+        "lower": 0.25,
+        "close": 0.01,
+        "open": 0.09
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 713,
+   "step": 723,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.46,
+        "none": 0.15,
+        "right": 0.39
+       },
+       "v": {
+        "up": 0.23,
+        "none": 0.17,
+        "down": 0.6
+       },
+       "action": {
+        "move": 0.68,
+        "lower": 0.24,
+        "close": 0.01,
+        "open": 0.07
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 731,
+   "step": 739,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.72,
+        "none": 0.17,
+        "right": 0.11
+       },
+       "v": {
+        "up": 0.31,
+        "none": 0.18,
+        "down": 0.51
+       },
+       "action": {
+        "move": 0.57,
+        "lower": 0.26,
+        "close": 0.01,
+        "open": 0.16
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 748,
+   "step": 755,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: right, v: down)",
+   "command": "水平に x +2 cm、y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.19,
+        "none": 0.15,
+        "right": 0.66
+       },
+       "v": {
+        "up": 0.08,
+        "none": 0.25,
+        "down": 0.67
+       },
+       "action": {
+        "move": 0.56,
+        "lower": 0.33,
+        "close": 0.01,
+        "open": 0.1
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 761,
+   "step": 768,
+   "text": "wrist_step(\"the center of the other black bowl\") → lower (h: right, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.22,
+        "none": 0.21,
+        "right": 0.57
+       },
+       "v": {
+        "up": 0.05,
+        "none": 0.27,
+        "down": 0.68
+       },
+       "action": {
+        "move": 0.36,
+        "lower": 0.52,
+        "close": 0.01,
+        "open": 0.11
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 775,
+   "step": 782,
+   "text": "wrist_step(\"the center of the other black bowl\") → lower (h: right, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.23,
+        "none": 0.22,
+        "right": 0.55
+       },
+       "v": {
+        "up": 0.06,
+        "none": 0.26,
+        "down": 0.68
+       },
+       "action": {
+        "move": 0.42,
+        "lower": 0.44,
+        "close": 0.01,
+        "open": 0.13
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 789,
+   "step": 797,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: right, v: down)",
+   "command": "水平に x +2 cm、y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.14,
+        "none": 0.24,
+        "right": 0.62
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.43,
+        "down": 0.5
+       },
+       "action": {
+        "move": 0.45,
+        "lower": 0.44,
+        "close": 0.01,
+        "open": 0.1
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 803,
+   "step": 811,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: right, v: down)",
+   "command": "水平に x +2 cm、y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.23,
+        "none": 0.23,
+        "right": 0.54
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.24,
+        "down": 0.69
+       },
+       "action": {
+        "move": 0.5,
+        "lower": 0.38,
+        "close": 0.01,
+        "open": 0.11
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 817,
+   "step": 824,
+   "text": "wrist_step(\"the center of the other black bowl\") → lower (h: left, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.44,
+        "none": 0.34,
+        "right": 0.22
+       },
+       "v": {
+        "up": 0.05,
+        "none": 0.34,
+        "down": 0.61
+       },
+       "action": {
+        "move": 0.45,
+        "lower": 0.49,
+        "close": 0.0,
+        "open": 0.06
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 831,
+   "step": 838,
+   "text": "wrist_step(\"the center of the other black bowl\") → lower (h: left, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.56,
+        "none": 0.25,
+        "right": 0.19
+       },
+       "v": {
+        "up": 0.11,
+        "none": 0.35,
+        "down": 0.54
+       },
+       "action": {
+        "move": 0.42,
+        "lower": 0.43,
+        "close": 0.01,
+        "open": 0.14
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 844,
+   "step": 851,
+   "text": "wrist_step(\"the center of the other black bowl\") → lower (h: right, v: down)",
+   "command": "3 cm 下ろす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "lower",
+      "p": {
+       "h": {
+        "left": 0.19,
+        "none": 0.2,
+        "right": 0.61
+       },
+       "v": {
+        "up": 0.1,
+        "none": 0.4,
+        "down": 0.5
+       },
+       "action": {
+        "move": 0.41,
+        "lower": 0.47,
+        "close": 0.01,
+        "open": 0.11
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 858,
+   "step": 866,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: right, v: none)",
+   "command": "水平に y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "none",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.37,
+        "none": 0.22,
+        "right": 0.41
+       },
+       "v": {
+        "up": 0.11,
+        "none": 0.47,
+        "down": 0.42
+       },
+       "action": {
+        "move": 0.56,
+        "lower": 0.35,
+        "close": 0.01,
+        "open": 0.08
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 872,
+   "step": 879,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: right, v: down)",
+   "command": "水平に x +2 cm、y +2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "right",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.26,
+        "none": 0.22,
+        "right": 0.52
+       },
+       "v": {
+        "up": 0.08,
+        "none": 0.41,
+        "down": 0.51
+       },
+       "action": {
+        "move": 0.54,
+        "lower": 0.38,
+        "close": 0.01,
+        "open": 0.07
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 886,
+   "step": 894,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.42,
+        "none": 0.31,
+        "right": 0.27
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.41,
+        "down": 0.52
+       },
+       "action": {
+        "move": 0.5,
+        "lower": 0.4,
+        "close": 0.01,
+        "open": 0.09
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 901,
+   "step": 908,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.65,
+        "none": 0.22,
+        "right": 0.13
+       },
+       "v": {
+        "up": 0.11,
+        "none": 0.19,
+        "down": 0.7
+       },
+       "action": {
+        "move": 0.64,
+        "lower": 0.27,
+        "close": 0.01,
+        "open": 0.08
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 916,
+   "step": 923,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.67,
+        "none": 0.27,
+        "right": 0.06
+       },
+       "v": {
+        "up": 0.1,
+        "none": 0.37,
+        "down": 0.53
+       },
+       "action": {
+        "move": 0.59,
+        "lower": 0.33,
+        "close": 0.01,
+        "open": 0.07
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 931,
+   "step": 938,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: none)",
+   "command": "水平に y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "none",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.77,
+        "none": 0.18,
+        "right": 0.05
+       },
+       "v": {
+        "up": 0.11,
+        "none": 0.46,
+        "down": 0.43
+       },
+       "action": {
+        "move": 0.5,
+        "lower": 0.41,
+        "close": 0.01,
+        "open": 0.08
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 944,
+   "step": 952,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.61,
+        "none": 0.26,
+        "right": 0.13
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.18,
+        "down": 0.75
+       },
+       "action": {
+        "move": 0.55,
+        "lower": 0.36,
+        "close": 0.01,
+        "open": 0.08
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 959,
+   "step": 966,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.58,
+        "none": 0.26,
+        "right": 0.16
+       },
+       "v": {
+        "up": 0.11,
+        "none": 0.36,
+        "down": 0.53
+       },
+       "action": {
+        "move": 0.53,
+        "lower": 0.41,
+        "close": 0.01,
+        "open": 0.05
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 974,
+   "step": 982,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.52,
+        "none": 0.28,
+        "right": 0.2
+       },
+       "v": {
+        "up": 0.09,
+        "none": 0.31,
+        "down": 0.6
+       },
+       "action": {
+        "move": 0.53,
+        "lower": 0.38,
+        "close": 0.01,
+        "open": 0.08
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 991,
+   "step": 998,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.72,
+        "none": 0.2,
+        "right": 0.08
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.28,
+        "down": 0.65
+       },
+       "action": {
+        "move": 0.6,
+        "lower": 0.34,
+        "close": 0.01,
+        "open": 0.05
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 1007,
+   "step": 1014,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.64,
+        "none": 0.24,
+        "right": 0.12
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.29,
+        "down": 0.64
+       },
+       "action": {
+        "move": 0.53,
+        "lower": 0.37,
+        "close": 0.01,
+        "open": 0.09
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 1022,
+   "step": 1030,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.52,
+        "none": 0.28,
+        "right": 0.2
+       },
+       "v": {
+        "up": 0.04,
+        "none": 0.24,
+        "down": 0.72
+       },
+       "action": {
+        "move": 0.52,
+        "lower": 0.37,
+        "close": 0.01,
+        "open": 0.1
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 1039,
+   "step": 1047,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.61,
+        "none": 0.26,
+        "right": 0.13
+       },
+       "v": {
+        "up": 0.07,
+        "none": 0.24,
+        "down": 0.69
+       },
+       "action": {
+        "move": 0.46,
+        "lower": 0.45,
+        "close": 0.01,
+        "open": 0.08
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 1057,
+   "step": 1065,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.58,
+        "none": 0.21,
+        "right": 0.21
+       },
+       "v": {
+        "up": 0.06,
+        "none": 0.27,
+        "down": 0.67
+       },
+       "action": {
+        "move": 0.63,
+        "lower": 0.31,
+        "close": 0.01,
+        "open": 0.05
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 1074,
+   "step": 1082,
+   "text": "wrist_step(\"the center of the other black bowl\") → move (h: left, v: down)",
+   "command": "水平に x +2 cm、y -2 cm 動かす",
+   "calls": [
+    {
+     "fn": "wrist_step",
+     "args": [
+      "the center of the other black bowl",
+      "black bowl in the gripper"
+     ],
+     "answers": {
+      "h": "left",
+      "v": "down",
+      "action": "move",
+      "p": {
+       "h": {
+        "left": 0.59,
+        "none": 0.25,
+        "right": 0.16
+       },
+       "v": {
+        "up": 0.09,
+        "none": 0.28,
+        "down": 0.63
+       },
+       "action": {
+        "move": 0.56,
+        "lower": 0.37,
+        "close": 0.01,
+        "open": 0.06
+       }
+      }
+     }
+    }
+   ],
+   "stage": 4
+  },
+  {
+   "obs": 1095,
+   "step": 1105,
+   "text": "check(\"Is one black bowl stacked on the other?\") → 0.12",
+   "stage": 5
+  }
+ ],
+ "stages": [
+  "対象物へ寄せる",
+  "掴む",
+  "持ち上げる",
+  "置き場所へ寄せる",
+  "置く",
+  "完了を確認"
+ ]
+}

@@ -9,7 +9,11 @@ const CAMERA: Record<string, { name: string; mark: string; color: string }> = {
     mark: "yellow dot",
     color: COLORS.fixed,
   },
-  wrist_direction: { name: "手首カメラ", mark: "red cross", color: COLORS.wrist },
+  wrist_direction: {
+    name: "手首カメラ",
+    mark: "red cross",
+    color: COLORS.wrist,
+  },
   wrist_step: { name: "手首カメラ", mark: "red cross", color: COLORS.wrist },
 };
 
@@ -42,12 +46,12 @@ export const cameraOf = (d: Decision | null) => {
   return fn ? CAMERA[fn] : null;
 };
 
-const Row: React.FC<{ label: string; children: React.ReactNode }> = ({
+export const Row: React.FC<{ label: string; children: React.ReactNode }> = ({
   label,
   children,
 }) => (
-  <div style={{ marginBottom: 10, fontSize: 20 }}>
-    <div style={{ fontSize: 16, color: COLORS.sub }}>{label}</div>
+  <div style={{ marginBottom: 8, fontSize: 20, lineHeight: 1.35 }}>
+    <div style={{ fontSize: 16, color: COLORS.muted }}>{label}</div>
     <div>{children}</div>
   </div>
 );
@@ -56,7 +60,7 @@ export const StageList: React.FC<{
   stages: string[];
   current: number | null;
 }> = ({ stages, current }) => (
-  <Card title="スケルトンのステップ">
+  <Card title="ステップ">
     {stages.map((s, i) => {
       const active = i === current;
       const done = current !== null && i < current;
@@ -67,11 +71,11 @@ export const StageList: React.FC<{
             display: "flex",
             alignItems: "center",
             gap: 12,
-            padding: "4px 10px",
-            borderRadius: 8,
+            padding: "4px 10px 4px 6px",
             fontSize: 20,
-            background: active ? COLORS.barOn : "transparent",
-            color: active ? "white" : done ? COLORS.sub : COLORS.ink,
+            borderLeft: `4px solid ${active ? COLORS.accent1 : "transparent"}`,
+            background: active ? COLORS.surfaceAlt : "transparent",
+            color: active ? COLORS.accent1 : done ? COLORS.muted : COLORS.ink,
             fontWeight: active ? 700 : 400,
           }}
         >
@@ -83,6 +87,22 @@ export const StageList: React.FC<{
       );
     })}
   </Card>
+);
+
+// 命令の行。「、」の後で改行し、数と単位の間では折り返さない
+const Command: React.FC<{ command: string }> = ({ command }) => (
+  <div
+    style={{
+      marginTop: 12,
+      paddingTop: 12,
+      borderTop: `1px solid ${COLORS.rule}`,
+      fontSize: 21,
+      whiteSpace: "pre-line",
+    }}
+  >
+    <span style={{ color: COLORS.muted }}>命令 </span>
+    {command.replace(/ (?=[-+\d]|cm)/g, "\u00a0").replace("、", "、\n")}
+  </div>
 );
 
 export const JevInput: React.FC<{ decision: Decision | null }> = ({
@@ -117,7 +137,7 @@ export const JevInput: React.FC<{ decision: Decision | null }> = ({
           </Row>
         </>
       ) : (
-        <div style={{ fontSize: 21, color: COLORS.sub }}>
+        <div style={{ fontSize: 21, color: COLORS.muted }}>
           {decision?.text.startsWith("check")
             ? "両方の画像と、完了したかを問う文"
             : decision
@@ -129,7 +149,7 @@ export const JevInput: React.FC<{ decision: Decision | null }> = ({
   );
 };
 
-const Bars: React.FC<{
+export const Bars: React.FC<{
   name: string;
   p: Record<string, number>;
   chosen: string;
@@ -139,7 +159,7 @@ const Bars: React.FC<{
       style={{
         fontFamily: MONO,
         fontSize: 18,
-        color: COLORS.sub,
+        color: COLORS.muted,
         marginBottom: 4,
       }}
     >
@@ -159,7 +179,7 @@ const Bars: React.FC<{
               fontFamily: MONO,
               fontSize: 18,
               fontWeight: on ? 700 : 400,
-              color: on ? COLORS.ink : COLORS.sub,
+              color: on ? COLORS.ink : COLORS.muted,
             }}
           >
             {option}
@@ -168,7 +188,7 @@ const Bars: React.FC<{
             style={{
               flex: 1,
               height: 14,
-              background: COLORS.bar,
+              background: COLORS.surfaceAlt,
               borderRadius: 7,
             }}
           >
@@ -177,7 +197,7 @@ const Bars: React.FC<{
                 width: `${value * 100}%`,
                 height: "100%",
                 borderRadius: 7,
-                background: on ? COLORS.barOn : COLORS.barOff,
+                background: on ? COLORS.accent1 : COLORS.barOff,
               }}
             />
           </div>
@@ -211,20 +231,23 @@ export const JevOutput: React.FC<{ decision: Decision | null }> = ({
       ) : checked ? (
         <Bars name="完了したか" p={{ yes: Number(checked[1]) }} chosen="yes" />
       ) : (
-        <div style={{ fontSize: 21, color: COLORS.sub }}>なし</div>
+        <div style={{ fontSize: 21, color: COLORS.muted }}>なし</div>
       )}
-      {decision?.command ? (
-        <div
-          style={{
-            paddingTop: 12,
-            borderTop: `1px solid ${COLORS.line}`,
-            fontSize: 21,
-          }}
-        >
-          <span style={{ color: COLORS.sub }}>命令 </span>
-          {decision.command}
-        </div>
-      ) : null}
+      {decision?.command ? <Command command={decision.command} /> : null}
     </Card>
   );
 };
+
+// 実験 1、2 のように回答を文で記録した判断の出力。項目ごとに改行して出す
+export const JevTextOutput: React.FC<{ decision: Decision | null }> = ({
+  decision,
+}) => (
+  <Card title="Jev の出力">
+    <div style={{ fontFamily: MONO, fontSize: 20, lineHeight: 1.5 }}>
+      {(decision?.text ?? "").split(/\s*\/\s*|,\s*/).map((part) => (
+        <div key={part}>{part}</div>
+      ))}
+    </div>
+    {decision?.command ? <Command command={decision.command} /> : null}
+  </Card>
+);

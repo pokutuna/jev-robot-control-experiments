@@ -35,6 +35,8 @@ CLIPS = [
     ("024-init0", "024-skeleton-jev-phases-task60", 0, True, 4, None),
     ("025-init7", "025-skeleton-bowl-left-right", 7, True, 8, None),
     ("025-init4", "025-skeleton-bowl-left-right", 4, True, 8, None),
+    ("025-init3", "025-skeleton-bowl-left-right", 3, True, 8, None),
+    ("025-init5", "025-skeleton-bowl-left-right", 5, True, 8, None),
     ("021-init0", "021-cap-task61-full", 0, False, 4, None),
     ("021-init1", "021-cap-task61-full", 1, False, 4, None),
     ("022-init6", "022-cap-task60-full", 6, False, 4, None),
@@ -47,6 +49,15 @@ IMAGES = [
     "023-init0-d02-fixed.png",
     "023-init0-d02-wrist.png",
 ]
+
+# 実験 016 で Jev に問うた静止画 (書き出し先の名前: outputs/probe_targets/ からの位置)。
+# outputs/ は git に入れないので、先に experiments/016-target-wording/README.md の
+# probe_targets.py run を実行しておく
+PROBE_IMAGES = {
+    "016-init0-dy4-fixed.png": "pudding_fixed/init0_dx0_dy4_fixed.png",
+    "016-init0-dy4-wrist.png": "pudding/init0_dx0_dy4_wrist.png",
+    "016-init0-dy-4-wrist.png": "pudding/init0_dx0_dy-4_wrist.png",
+}
 
 # スケルトンの段階 (レポートの 5.4 節の段階の順)
 STAGES = [
@@ -238,6 +249,8 @@ def main() -> None:
         print(name)
     for image in IMAGES:
         shutil.copy(ROOT / "report" / "images" / image, OUT / "images" / image)
+    for image, source in PROBE_IMAGES.items():
+        shutil.copy(ROOT / "outputs" / "probe_targets" / source, OUT / "images" / image)
 
 
 if __name__ == "__main__":

@@ -1,71 +1,115 @@
 import React from "react";
 import { Img, staticFile } from "remotion";
-import { SceneFrame, SceneTitle, TimedCaption } from "../components/SceneText";
+import {
+  Section,
+  SceneFrame,
+  SceneTitle,
+  TimedCaption,
+} from "../components/SceneText";
 import { COLORS } from "../theme";
 
-export const backgroundDuration = (fps: number) => Math.round(12 * fps);
+export const backgroundDuration = (fps: number) => Math.round(24.8 * fps);
 
-const POINTS: { head: string; body: string }[] = [
+const SECTIONS: { head: React.ReactNode; items: string[] }[] = [
   {
-    head: "Jev",
-    body: "状態と型付きの問いを受け取り、選択肢とその確率を返す Decision モデルです / 1.14 (preview) で画像を入力できるようになりました",
+    head: "Jev (Decision モデル) が画像入力に対応",
+    items: [
+      "問いと選択肢を渡すと、回答と各選択肢の確率を返す",
+      "jev-1.14 (preview、2026-10-14 公開) から",
+    ],
   },
   {
-    head: "先行事例",
-    body: "Jev でロボットアームを操作する事例の多くは、シミュレータから得た物体の座標をテキストで渡しています",
+    head: (
+      <>
+        先行事例はシミュレータの座標を参照
+        <span style={{ fontSize: 26, fontWeight: 400, color: COLORS.muted }}>
+          {" "}
+          (と思われるものが多い)
+        </span>
+      </>
+    ),
+    items: [
+      "対象物や目標の座標を入力している",
+      "実環境でこのような値は得にくい",
+    ],
   },
   {
-    head: "この課題",
-    body: "対象物の座標を使わず、カメラ画像とロボットの状態 (グリッパーの高さ、開き幅) だけを Jev に渡します",
+    head: "課題設定",
+    items: [
+      "座標の代わりにカメラ画像とロボットの状態を入力する",
+      "Jev がうまく判断できる入力を探る",
+    ],
   },
 ];
 
 export const Background: React.FC = () => (
   <SceneFrame>
-    <SceneTitle>背景と方針</SceneTitle>
+    <SceneTitle fontSize={80}>背景と課題設定</SceneTitle>
     <div
       style={{
         position: "absolute",
         top: 200,
-        left: 120,
-        right: 120,
+        left: 100,
+        right: 100,
         display: "flex",
-        gap: 64,
+        gap: 96,
         alignItems: "center",
       }}
     >
-      <div style={{ width: 640 }}>
+      <div style={{ width: 600 }}>
         <Img
           src={staticFile("images/scene-quarterview.png")}
-          style={{ width: 640, height: 640, borderRadius: 6 }}
+          style={{ width: 600, height: 600, borderRadius: 6 }}
         />
         <div
           style={{
-            marginTop: 8,
-            fontSize: 22,
-            color: COLORS.sub,
+            margin: "12px -60px 0",
+            fontSize: 24,
+            lineHeight: 1.6,
             textAlign: "center",
           }}
         >
-          LIBERO のシーン (固定カメラ)
+          <div style={{ color: COLORS.muted }}>
+            LIBERO の LIVING_ROOM_SCENE4 (固定カメラ)
+          </div>
+          <div>代表タスク: プリンの箱 (左下) を木製のトレイ (右下) へ運ぶ</div>
         </div>
       </div>
-      <div style={{ flex: 1 }}>
-        {POINTS.map((p) => (
-          <div key={p.head} style={{ marginBottom: 40 }}>
-            <div style={{ fontSize: 26, color: COLORS.sub, fontWeight: 700 }}>
-              {p.head}
-            </div>
-            <div style={{ fontSize: 34, lineHeight: 1.5 }}>{p.body}</div>
-          </div>
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: 64,
+        }}
+      >
+        {SECTIONS.map((s) => (
+          <Section key={s.items[0]} head={s.head} items={s.items} />
         ))}
       </div>
     </div>
     <TimedCaption
       items={[
+        { at: 0, text: "こんにちは、まず課題設定について述べます" },
         {
-          at: 0,
-          text: "LIBERO の物を掴んで別の場所に置くタスクを、シミュレータ上のロボットアームで解きます",
+          at: 2.5,
+          text: "2026-09 に Jev というモデルが公開され話題になりました",
+        },
+        {
+          at: 6.5,
+          text: "流行し様々な領域で活用され、ロボットアームを動かす例も見られました",
+        },
+        {
+          at: 10.5,
+          text: "私が見た事例の多くでは、シミュレータから正解となる座標を渡していたようです",
+        },
+        {
+          at: 15.5,
+          text: "しかし実環境ではそうした座標を手に入れるのは難しいです",
+        },
+        {
+          at: 19,
+          text: "そこで画像入力に対応した Jev を利用し、正解座標を参照せず解けないかを探ってみました",
         },
       ]}
     />
