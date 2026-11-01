@@ -17,3 +17,5 @@ experiments/*/excluded-runs/*/ground_truth.jsonl
 experiments/*/excluded-runs/*/robot_state.jsonl
 experiments/*/excluded-runs/*/dora.log
 experiments/*/.dataflow-init*.yml
+# レポートの PDF のビルド出力 (report/build.sh)
+report/build/

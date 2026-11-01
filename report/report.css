@@ -1,0 +1,231 @@
+/* report.md の PDF 組版用。A4 1 段組、日本語は Noto Sans CJK JP (無ければヒラギノ角ゴ)。
+   文字の大きさと行間は :root の --base-size と --leading で調整する。 */
+
+:root {
+  --base-size: 10pt;
+  --leading: 1.65;
+  --ink: #000;
+  --rule: #999;
+  --head-rule: #333;
+  --code-bg: #f6f6f6;
+}
+
+@page {
+  size: A4;
+  margin: 18mm 17mm;
+}
+
+html {
+  font-size: var(--base-size);
+}
+
+body {
+  font-family: "Noto Sans CJK JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  line-height: var(--leading);
+  color: var(--ink);
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  text-align: justify;
+  /* 日本語の行末処理 */
+  word-break: normal;
+  line-break: strict;
+  overflow-wrap: anywhere;
+}
+
+/* --- 見出し --- */
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 1em;
+  padding-bottom: 0.4em;
+  border-bottom: 1.2pt solid var(--head-rule);
+  line-height: 1.3;
+  text-align: left;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin: 1.8em 0 0.6em;
+  padding-bottom: 0.15em;
+  border-bottom: 0.6pt solid var(--rule);
+  line-height: 1.35;
+  /* 見出しだけが取り残されないように */
+  break-after: avoid;
+  break-inside: avoid;
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 1.3em 0 0.4em;
+  line-height: 1.4;
+  break-after: avoid;
+  break-inside: avoid;
+}
+
+h4 {
+  font-size: 1rem;
+  margin: 1em 0 0.3em;
+  break-after: avoid;
+}
+
+/* --- 本文 --- */
+
+p {
+  margin: 0 0 0.7em;
+  orphans: 2;
+  widows: 2;
+}
+
+ul,
+ol {
+  margin: 0 0 0.7em;
+  padding-left: 1.5em;
+}
+
+li {
+  margin-bottom: 0.2em;
+}
+
+li > p {
+  margin-bottom: 0.2em;
+}
+
+/* --- 図 --- */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 単独の画像 (段落に画像だけがあるもの) は中央に置く */
+p > img:only-child {
+  display: block;
+  margin: 0.5em auto;
+  max-height: 95mm;
+}
+
+/* mermaid から作った図 */
+p > img[alt="diagram"] {
+  max-height: 120mm;
+}
+
+/* 「図 N: ...」のキャプション。直前の図や表と同じページに置く */
+.caption {
+  break-before: avoid;
+  margin: 0.2em 0 1.2em;
+}
+
+.caption p {
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0;
+}
+
+/* --- 表 --- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6em 0 0.9em;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  break-inside: auto;
+}
+
+th,
+td {
+  border: 0.4pt solid var(--rule);
+  padding: 0.25em 0.5em;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f0f0f0;
+  font-weight: 700;
+}
+
+tr {
+  break-inside: avoid;
+}
+
+thead {
+  display: table-header-group;
+}
+
+/* 画像を並べた表は罫線を消し、画像をセルの幅に合わせる */
+table:has(img) {
+  break-inside: avoid;
+}
+
+table:has(img) th,
+table:has(img) td {
+  border: none;
+  background: none;
+  text-align: center;
+  font-weight: 400;
+  padding: 0.15em 0.3em;
+}
+
+table:has(img) img {
+  width: 100%;
+}
+
+/* --- コード --- */
+
+code {
+  font-family: "SF Mono", "Menlo", "Consolas", monospace;
+  font-size: 0.88em;
+}
+
+:not(pre) > code {
+  background: var(--code-bg);
+  padding: 0.05em 0.25em;
+  border-radius: 2px;
+  overflow-wrap: anywhere;
+}
+
+/* 長い YAML は折り返して紙面に収める */
+pre,
+pre > code,
+pre > code.sourceCode,
+div.sourceCode {
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere;
+  overflow: visible !important;
+}
+
+pre {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  background: var(--code-bg);
+  border: 0.4pt solid #ddd;
+  border-radius: 3px;
+  padding: 0.6em 0.8em;
+  margin: 0.6em 0 0.4em;
+  text-align: left;
+}
+
+div.sourceCode {
+  margin: 0.6em 0 0.4em;
+  background: none;
+}
+
+/* pandoc のハイライトが付ける行番号用のリンクを無効にする */
+pre > code.sourceCode > span > a:first-child::before {
+  text-decoration: none;
+}
+
+/* 参考文献 (最後の h2 以降) は URL で行が間延びしないよう左揃えにする */
+h2:last-of-type ~ p {
+  text-align: left;
+}
+
+/* --- 区切り --- */
+
+hr {
+  border: none;
+  border-top: 0.4pt solid var(--rule);
+  margin: 1em 0;
+}
