@@ -1,4 +1,4 @@
-# Jev の画像入力を用いたロボットアーム制御の実験
+# Decision モデルへの画像入力でロボットアームを操作する
 
 [Physical AI 応用編1 知能ロボティクス講座 2026 Summer](https://www.u-tokyo.ac.jp/focus/ja/events/z0104_02200.html) の最終課題の実装です。
 
@@ -10,11 +10,12 @@ Decision モデル Jev にカメラ画像とロボット自身の状態を渡し
 
 ## 資料と構成
 
+- [説明動画 (YouTube)](https://youtu.be/I8moz2LAhDo): 実験の録画と Jev の判断を 3 分で紹介する動画
 - [レポート](report/report.md): 背景、実験方法、結果と考察
 - [実験](experiments/): 実験ごとの設定、記録、結果 ([構成の説明](experiments/README.md))
 - [環境構築](docs/setup.md): セットアップと実験の実行方法
 - [wiki](wiki/index.md): 環境構築やロボット制御についての知見
-- [説明動画](video/README.md): 実験の録画から説明動画を作る Remotion のプロジェクト
+- [説明動画のソース](video/README.md): 実験の録画から説明動画を作る Remotion のプロジェクト
 - `src/s1cap/`、`nodes/`、`dataflows/`: シミュレーション、方策、評価とそれらをつなぐ dora-rs の設定
 
 `experiments/` には、実験ごとに `NNN-slug/` ディレクトリを置いています。各ディレクトリの `README.md` に方法と考察、`dataflow.yml` に実験の設定、`results.md` と `runs/` に結果とエピソードの記録があります。静止画などを使う検証では、代わりに `probe/` や `images/` に記録を置いています。
