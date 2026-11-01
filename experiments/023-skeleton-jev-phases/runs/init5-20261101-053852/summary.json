@@ -1,0 +1,46 @@
+{
+  "suite": "libero_90",
+  "task_id": 61,
+  "init": 5,
+  "seed": 0,
+  "image_size": 448,
+  "task_name": "LIVING_ROOM_SCENE4_pick_up_the_chocolate_pudding_and_put_it_in_the_tray",
+  "instruction": "pick up the chocolate pudding and put it in the tray",
+  "fixed_view": "quarterview",
+  "camera_matrix": [
+    [
+      -503.72716835979986,
+      261.0566696117734,
+      -143.9844245697848,
+      213.13688209495126
+    ],
+    [
+      124.46153819430933,
+      124.46153819430933,
+      -558.2488785764623,
+      462.05828543406045
+    ],
+    [
+      -0.541675220419702,
+      -0.541675220419702,
+      -0.6427876096865394,
+      1.1051435482306788
+    ]
+  ],
+  "steps": 886,
+  "frames": 886,
+  "dropped_frames": 0,
+  "success": true,
+  "first_success_step": 849,
+  "end_reason": "policy_end",
+  "commands": 56,
+  "command_status": {
+    "reached": 55,
+    "timeout": 1
+  },
+  "decisions": 57,
+  "mean_latency_ms": 438,
+  "jev_calls": 55,
+  "input_tokens": 60897,
+  "output_tokens": 4704
+}

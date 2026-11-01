@@ -45,6 +45,8 @@ POLICY で方策を選ぶ。
     MAX_MOVES (120)         cap で移動と指の命令を送る回数の上限
     FIXED_TARGETS ()        cap で 1 にすると、向きの関数はプログラムが渡した行き先の言い方を使わず、
                             実験 006 の言い方で Jev に問う (s1cap.cap.CaPPolicy)
+    CROSS (fixed)           cap で手首の画像の赤い × の位置。fixed は始めの高さに合わせた位置、height は手先の高さごとに
+                            真下のテーブルの点が写る位置 (s1cap.cap.CaPPolicy)
     JEV_MODEL (typesafe/jev-1.14)
 """
 
@@ -157,6 +159,7 @@ def main() -> None:
                     ),
                     max_moves=int(os.environ.get("MAX_MOVES", cap.DEFAULT_MAX_MOVES)),
                     fixed_targets=os.environ.get("FIXED_TARGETS") == "1",
+                    cross=os.environ.get("CROSS", "fixed"),
                 )
             elif policy_kind == "text":
                 policy = JevTextPolicy(client, task["instruction"], spec_of_run(task))

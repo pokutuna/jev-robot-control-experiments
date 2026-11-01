@@ -11,7 +11,8 @@
     decision                      policy の判断ごとの記録 (Jev の policy など)
 保存先は環境変数 OUT_DIR (既定はリポジトリの outputs/runs/<日時>)。sim が止まると記録を閉じる。
 環境変数 WRIST_CROSS_UV (例 "0.5,0.40") を与えると、手首の画像を Jev に渡すときと同じ向き (180° 回す) にし、
-その位置 (画像の幅と高さに対する割合) に赤い × を描いて動画に書く。
+その位置 (画像の幅と高さに対する割合) に赤い × を描いて動画に書く。"height" にすると、× を手先の高さごとに
+真下のテーブルの点が写る位置 (s1cap.marks.wrist_cross_uv) に描く。
 環境変数 FIXED_MARK を 1 にすると、固定カメラの画像に 手先の印 (s1cap.marks)を描いて動画に書く。
 印の位置は task の射影行列と robot_state の手先の位置から求めるので、task と robot_state をつなぐ。
 """
@@ -26,7 +27,7 @@ from arrow_io import decode_image, decode_json
 from dora import Node
 
 from s1cap.jev_policy import wrist_view
-from s1cap.marks import fixed_view
+from s1cap.marks import fixed_view, wrist_cross_uv
 from s1cap.recorder import EpisodeRecorder
 
 # dora はノードを dataflow の yaml の場所で起動するので、既定の保存先はこのファイルの位置から決める
@@ -40,7 +41,10 @@ def main() -> None:
     ).resolve()
     recorder = EpisodeRecorder(out_dir, tuple(CAMERA_OF_INPUT.values()))
     cross = os.environ.get("WRIST_CROSS_UV")
-    cross_uv = tuple(float(v) for v in cross.split(",")) if cross else None
+    by_height = cross == "height"
+    cross_uv = (
+        tuple(float(v) for v in cross.split(",")) if cross and not by_height else None
+    )
     fixed_mark = os.environ.get("FIXED_MARK") == "1"
     camera_matrix = None  # task で受ける
     eef = None  # 最後に受けた手先の位置
@@ -63,7 +67,9 @@ def main() -> None:
                 recorder.add_robot_state(step, state)
             elif eid in CAMERA_OF_INPUT:
                 image = decode_image(event["value"], event["metadata"])
-                if eid == "image_wrist" and cross_uv:
+                if eid == "image_wrist" and by_height and eef is not None:
+                    image = wrist_view(image, wrist_cross_uv(eef[2]))
+                elif eid == "image_wrist" and cross_uv:
                     image = wrist_view(image, cross_uv)
                 if (
                     eid == "image_agentview"

@@ -69,3 +69,20 @@ def fixed_direction(
         return np.zeros(2)
     d = image_to_world(matrix, eef, duv)
     return np.where(np.abs(d) >= AXIS_MIN, np.sign(d), 0.0)
+
+
+# 手首カメラの画像 (180° 回した後) で、手先の真下の点が写る縦の位置 (画像の高さに対する割合)。手先からの深さ [m]
+# ごとに、手先を下向きにした姿勢で手首カメラの射影行列から求めた (libero_90 61 init 0、60 init 3 で同じ値)。
+# 横の位置は 0.5 で変わらない
+WRIST_CROSS_DEPTH = np.array(
+    [0.0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24, 0.26, 0.28, 0.3]
+)
+WRIST_CROSS_V = np.array(
+    [0.164, 0.228, 0.273, 0.306, 0.332, 0.353, 0.37, 0.384, 0.396, 0.406, 0.415, 0.422, 0.429, 0.435, 0.44, 0.445]
+)
+
+
+def wrist_cross_uv(eef_z: float) -> tuple[float, float]:
+    """手先の高さ eef_z [m] で、手先の真下のテーブルの点 (高さ TABLE_Z) が手首の画像に写る位置。"""
+    depth = max(eef_z - TABLE_Z, 0.0)
+    return (0.5, float(np.interp(depth, WRIST_CROSS_DEPTH, WRIST_CROSS_V)))

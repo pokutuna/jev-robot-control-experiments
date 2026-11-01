@@ -48,6 +48,14 @@ TASKS = {
         grasp_offset=np.array([0.0, 0.0, 0.0]),
         release_offset=np.array([0.0, 0.0, 0.05]),
     ),
+    # 右のボウル (bowl_2) を左のボウル (bowl_1) に重ねる。掴み方は 60 と同じ。トレイへ運ぶ段は評価しない
+    ("libero_90", 64): TaskSpec(
+        object_body="akita_black_bowl_2",
+        target_body="akita_black_bowl_1",
+        object_word="bowl",
+        grasp_offset=np.array([0.0, 0.06, 0.03]),
+        release_offset=np.array([0.0, 0.06, 0.10]),
+    ),
     # 瓶の底から 6 cm の高さで挟む
     ("libero_90", 62): TaskSpec(
         object_body="new_salad_dressing_1",

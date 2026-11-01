@@ -41,7 +41,7 @@ from s1cap.jev_staged import (
     WRIST_CAPTION,
 )
 from s1cap.marks import FIXED_CAPTION as MARKED_FIXED_CAPTION
-from s1cap.marks import fixed_direction, fixed_view
+from s1cap.marks import TABLE_Z, fixed_direction, fixed_view, wrist_cross_uv
 
 DEFAULT_CODE_MODEL = "deepseek/deepseek-v4.1-flash-1017"
 CHAT_URL = "https://openrouter.ai/api/v1/chat/completions"
@@ -51,6 +51,12 @@ DEFAULT_MAX_MOVES = 120
 DOWN_TIMEOUT_STEPS = 40
 # プログラムが命令を出さずにこの秒数を超えたら止める (Jev を呼ばない無限ループなど)
 WAIT_S = 300.0
+
+# cross="height" のときの手首の画像の説明。× は手先の高さごとに、真下のテーブルの点に描く (s1cap.marks.wrist_cross_uv)
+HEIGHT_WRIST_CAPTION = (
+    "Wrist camera, looking straight down from the gripper. "
+    "The red cross marks the point on the table directly below the gripper:"
+)
 
 # PROMPT の「Facts」と「Reliability」は KNOWLEDGE から選ぶ
 PROMPT = """\
@@ -362,6 +368,14 @@ def direction_questions(
     return qs
 
 
+def probabilities(response: Any) -> dict[str, dict[str, float]]:
+    """選択肢の問いごとの、選択肢の確率。"""
+    return {
+        name: {k: round(p, 3) for k, p in a.probabilities.items()}
+        for name, a in response.choices.items()
+    }
+
+
 class CaPPolicy:
     def __init__(
         self,
@@ -375,12 +389,17 @@ class CaPPolicy:
         jev_budget: int = DEFAULT_JEV_BUDGET,
         max_moves: int = DEFAULT_MAX_MOVES,
         fixed_targets: bool = False,
+        cross: str = "fixed",
     ) -> None:
-        """fixed_targets にすると、向きの関数 (wrist_direction、fixed_direction) は、プログラムが渡した行き先の
+        """cross は手首の画像の赤い × の位置。"fixed" は始めの高さに合わせた位置 (CROSS_UV)、"height" は
+        手先の高さごとに、真下のテーブルの点が写る位置 (実験 023 から)。
+
+        fixed_targets にすると、向きの関数 (wrist_direction、fixed_direction) は、プログラムが渡した行き先の
         言い方を使わず、実験 006 の言い方 (s1cap.jev_staged.TARGETS) で Jev に問う。行き先に tray を含めば
         トレイの中心、bowl を含めばボウルの中心にする。手順は同じまま、問いの言い方だけを 006 にそろえる比較に使う。"""
         self.client = client
         self.fixed_targets = fixed_targets
+        self.cross = cross
         self.instruction = instruction
         self.code = compile(program, program_name, "exec")
         self.camera_matrix = camera_matrix
@@ -392,6 +411,8 @@ class CaPPolicy:
         )
         self.obs: Observation | None = None
         self.status = "none"  # 直前の命令の結果
+        self.fingers_closed = False  # 最後に送った指の命令
+        self.down_blocked = False  # 直前の命令が下ろす命令で、届かずに止まったか
         self.jev_calls = 0
         self.moves = 0
         self.thread: threading.Thread | None = None
@@ -470,6 +491,7 @@ class CaPPolicy:
             "fixed_direction": self.fixed_direction,
             "in_wrist_view": self.in_wrist_view,
             "check": self.check,
+            "wrist_step": self.wrist_step,
             "print": self._print,
             "math": math,
             "np": np,
@@ -490,24 +512,29 @@ class CaPPolicy:
         if dpos[2] < 0:
             command["timeout_steps"] = DOWN_TIMEOUT_STEPS
         reached = self._send(command) == "reached"
+        self.down_blocked = dpos[2] < 0 and not reached
         self._log("move_by", dpos, reached)
         return reached
 
     def move_to(self, x: float, y: float, z: float) -> bool:
         pos = [float(x), float(y), float(z)]
         command: dict[str, Any] = {"type": "move_to", "pos": pos, "quat": TOP_DOWN}
-        if pos[2] < self.gripper_position()[2] - 1e-3:
+        down = pos[2] < self.gripper_position()[2] - 1e-3
+        if down:
             command["timeout_steps"] = DOWN_TIMEOUT_STEPS
         reached = self._send(command) == "reached"
+        self.down_blocked = down and not reached
         self._log("move_to", pos, reached)
         return reached
 
     def open_gripper(self) -> None:
         self._send({"type": "gripper", "closed": False})
+        self.fingers_closed, self.down_blocked = False, False
         self._log("open_gripper", [], None)
 
     def close_gripper(self) -> None:
         self._send({"type": "gripper", "closed": True})
+        self.fingers_closed, self.down_blocked = True, False
         self._log("close_gripper", [], None)
 
     def wrist_direction(self, target: str) -> tuple[int, int]:
@@ -518,7 +545,7 @@ class CaPPolicy:
         h, v = r.choices["h"].choice, r.choices["v"].choice
         d = IMAGE_TO_WORLD[h] + IMAGE_TO_WORLD[v]
         result = (int(d[0]), int(d[1]))
-        answers = {"h": h, "v": v}
+        answers = {"h": h, "v": v, "p": probabilities(r)}
         if self.fixed_targets:
             answers["asked"] = self._direction_target(target)
         self._log("wrist_direction", [target], result, answers)
@@ -533,7 +560,7 @@ class CaPPolicy:
         eef = np.asarray(self.gripper_position())
         d = fixed_direction(self.camera_matrix, eef, h, v)
         result = (int(d[0]), int(d[1]))
-        answers = {"h": h, "v": v}
+        answers = {"h": h, "v": v, "p": probabilities(r)}
         if self.fixed_targets:
             answers["asked"] = self._direction_target(target)
         self._log("fixed_direction", [target], result, answers)
@@ -555,6 +582,38 @@ class CaPPolicy:
         result = round(r.nouls["q"].noul, 3)
         self._log("check", [question], result)
         return result
+
+    def wrist_step(
+        self, target: str, actions: dict[str, str], mark: str = "red cross"
+    ) -> tuple[int, int, str]:
+        """手首の画像 1 枚で、mark を target へ寄せる向きと、actions (動作の名前と、それを選ぶ条件の文) から
+        次の動作を 1 回の呼び出しで問う。手先の高さ、指の開閉、直前の下ろす命令が止まったかを文で添える。
+        返す向きは wrist_direction と同じ。"""
+        qs = direction_questions(self.instruction, "wrist", mark, target)
+        qs["action"] = Choice(
+            instructions=f"Task: {self.instruction}. What should the gripper do next?",
+            criteria=dict(actions),
+        )
+        task, caption, image = self._wrist_state()
+        r = self._ask("wrist_step", [task, self._body_text(), caption, image], qs)
+        h, v = r.choices["h"].choice, r.choices["v"].choice
+        action = r.choices["action"].choice
+        d = IMAGE_TO_WORLD[h] + IMAGE_TO_WORLD[v]
+        result = (int(d[0]), int(d[1]), action)
+        answers = {"h": h, "v": v, "action": action, "p": probabilities(r)}
+        self._log("wrist_step", [target, mark], result, answers)
+        return result
+
+    def _body_text(self) -> str:
+        """ロボット自身の状態を文にする。物の位置は入れない。"""
+        height = (self.gripper_position()[2] - TABLE_Z) * 100
+        text = (
+            f"The gripper is {height:.0f} cm above the table. "
+            f"The fingers are {'closed' if self.fingers_closed else 'open'}."
+        )
+        if self.down_blocked:
+            text += " The last downward move was blocked."
+        return text
 
     def _direction_target(self, target: str) -> str:
         target = str(target)
@@ -596,9 +655,14 @@ class CaPPolicy:
     def _wrist_state(self) -> list[Any]:
         if "wrist" not in self.images:
             assert self.obs is not None
-            image = wrist_view(self.obs.images[WRIST_CAMERA], CROSS_UV)
+            if self.cross == "height":
+                cross_uv = wrist_cross_uv(self.gripper_position()[2])
+            else:
+                cross_uv = CROSS_UV
+            image = wrist_view(self.obs.images[WRIST_CAMERA], cross_uv)
             self.images["wrist"] = jev.image_content(image)
-        return [f"Task: {self.instruction}", WRIST_CAPTION, self.images["wrist"]]
+        caption = HEIGHT_WRIST_CAPTION if self.cross == "height" else WRIST_CAPTION
+        return [f"Task: {self.instruction}", caption, self.images["wrist"]]
 
     def _fixed_state(self) -> list[Any]:
         if "fixed" not in self.images:
