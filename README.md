@@ -1,19 +1,19 @@
-# template-llm-wiki
+# Jev の画像入力を用いたロボットアーム制御の実験
 
-コーディングエージェントが、調べたこと、試した結果、ハマったこと、設計判断を `wiki/` に貯め、セッションを跨いで再利用するためのリポジトリのテンプレート。
-`wiki/` は [OKF (Open Knowledge Format) v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) に適合する。
+[Physical AI 応用編1 知能ロボティクス講座 2026 Summer](https://www.u-tokyo.ac.jp/focus/ja/events/z0104_02200.html) の最終課題の実装です。
 
-## 使い方
+Decision モデル Jev にカメラ画像とロボット自身の状態を渡し、LIBERO のシミュレータでロボットアームが物を掴んで運ぶ実験です。対象物の座標をシミュレータから方策に渡さず、画像を使って操作できるかを調べました。比較のため、対象物の座標をテキストで渡す実験も行っています。
 
-| やりたいこと | 頼み方の例 |
-| --- | --- |
-| 調べる | 「wiki に foo について何か書いてある?」 |
-| 資料を取り込む | 「この URL を wiki に取り込んで」 |
-| 結果を残す | 「今の調査結果を wiki に残して」 |
-| 点検する | `/wiki-lint`、`/wiki-lint wiki/research` |
+固定カメラと手首カメラの画像にグリッパーの位置を示す印を描き、印を対象物へ近づけるには画像内のどちらへ動かすかを Jev に問いかけます。Jev の回答をロボットの移動に変換し、近づく・掴む・運ぶ・置くといった段階を進める処理はコードが担います。手順を人が定義する方法に加え、LLM に制御プログラムを書かせる Code as Policies も試しました。
 
-## 既存のリポジトリに導入する
+人が定義した手順では、プリンの箱をトレイへ運ぶタスクは 10 回中 10 回、左のボウルをトレイへ運ぶタスクは 10 回中 8 回成功しました。一方、右のボウルを左のボウルに重ねるタスクは 10 回中 4 回の成功でした。画像からの位置合わせや、物を掴むタイミングを決める際の課題も含め、実験の条件と考察は[レポート](report/report.md)にまとめています。
 
-1. `.claude/rules/`、`.claude/skills/`、`wiki/` をコピーする
-2. `CLAUDE.md` の内容を、既存の `CLAUDE.md` に統合する
-3. Claude Code 以外のエージェントも使うなら、`AGENTS.md` を `CLAUDE.md` への、`.agents/skills` を `../.claude/skills` への symlink にする
+## 資料と構成
+
+- [レポート](report/report.md): 背景、実験方法、結果と考察
+- [実験](experiments/): 実験ごとの設定、記録、結果 ([構成の説明](experiments/README.md))
+- [環境構築](docs/setup.md): セットアップと実験の実行方法
+- [wiki](wiki/index.md): 環境構築やロボット制御についての知見
+- `src/s1cap/`、`nodes/`、`dataflows/`: シミュレーション、方策、評価とそれらをつなぐ dora-rs の設定
+
+`experiments/` には、実験ごとに `NNN-slug/` ディレクトリを置いています。各ディレクトリの `README.md` に方法と考察、`dataflow.yml` に実験の設定、`results.md` と `runs/` に結果とエピソードの記録があります。静止画などを使う検証では、代わりに `probe/` や `images/` に記録を置いています。
